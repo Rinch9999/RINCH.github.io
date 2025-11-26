@@ -1,198 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>POI 机密案卷库</title>
-  <meta name="description" content="POI 机密案卷库 — Person of Interest 专题档案与同人库。角色档案、案件索引、技术档案与同人作品汇编。" />
+  <meta charset="UTF-8">
+  <title>POI 粉丝维基 - 主页</title>
   <style>
-    :root{
-      --bg:#050507;
-      --panel:#0b0b0d;
-      --accent:#e33;
-      --muted:#9aa1a6;
-      --glass: rgba(255,255,255,0.03);
-      --mono: 'Courier New', Consolas, monospace;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(227,51,51,0.03), transparent), var(--bg);
-      color:#e6eef3;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:24px;
-    }
-    .wrap{max-width:1100px;margin:0 auto}
-    header{display:flex;align-items:center;gap:16px}
-    .logo{
-      width:68px;height:68px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;flex-shrink:0;
-    }
-    .logo .eye{width:36px;height:36px;background:conic-gradient(from 200deg at 50% 50%, var(--accent), transparent 60%);border-radius:50%;box-shadow:0 0 12px rgba(227,51,51,0.12) inset}
-    h1{font-size:20px;margin:0}
-    .tagline{color:var(--muted);font-size:13px;margin-top:6px}
-
-    nav{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
-    .nav-link{background:var(--glass);padding:8px 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:600;font-size:13px}
-    .nav-link:hover{color:#fff;border:1px solid rgba(255,255,255,0.04)}
-
-    .hero{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:22px;align-items:start}
-    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-
-    .hero-left h2{color:var(--accent);margin:0 0 8px 0}
-    .lead{color:var(--muted);line-height:1.6}
-
-    .search{
-      display:flex;gap:8px;margin-top:12px
-    }
-    .search input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-family:var(--mono)}
-    .search button{background:var(--accent);color:#111;border:none;padding:10px 12px;border-radius:10px;font-weight:700;cursor:pointer}
-
-    .sidebar .stats{display:flex;gap:8px;flex-direction:column}
-    .stat{background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;text-align:center}
-    .stat .n{font-size:18px;font-weight:700;color:#fff}
-    .stat .l{font-size:12px;color:var(--muted)}
-
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
-    .card{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
-    .card h3{margin:0 0 8px 0;color:#fff}
-    .card p{margin:0;color:var(--muted);font-size:13px}
-
-    .cases{margin-top:18px}
-    .case-item{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);background:rgba(0,0,0,0.2);margin-bottom:8px}
-    .case-rank{width:46px;height:46px;border-radius:8px;background:#071218;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);border:1px solid rgba(227,51,51,0.06)}
-    .case-body h4{margin:0 0 6px 0}
-    .case-body p{margin:0;color:var(--muted);font-size:13px}
-
-    footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
-
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:520px){
-      .grid{grid-template-columns:1fr}
-      header{gap:10px}
-      .logo{width:52px;height:52px}
-    }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f4f4f4; }
+    header { background: #222; color: #fff; padding: 1rem; text-align: center; }
+    header nav a { color: #fff; margin: 0 1rem; text-decoration: none; font-weight: bold; }
+    .container { display: flex; min-height: 80vh; }
+    .sidebar { width: 220px; background: #333; color: #fff; padding: 1rem; }
+    .sidebar a { color: #fff; display: block; margin: 0.5rem 0; text-decoration: none; }
+    .sidebar a:hover { text-decoration: underline; }
+    .main { flex: 1; padding: 2rem; background: #f9f9f9; }
+    footer { text-align: center; padding: 1rem; background: #222; color: #fff; }
+    h2 { color: #222; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="logo" aria-hidden>
-        <div class="eye" role="img" aria-label="machine-eye"></div>
-      </div>
-      <div>
-        <h1>《POI 机密案卷库》</h1>
-        <div class="tagline">档案等级：ROOT · 整理者：<strong>POI 档案员</strong></div>
-      </div>
-    </header>
-
+  <header>
+    <h1>Person of Interest 粉丝维基</h1>
     <nav>
-      <a class="nav-link" href="#characters">人物档案</a>
-      <a class="nav-link" href="#cases">案件档案</a>
-      <a class="nav-link" href="#technology">技术档案</a>
-      <a class="nav-link" href="#fanworks">同人文库</a>
-      <a class="nav-link" href="#about">关于站点</a>
+      <a href="index.html">主页</a>
+      <a href="characters.html">人物档案</a>
+      <a href="case_files.html">机密案卷库</a>
     </nav>
+  </header>
 
-    <div class="hero">
-      <div class="hero-left panel">
-        <h2>欢迎进入机密案卷库</h2>
-        <p class="lead">这是一个以《Person of Interest》世界观为核心的档案库。我们整理角色档案、案件索引、技术说明与粉丝创作，目标是为喜欢这部剧的读者提供结构化、可检索且易扩展的资料库。</p>
-
-        <div class="search">
-          <input id="q" placeholder="搜索人物、案件、术语（示例：Finch / 513 事件）" />
-          <button onclick="doMockSearch()">搜索</button>
-        </div>
-
-        <section class="grid" aria-label="快速入口">
-          <div class="card">
-            <h3>特色人物</h3>
-            <p>Finch · Reese · Root · Shaw — 点击进入详细档案。</p>
-          </div>
-          <div class="card">
-            <h3>关键事件</h3>
-            <p>513 事件 · Machine 崛起 · Samaritan 对抗。</p>
-          </div>
-          <div class="card">
-            <h3>技术档案</h3>
-            <p>预测模型 · The Machine 架构 · 机密日志。</p>
-          </div>
-        </section>
-
-        <section class="cases">
-          <h3 style="color:var(--accent)">最新整理的案卷</h3>
-
-          <article class="case-item">
-            <div class="case-rank">01</div>
-            <div class="case-body">
-              <h4>513 事件 — 岸边夜景</h4>
-              <p>关键人物：Finch / Reese。该案卷整理了现场记录、证据链与后续影响分析（包括Reese的心理变化）。</p>
-            </div>
-          </article>
-
-          <article class="case-item">
-            <div class="case-rank">02</div>
-            <div class="case-body">
-              <h4>The Machine 起源概述</h4>
-              <p>收录 Machine 早期架构笔记、设计理念与数据流示意图（节选）。</p>
-            </div>
-          </article>
-
-        </section>
-
-      </div>
-
-      <aside class="sidebar panel">
-        <div class="stats">
-          <div class="stat">
-            <div class="n">24</div>
-            <div class="l">已整理条目</div>
-          </div>
-          <div class="stat">
-            <div class="n">8</div>
-            <div class="l">主要人物</div>
-          </div>
-          <div class="stat">
-            <div class="n">3</div>
-            <div class="l">重点专题</div>
-          </div>
-        </div>
-
-        <div style="margin-top:14px">
-          <h4 style="margin:0 0 8px 0">快速模板</h4>
-          <p style="margin:0;color:var(--muted);font-size:13px">人物模板：姓名 / 初次出现 / 所属组织 / 关键事件 / 关联条目</p>
-        </div>
-
-        <div style="margin-top:14px">
-          <h4 style="margin:0 0 8px 0">贡献方式</h4>
-          <p style="margin:0;color:var(--muted);font-size:13px">你可以把稿件通过仓库 Issues 上传，标注“待审”。</p>
-        </div>
-      </aside>
+  <div class="container">
+    <div class="sidebar">
+      <h3>快速导航</h3>
+      <a href="#intro">简介</a>
+      <a href="#news">最新分析</a>
+      <a href="#top-characters">热门人物</a>
+      <a href="#featured-cases">精选案卷</a>
     </div>
 
-    <section id="about" class="panel" style="margin-top:18px">
-      <h3 style="color:var(--accent);margin-top:0">关于 POI 机密案卷库</h3>
-      <p style="color:var(--muted)">本站为非营利的粉丝资料整理项目。所有内容基于剧集与二次创作而来，若涉及版权或侵权问题请及时联系我们。本站鼓励理性讨论与创作，欢迎加入协作。</p>
-    </section>
+    <div class="main">
+      <section id="intro">
+        <h2>欢迎来到 POI 粉丝维基</h2>
+        <p>这里记录剧情分析、人物关系、机密案卷，以及对 Person of Interest 的热爱与讨论。</p>
+      </section>
 
-    <footer>
-      <div>© POI 机密案卷库 — 架构模板由 AI 协同生成 · 由站长整理维护</div>
-      <div style="margin-top:6px">上传到 GitHub Pages 后，请将该页面命名为 <code>index.html</code> 并放在仓库根目录。</div>
-    </footer>
+      <section id="news">
+        <h2>最新分析</h2>
+        <p>我们最近分析了 5x03 剧情和 Reese 与 Finch 的人物关系动态。</p>
+      </section>
+
+      <section id="top-characters">
+        <h2>热门人物</h2>
+        <ul>
+          <li>哈罗德·芬奇 (Harold Finch)</li>
+          <li>约翰·里瑟 (John Reese)</li>
+          <li>萨曼莎·肖 (Samantha Shaw)</li>
+          <li>Root (艾米丽·莱斯)</li>
+        </ul>
+      </section>
+
+      <section id="featured-cases">
+        <h2>精选案卷</h2>
+        <ul>
+          <li>案件 001：失踪的黑客</li>
+          <li>案件 002：纽约地铁威胁</li>
+          <li>案件 003：金融诈骗集团</li>
+        </ul>
+      </section>
+    </div>
   </div>
 
-  <script>
-    function doMockSearch(){
-      var q = document.getElementById('q').value.trim();
-      if(!q){alert('请输入关键词（示例：Finch / 513 事件）');return}
-      alert('模拟搜索：'+q+'（部署后可替换为真实检索功能）')
-    }
-  </script>
+  <footer>
+    &copy; 2025 POI 粉丝维基
+  </footer>
 </body>
 </html>
