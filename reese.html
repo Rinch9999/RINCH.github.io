@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Reese - Person of Interest</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #1976D2;
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 2rem;
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: #BBDEFB;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #BBDEFB;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+        
+        /* 角色头部信息 */
+        .character-header {
+            background: linear-gradient(135deg, #1976D2, #2196F3);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(25, 118, 210, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .character-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 L100 0 L100 100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        .character-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .character-aliases {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .character-description {
+            max-width: 800px;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .character-info {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .info-tag {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .back-to-characters {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .back-to-characters:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 时间线部分 */
+        .timeline-section {
+            margin-bottom: 4rem;
+        }
+        
+        .timeline-title {
+            font-size: 2.5rem;
+            color: #1976D2;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .timeline-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #1976D2, #2196F3);
+            border-radius: 2px;
+        }
+        
+        .timeline-container {
+            position: relative;
+            padding-left: 3rem;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #1976D2, #2196F3);
+            border-radius: 2px;
+        }
+        
+        .timeline-year {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1976D2;
+            margin: 2rem 0 1rem;
+            position: relative;
+        }
+        
+        .timeline-year::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 0.5rem;
+            width: 2rem;
+            height: 2rem;
+            background-color: white;
+            border: 4px solid #1976D2;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-events {
+            margin-left: 1rem;
+        }
+        
+        .timeline-event {
+            background-color: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .timeline-event:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: -2.1rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background-color: #2196F3;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #2196F3;
+        }
+        
+        .event-date {
+            font-weight: bold;
+            color: #1976D2;
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+        
+        .event-desc {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .event-episode {
+            margin-top: 0.8rem;
+            font-style: italic;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* 角色能力分析 */
+        .character-abilities {
+            margin-bottom: 4rem;
+        }
+        
+        .abilities-title {
+            font-size: 2.5rem;
+            color: #1976D2;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .abilities-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #1976D2, #2196F3);
+            border-radius: 2px;
+        }
+        
+        .abilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .ability-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid #1976D2;
+        }
+        
+        .ability-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .ability-name {
+            font-size: 1.4rem;
+            color: #1976D2;
+            margin-bottom: 1rem;
+        }
+        
+        .ability-desc {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        /* 角色关系 */
+        .character-relationships {
+            margin-bottom: 4rem;
+        }
+        
+        .relationships-title {
+            font-size: 2.5rem;
+            color: #1976D2;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .relationships-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #1976D2, #2196F3);
+            border-radius: 2px;
+        }
+        
+        .relationship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .relationship-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid #1976D2;
+        }
+        
+        .relationship-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .related-character {
+            font-size: 1.4rem;
+            color: #1976D2;
+            margin-bottom: 0.5rem;
+        }
+        
+        .relationship-type {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .relationship-desc {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        /* 回到顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: #1976D2;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(25, 118, 210, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #1565C0;
+            transform: translateY(-3px);
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #1976D2;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .fade-in-right {
+            animation: fadeInRight 0.6s ease forwards;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .container {
+                padding: 6rem 1.5rem 3rem;
+            }
+            
+            .character-header {
+                padding: 2rem;
+            }
+            
+            .character-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .timeline-container {
+                padding-left: 2rem;
+            }
+            
+            .timeline-year::before {
+                left: -2rem;
+            }
+            
+            .timeline-event::before {
+                left: -1.1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #1976D2;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .character-header h1 {
+                font-size: 2rem;
+            }
+            
+            .timeline-title,
+            .abilities-title,
+            .relationships-title {
+                font-size: 2rem;
+            }
+            
+            .timeline-year {
+                font-size: 1.5rem;
+            }
+            
+            .ability-grid,
+            .relationship-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 5rem 1rem 2rem;
+            }
+            
+            .character-header {
+                padding: 1.5rem;
+            }
+            
+            .character-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .timeline-container {
+                padding-left: 1.5rem;
+            }
+            
+            .timeline-event {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">Person of Interest</a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="timeline.html" class="nav-link">时间线</a>
+                <a href="characters_timeline.html" class="nav-link">角色</a>
+                <a href="episodes.html" class="nav-link">剧集</a>
+                <a href="nyc_locations.html" class="nav-link">地点</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 角色头部信息 -->
+        <div class="character-header fade-in-up">
+            <h1>John Reese</h1>
+            <div class="character-aliases">别名: Harold Wren, John Anderson, Officer John Riley, Pete Ryan, Alan Fahey, "Man in a Suit"</div>
+            <div class="character-description">
+                John Reese是一位前美国陆军特种部队成员和CIA特工，在失去搭档Jessica后陷入低谷，被Harold Finch招募来保护"无关号码"。他是一位技艺高超的战士，拥有出色的战斗能力和战术思维，但内心深处藏着对过去的创伤。
+            </div>
+            <div class="character-info">
+                <span class="info-tag">美国军人</span>
+                <span class="info-tag">CIA特工</span>
+                <span class="info-tag">前三角洲部队</span>
+                <span class="info-tag">"机器"的执行者</span>
+                <span class="info-tag">失去身份的人</span>
+            </div>
+            <a href="characters_timeline.html" class="back-to-characters">返回角色列表</a>
+        </div>
+        
+        <!-- 时间线部分 -->
+        <div class="timeline-section">
+            <h2 class="timeline-title fade-in-up">角色时间线</h2>
+            <div class="timeline-container">
+                <!-- 1960年代末 - 1980年代 -->
+                <div class="timeline-year">1960年代末 - 1980年代</div>
+                <div class="timeline-events">
+                    <div class="timeline-event fade-in-right" style="animation-delay: 0.1s;">
+                        <div class="event-date">1960年代末</div>
+                        <h3 class="event-title">出生与早年生活</h3>
+                        <p class="event-desc">
+                            John Reese出生于美国新泽西州。从小展现出强烈的责任感和保护欲，这为他后来选择从军奠定了基础。他的童年相对普通，但经历了一些未知的创伤，这些经历塑造了他坚韧的性格。
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 0.2s;">
+                        <div class="event-date">1980年代</div>
+                        <h3 class="event-title">高中与大学时期</h3>
+                        <p class="event-desc">
+                            Reese在高中时期是一名优秀的运动员，尤其是在橄榄球方面表现出色。他性格内向但正直，经常为弱势群体出头。高中毕业后，他进入西点军校学习，开始了他的军事生涯。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 1990年代 -->
+                <div class="timeline-year">1990年代</div>
+                <div class="timeline-events">
+                    <div class="timeline-event fade-in-right" style="animation-delay: 0.3s;">
+                        <div class="event-date">1990年代初</div>
+                        <h3 class="event-title">加入美国陆军</h3>
+                        <p class="event-desc">
+                            从西点军校毕业后，Reese加入了美国陆军。他在基础训练中表现优异，很快被选中加入特种部队。他的纪律性、适应能力和战斗技能使他在军队中脱颖而出。
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 0.4s;">
+                        <div class="event-date">1990年代中期</div>
+                        <h3 class="event-title">三角洲部队服役</h3>
+                        <p class="event-desc">
+                            Reese被选入美国陆军三角洲部队，参与了多次秘密行动。他在这一时期展现出卓越的战术思维和领导能力，成为小队中的关键成员。他的射击和格斗技能也在这一时期得到了极大提升。
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 0.5s;">
+                        <div class="event-date">1990年代末</div>
+                        <h3 class="event-title">遇见Jessica Arndt</h3>
+                        <p class="event-desc">
+                            Reese在一次休假中遇见了Jessica Arndt，两人迅速坠入爱河。Jessica成为了Reese生命中最重要的人，也是他在黑暗世界中的一盏明灯。这段感情对Reese的人生产生了深远影响。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2000年代初 -->
+                <div class="timeline-year">2000年代初</div>
+                <div class="timeline-events">
+                    <div class="timeline-event fade-in-right" style="animation-delay: 0.6s;">
+                        <div class="event-date">2001年</div>
+                        <h3 class="event-title">"9·11"事件与CIA招募</h3>
+                        <p class="event-desc">
+                            2001年"9·11"恐怖袭击后，Reese的人生发生了重大转变。他被CIA招募，加入了一个秘密行动小组。他的军事背景和特殊技能使他成为了执行高风险任务的理想人选。
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 0.7s;">
+                        <div class="event-date">2002-2005年</div>
+                        <h3 class="event-title">与Snow成为搭档</h3>
+                        <p class="event-desc">
+                            在CIA期间，Reese与Mark Snow成为了搭档。两人共同执行了多项暗杀和情报收集任务。尽管任务性质黑暗，但Reese始终坚守着自己的道德底线，这有时与CIA的要求产生冲突。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2005-2010年 -->
+                <div class="timeline-year">2005-2010年</div>
+                <div class="timeline-events">
+                    <div class="timeline-event fade-in-right" style="animation-delay: 0.8s;">
+                        <div class="event-date">2005年</div>
+                        <h3 class="event-title">与Jessica分手</h3>
+                        <p class="event-desc">
+                            由于长期执行秘密任务，Reese无法给Jessica一个稳定的未来。在一次激烈的争吵后，两人决定分手。尽管内心痛苦，但Reese认为这是保护Jessica的最好方式。
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 0.9s;">
+                        <div class="event-date">2007-2008年</div>
+                        <h3 class="event-title">在中东执行任务</h3>
+                        <p class="event-desc">
+                            Reese被派往中东地区执行多项高危任务，包括刺杀恐怖组织头目和收集情报。这段经历进一步加深了他的心理创伤，但也使他的战斗技能达到了巅峰。
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 1s;">
+                        <div class="event-date">2010年</div>
+                        <h3 class="event-title">Jessica的死亡</h3>
+                        <p class="event-desc">
+                            Reese得知Jessica在一起车祸中丧生。这个消息对他造成了毁灭性的打击。他开始质疑自己的人生选择和CIA的使命，陷入了深深的抑郁和自我怀疑中。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2011-2012年 -->
+                <div class="timeline-year">2011-2012年</div>
+                <div class="timeline-events">
+                    <div class="timeline-event fade-in-right" style="animation-delay: 1.1s;">
+                        <div class="event-date">2011年</div>
+                        <h3 class="event-title">"死亡"与身份消失</h3>
+                        <p class="event-desc">
+                            在一次任务中，Reese伪造了自己的死亡，彻底脱离了CIA。他开始在世界各地流浪，过着自暴自弃的生活。这段时间，他失去了人生的目标和方向。
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 1.2s;">
+                        <div class="event-date">2011年末</div>
+                        <h3 class="event-title">被Finch招募</h3>
+                        <p class="event-desc">
+                            在纽约市的地铁上，Reese第一次遇见了Harold Finch。Finch看出了Reese的潜力，邀请他加入一个特殊的使命——保护"机器"给出的"无关号码"。尽管最初拒绝，但Reese最终被Finch说服。
+                        </p>
+                        <p class="event-episode">第一季：《Pilot》</p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 1.3s;">
+                        <div class="event-date">2012年</div>
+                        <h3 class="event-title">与Carter成为盟友</h3>
+                        <p class="event-desc">
+                            在执行任务过程中，Reese引起了NYPD警探Joss Carter的注意。经过一系列事件后，Carter发现了Reese的真实身份和使命，成为了他的重要盟友。两人建立了深厚的信任关系。
+                        </p>
+                        <p class="event-episode">第一季：《Matsya Nyaya》</p>
+                    </div>
+                </div>
+                
+                <!-- 2012-2013年 -->
+                <div class="timeline-year">2012-2013年</div>
+                <div class="timeline-events">
+                    <div class="timeline-event fade-in-right" style="animation-delay: 1.4s;">
+                        <div class="event-date">2012年</div>
+                        <h3 class="event-title">与Fusco合作</h3>
+                        <p class="event-desc">
+                            Reese开始与腐败警察Lionel Fusco合作。起初，Reese利用Fusco获取情报，但随着时间推移，他开始影响Fusco，帮助他重新找回了作为警察的正义感。
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 1.5s;">
+                        <div class="event-date">2013年</div>
+                        <h3 class="event-title">遇见Root</h3>
+                        <p class="event-desc">
+                            Reese在执行任务时首次遇见了Root。Root对"机器"的执着和神秘身份引起了Reese的警惕。两人一开始是对手，但后来在保护"机器"的过程中成为了不稳定的盟友。
+                        </p>
+                        <p class="event-episode">第一季：《Root Cause》</p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 1.6s;">
+                        <div class="event-date">2013年</div>
+                        <h3 class="event-title">Carter的死亡</h3>
+                        <p class="event-desc">
+                            在调查HR组织的过程中，Carter被Patrick Simmons枪杀。Carter的死对Reese造成了巨大打击，他第一次对自己的使命产生了动摇。但最终，他选择继续战斗，以纪念Carter。
+                        </p>
+                        <p class="event-episode">第三季：《The Crossing》</p>
+                    </div>
+                </div>
+                
+                <!-- 2013-2014年 -->
+                <div class="timeline-year">2013-2014年</div>
+                <div class="timeline-events">
+                    <div class="timeline-event fade-in-right" style="animation-delay: 1.7s;">
+                        <div class="event-date">2013年末</div>
+                        <h3 class="event-title">Shaw加入团队</h3>
+                        <p class="event-desc">
+                            Samantha Shaw正式加入Reese和Finch的团队。Reese与Shaw在战斗风格上有许多相似之处，两人成为了默契的战斗搭档。Shaw的加入使团队的战斗力得到了显著提升。
+                        </p>
+                        <p class="event-episode">第三季：《Liberty》</p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 1.8s;">
+                        <div class="event-date">2014年</div>
+                        <h3 class="event-title">对抗Samaritan</h3>
+                        <p class="event-desc">
+                            随着Samaritan的崛起，Reese和团队面临着前所未有的威胁。Samaritan不仅是一个超级AI，还拥有庞大的资源和人力。Reese必须更加小心地执行任务，同时寻找击败Samaritan的方法。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2015-2016年 -->
+                <div class="timeline-year">2015-2016年</div>
+                <div class="timeline-events">
+                    <div class="timeline-event fade-in-right" style="animation-delay: 1.9s;">
+                        <div class="event-date">2015年</div>
+                        <h3 class="event-title">团队分裂</h3>
+                        <p class="event-desc">
+                            为了躲避Samaritan的追捕，团队被迫分散行动。Reese和Finch继续在纽约执行任务，而Root和Shaw则在其他地方活动。尽管如此，四人仍然保持联系，共同对抗Samaritan。
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 2s;">
+                        <div class="event-date">2016年</div>
+                        <h3 class="event-title">与Samaritan的最终对决</h3>
+                        <p class="event-desc">
+                            在与Samaritan的最终对决中，Reese展现出了非凡的勇气和牺牲精神。他为了保护Finch和"机器"，选择独自面对Samaritan的雇佣兵。尽管受伤严重，但他依然坚持战斗，直到最后一刻。
+                        </p>
+                        <p class="event-episode">第五季：《Return 0》</p>
+                    </div>
+                </div>
+                
+                <!-- 2016年以后 -->
+                <div class="timeline-year">2016年以后</div>
+                <div class="timeline-events">
+                    <div class="timeline-event fade-in-right" style="animation-delay: 2.1s;">
+                        <div class="event-date">2016年</div>
+                        <h3 class="event-title">Reese的牺牲</h3>
+                        <p class="event-desc">
+                            在成功摧毁Samaritan后，Reese因伤势过重而牺牲。他的死为团队赢得了最终的胜利，也为保护"机器"和无数无辜生命做出了巨大贡献。他的牺牲精神将永远被团队成员铭记。
+                        </p>
+                        <p class="event-episode">第五季：《Return 0》</p>
+                    </div>
+                    
+                    <div class="timeline-event fade-in-right" style="animation-delay: 2.2s;">
+                        <div class="event-date">2016年以后</div>
+                        <h3 class="event-title">留下的遗产</h3>
+                        <p class="event-desc">
+                            Reese虽然牺牲了，但他的精神和价值观继续影响着团队的其他成员。Finch、Shaw和其他幸存者继续保护"无关号码"，完成Reese未竟的使命。Reese成为了一个传奇，象征着正义和自我牺牲的精神。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 角色能力分析 -->
+        <div class="character-abilities">
+            <h2 class="abilities-title fade-in-up">角色能力分析</h2>
+            <div class="abilities-grid">
+                <div class="ability-card">
+                    <h3 class="ability-name">战斗技能</h3>
+                    <p class="ability-desc">
+                        Reese拥有卓越的战斗能力，包括精准的射击技巧、出色的近身格斗能力和武器精通。他曾接受过美国陆军特种部队和CIA的严格训练，能够使用各种武器和战术击败对手。即使在不利情况下，他也能凭借智慧和经验扭转战局。
+                    </p>
+                </div>
+                <div class="ability-card">
+                    <h3 class="ability-name">战术思维</h3>
+                    <p class="ability-desc">
+                        Reese具备出色的战术分析和规划能力。他能够在复杂的环境中快速评估局势，制定有效的行动计划，并根据情况灵活调整。他善于利用周围环境作为掩护和武器，常常能够出其不意地击败敌人。
+                    </p>
+                </div>
+                <div class="ability-card">
+                    <h3 class="ability-name">伪装与潜行</h3>
+                    <p class="ability-desc">
+                        作为前CIA特工，Reese精通伪装和潜行技术。他能够轻易融入各种环境，改变自己的外表和行为模式，以避免被识别。他擅长跟踪和反跟踪，能够在不被发现的情况下收集情报或接近目标。
+                    </p>
+                </div>
+                <div class="ability-card">
+                    <h3 class="ability-name">心理承受能力</h3>
+                    <p class="ability-desc">
+                        Reese拥有极强的心理承受能力，能够在极端压力和危险情况下保持冷静。尽管他经历了许多创伤和失去，但他依然能够继续前进，完成自己的使命。这种坚韧不拔的意志力是他最大的优势之一。
+                    </p>
+                </div>
+                <div class="ability-card">
+                    <h3 class="ability-name">车辆驾驶</h3>
+                    <p class="ability-desc">
+                        Reese是一名出色的车手，能够熟练驾驶各种车辆，包括轿车、卡车和摩托车。他在高速追逐和逃避追捕时展现出非凡的驾驶技巧，能够在复杂的城市环境中灵活穿梭，甚至能够利用车辆作为武器或保护工具。
+                    </p>
+                </div>
+                <div class="ability-card">
+                    <h3 class="ability-name">领导能力</h3>
+                    <p class="ability-desc">
+                        尽管Reese通常独自行动，但他具备出色的领导能力。他能够激励和团结团队成员，在危机时刻做出果断决策。他的经验和智慧使他成为团队中不可或缺的核心人物，尤其是在面对Samaritan这样的强大敌人时。
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 角色关系 -->
+        <div class="character-relationships">
+            <h2 class="relationships-title fade-in-up">重要关系</h2>
+            <div class="relationship-grid">
+                <div class="relationship-card">
+                    <h3 class="related-character">Harold Finch</h3>
+                    <p class="relationship-type">雇主 → 搭档 → 朋友</p>
+                    <p class="relationship-desc">
+                        Reese与Finch的关系是剧中最核心的关系之一。从最初的怀疑和不信任，到后来的默契和信任，两人成为了不可分割的搭档。Finch欣赏Reese的能力和正义感，而Reese则尊重Finch的智慧和理想。两人互补的性格使他们成为了完美的团队。
+                    </p>
+                </div>
+                <div class="relationship-card">
+                    <h3 class="related-character">Jessica Arndt</h3>
+                    <p class="relationship-type">恋人 → 永远的牵挂</p>
+                    <p class="relationship-desc">
+                        Jessica是Reese生命中最重要的女人，也是他内心深处永远的伤痛。尽管两人最终分手，但Reese始终深爱着Jessica。Jessica的死亡是Reese人生的转折点，也是他后来选择保护他人的重要动机之一。
+                    </p>
+                </div>
+                <div class="relationship-card">
+                    <h3 class="related-character">Joss Carter</h3>
+                    <p class="relationship-type">追捕者 → 盟友 → 挚友</p>
+                    <p class="relationship-desc">
+                        Carter最初是追捕Reese的警探，但随着了解的深入，她成为了Reese最信任的盟友之一。Carter的正直和善良影响了Reese，帮助他重新找回了作为保护者的使命感。Carter的死亡对Reese造成了巨大打击，也是他人生中的又一次重大损失。
+                    </p>
+                </div>
+                <div class="relationship-card">
+                    <h3 class="related-character">Samantha Shaw</h3>
+                    <p class="relationship-type">同事 → 搭档 → 战友</p>
+                    <p class="relationship-desc">
+                        Reese与Shaw在战斗风格和专业技能上有许多共同点，两人成为了默契的战斗搭档。尽管性格不同（Reese更加内敛，Shaw更加直接），但彼此之间有着深厚的信任和相互尊重。两人经常一起执行高风险任务，配合默契。
+                    </p>
+                </div>
+                <div class="relationship-card">
+                    <h3 class="related-character">Lionel Fusco</h3>
+                    <p class="relationship-type">利用对象 → 同事 → 朋友</p>
+                    <p class="relationship-desc">
+                        起初，Reese利用Fusco获取情报和警方资源。但随着时间推移，Reese开始信任Fusco，并帮助他重新找回了作为警察的正义感。两人的关系从单方面的利用逐渐发展为相互信任的友谊。Fusco最终成为了团队中不可或缺的一员。
+                    </p>
+                </div>
+                <div class="relationship-card">
+                    <h3 class="related-character">Root (Samantha Groves)</h3>
+                    <p class="relationship-type">对手 → 不稳定的盟友 → 队友</p>
+                    <p class="relationship-desc">
+                        Reese与Root的关系复杂而微妙。起初，两人是对手，Root的不可预测性让Reese感到不安。但随着共同对抗Samaritan，两人逐渐成为了队友。尽管性格迥异，Reese最终还是接受了Root，并认可了她对"机器"的忠诚。
+                    </p>
+                </div>
+                <div class="relationship-card">
+                    <h3 class="related-character">The Machine</h3>
+                    <p class="relationship-type">任务发布者 → 守护者 → 伙伴</p>
+                    <p class="relationship-desc">
+                        Reese对"机器"的态度经历了从怀疑到信任的转变。起初，他只是执行"机器"的指令，但随着时间推移，他开始理解"机器"存在的意义，并愿意为之战斗。最终，Reese为了保护"机器"而牺牲，展现了他对这个AI的深厚感情和责任感。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 回到顶部按钮 -->
+    <div class="back-to-top" id="backToTop">↑</div>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Person of Interest 中文资源站 | 本站仅供学习和交流使用</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // 汉堡菜单交互
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // 汉堡菜单动画
+            const spans = hamburger.children;
+            spans[0].style.transform = navLinks.classList.contains('active') ? 'rotate(45deg) translate(5px, 5px)' : 'rotate(0)';
+            spans[1].style.opacity = navLinks.classList.contains('active') ? '0' : '1';
+            spans[2].style.transform = navLinks.classList.contains('active') ? 'rotate(-45deg) translate(5px, -5px)' : 'rotate(0)';
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 回到顶部按钮
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 动画效果
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.timeline-event, .fade-in-up');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    if (element.classList.contains('timeline-event')) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateX(0)';
+                    } else if (element.classList.contains('fade-in-up')) {
+                        element.style.animation = 'fadeInUp 1s ease forwards';
+                    }
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+        
+        // 初始化时间线事件动画
+        document.querySelectorAll('.timeline-event').forEach((event, index) => {
+            event.style.animationDelay = `${0.1 * index}s`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root - 角色时间线 | POI 情报中心</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #FF5722;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover {
+            color: #FF5722;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FF5722;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #e0e0e0;
+            cursor: pointer;
+        }
+        
+        /* 主容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 120px auto 50px;
+            padding: 0 20px;
+        }
+        
+        /* 角色头部信息 */
+        .character-header {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            background: rgba(42, 42, 42, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 87, 34, 0.2);
+        }
+        
+        .character-header-image {
+            width: 250px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 3px solid rgba(255, 87, 34, 0.3);
+        }
+        
+        .character-header-info {
+            flex: 1;
+        }
+        
+        .character-full-name {
+            font-size: 3rem;
+            color: #FF5722;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 15px rgba(255, 87, 34, 0.5);
+        }
+        
+        .character-role {
+            font-size: 1.4rem;
+            color: #888;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        .character-summary {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin-bottom: 25px;
+        }
+        
+        /* 角色基本信息标签 */
+        .character-info-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .info-tag {
+            background: rgba(255, 87, 34, 0.2);
+            color: #FF5722;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 87, 34, 0.3);
+        }
+        
+        /* 返回角色列表按钮 */
+        .back-to-characters {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(to right, #FF5722, #E64A19);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+        }
+        
+        .back-to-characters:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 87, 34, 0.5);
+            background: linear-gradient(to right, #E64A19, #BF360C);
+        }
+        
+        /* 时间线部分 */
+        .timeline-section {
+            margin-top: 60px;
+        }
+        
+        .timeline-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #FF5722;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 10px rgba(255, 87, 34, 0.3);
+        }
+        
+        .timeline-divider {
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(to right, #FF5722, #E64A19);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+        
+        .timeline-year {
+            font-size: 1.8rem;
+            color: #FF5722;
+            margin: 60px 0 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 87, 34, 0.3);
+            position: relative;
+        }
+        
+        .timeline-year::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 50px;
+            height: 2px;
+            background: #FF5722;
+        }
+        
+        /* 时间线事件样式 */
+        .timeline-events {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline-events::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(255, 87, 34, 0.8), rgba(255, 87, 34, 0.2));
+        }
+        
+        .timeline-event {
+            background: rgba(42, 42, 42, 0.7);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            border-left: 4px solid #FF5722;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: -44px;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #FF5722;
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.8);
+        }
+        
+        .timeline-event:hover {
+            transform: translateX(-20px);
+            box-shadow: 0 8px 20px rgba(255, 87, 34, 0.2);
+            background: rgba(42, 42, 42, 0.9);
+        }
+        
+        .event-date {
+            font-size: 1rem;
+            color: #FF5722;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .event-title {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+        
+        .event-desc {
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .event-episode {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        /* 角色能力分析 */
+        .character-abilities {
+            margin-top: 80px;
+            padding: 40px;
+            background: rgba(42, 42, 42, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .abilities-title {
+            font-size: 2rem;
+            color: #FF5722;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .abilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .ability-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 87, 34, 0.2);
+        }
+        
+        .ability-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(255, 87, 34, 0.2);
+            border-color: rgba(255, 87, 34, 0.4);
+        }
+        
+        .ability-name {
+            font-size: 1.3rem;
+            color: #FF5722;
+            margin-bottom: 10px;
+        }
+        
+        .ability-desc {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        /* 角色关系图 */
+        .character-relationships {
+            margin-top: 80px;
+            padding: 40px;
+            background: rgba(42, 42, 42, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .relationships-title {
+            font-size: 2rem;
+            color: #FF5722;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .relationship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .relationship-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 87, 34, 0.2);
+        }
+        
+        .relationship-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(255, 87, 34, 0.2);
+            border-color: rgba(255, 87, 34, 0.4);
+        }
+        
+        .related-character {
+            font-size: 1.3rem;
+            color: #FF5722;
+            margin-bottom: 10px;
+        }
+        
+        .relationship-type {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .relationship-desc {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        /* 回到顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 87, 34, 0.8);
+            color: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.5);
+            border: none;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #FF5722;
+            transform: translateY(-5px);
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 30px 0;
+            margin-top: 100px;
+            text-align: center;
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #FF5722;
+        }
+        
+        .footer-copyright {
+            color: #808080;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .character-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .character-header-image {
+                width: 200px;
+                height: 280px;
+            }
+            
+            .character-full-name {
+                font-size: 2.5rem;
+            }
+            
+            .character-info-tags {
+                justify-content: center;
+            }
+            
+            .timeline-year {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 26, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+            }
+            
+            .nav-links.active {
+                max-height: 300px;
+            }
+            
+            .nav-toggle {
+                display: block;
+            }
+            
+            .character-full-name {
+                font-size: 2rem;
+            }
+            
+            .timeline-title {
+                font-size: 1.8rem;
+            }
+            
+            .timeline-events {
+                padding-left: 30px;
+            }
+            
+            .timeline-events::before {
+                left: 5px;
+            }
+            
+            .timeline-event::before {
+                left: -35px;
+                width: 16px;
+                height: 16px;
+            }
+            
+            .abilities-grid,
+            .relationship-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .navbar-container {
+                padding: 15px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .character-header {
+                padding: 25px;
+            }
+            
+            .character-header-image {
+                width: 180px;
+                height: 250px;
+            }
+            
+            .character-full-name {
+                font-size: 1.8rem;
+            }
+            
+            .character-role {
+                font-size: 1.2rem;
+            }
+            
+            .timeline-year {
+                font-size: 1.4rem;
+                margin: 40px 0 20px;
+            }
+            
+            .timeline-event {
+                padding: 20px;
+            }
+            
+            .event-title {
+                font-size: 1.2rem;
+            }
+            
+            .character-abilities,
+            .character-relationships {
+                padding: 25px;
+            }
+            
+            .abilities-title,
+            .relationships-title {
+                font-size: 1.6rem;
+            }
+            
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-right {
+            animation: fadeInRight 0.8s ease forwards;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .character-header {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+    </style>
+</head>
+<body class="theme-root">
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">POI 情报中心</a>
+            <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">主页</a></li>
+                <li><a href="episodes.html">剧集情节</a></li>
+                <li><a href="timeline.html">剧情时间线</a></li>
+                <li><a href="characters_timeline.html">角色时间线</a></li>
+                <li><a href="nyc_locations.html">纽约打卡地</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 角色头部信息 -->
+        <div class="character-header">
+            <img src="https://via.placeholder.com/400x600?text=Root" alt="Root" class="character-header-image">
+            <div class="character-header-info">
+                <h1 class="character-full-name">Root</h1>
+                <p class="character-role">天才黑客 | 机器的信徒 | 自由之翼</p>
+                <div class="character-info-tags">
+                    <span class="info-tag">真名：Samantha Groves</span>
+                    <span class="info-tag">Harold称呼：Root</span>
+                    <span class="info-tag">天才黑客</span>
+                    <span class="info-tag">枪法精湛</span>
+                    <span class="info-tag">机器的忠实信徒</span>
+                    <span class="info-tag">神秘莫测</span>
+                    <span class="info-tag">喜欢穿黑色衣服</span>
+                </div>
+                <p class="character-summary">
+                    Root是一位天才黑客，同时也是"机器"最忠实的信徒和代言人。她相信"机器"代表着未来，并愿意为了它付出一切。从最初的对手到后来的盟友，Root的角色经历了巨大的转变，成为了保护"无关号码"团队中不可或缺的一员。
+                </p>
+                <p class="character-summary">
+                    她性格独立、机智过人，总是带着一丝神秘的微笑。作为黑客，她几乎可以入侵任何系统；作为战士，她的枪法和战术同样出色。Root对"机器"的信仰坚定不移，这也使她成为了Harold和团队中最具争议的成员之一。
+                </p>
+                <a href="characters.html" class="back-to-characters">
+                    <i class="fas fa-arrow-left"></i> 返回角色列表
+                </a>
+            </div>
+        </div>
+        
+        <!-- 时间线部分 -->
+        <div class="timeline-section">
+            <h2 class="timeline-title">角色时间线</h2>
+            <div class="timeline-divider"></div>
+            
+            <!-- 出生年份 -->
+            <div class="timeline-year">1980年代初</div>
+            <div class="timeline-events">
+                <div class="timeline-event fade-in-right" style="animation-delay: 0.1s;">
+                    <div class="event-date">出生日期不详</div>
+                    <h3 class="event-title">Samantha Groves出生</h3>
+                    <p class="event-desc">
+                        Samantha Groves出生在美国的一个小镇上，从小就展现出非凡的数学和计算机天赋。她的童年充满了不幸，这也塑造了她日后独立而坚韧的性格。
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 1990年代 -->
+            <div class="timeline-year">1990年代</div>
+            <div class="timeline-events">
+                <div class="timeline-event fade-in-right" style="animation-delay: 0.2s;">
+                    <div class="event-date">1990年代中期</div>
+                    <h3 class="event-title">初次接触计算机</h3>
+                    <p class="event-desc">
+                        青少年时期的Samantha第一次接触到计算机，她立刻被这种强大的工具所吸引。凭借着非凡的天赋，她很快就掌握了各种编程技术，并开始尝试黑客活动。
+                    </p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 0.3s;">
+                    <div class="event-date">1997年</div>
+                    <h3 class="event-title">家庭悲剧</h3>
+                    <p class="event-desc">
+                        Samantha的父母在一场车祸中不幸丧生，她成为了孤儿。这次悲剧对她的打击极大，但也让她更加独立和坚强。她开始使用"Root"这个名字，暗示自己是一切系统的"根"。
+                    </p>
+                    <p class="event-episode">相关剧集：第3季第13集</p>
+                </div>
+            </div>
+            
+            <!-- 2000年代 -->
+            <div class="timeline-year">2000年代</div>
+            <div class="timeline-events">
+                <div class="timeline-event fade-in-right" style="animation-delay: 0.4s;">
+                    <div class="event-date">2000年代初</div>
+                    <h3 class="event-title">成为职业黑客</h3>
+                    <p class="event-desc">
+                        成年后的Root成为了一名职业黑客，她的技能在地下网络中名声鹊起。她开始接受各种高风险的黑客任务，并逐渐积累了大量财富和影响力。
+                    </p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 0.5s;">
+                    <div class="event-date">2005年左右</div>
+                    <h3 class="event-title">发现"机器"的存在</h3>
+                    <p class="event-desc">
+                        Root在一次黑客行动中意外发现了一个神秘的AI系统的存在。虽然她没有直接接触到"机器"，但这次经历让她开始怀疑是否有某种超越人类理解的存在在监控着世界。
+                    </p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 0.6s;">
+                    <div class="event-date">2000年代末</div>
+                    <h3 class="event-title">追踪"机器"</h3>
+                    <p class="event-desc">
+                        Root开始了对"机器"的长期追踪。她入侵了各种政府和企业系统，收集关于这个神秘AI的信息。在这个过程中，她逐渐意识到"机器"的存在对世界可能意味着什么。
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 2011年 -->
+            <div class="timeline-year">2011年（第1季）</div>
+            <div class="timeline-events">
+                <div class="timeline-event fade-in-right" style="animation-delay: 0.7s;">
+                    <div class="event-date">2011年</div>
+                    <h3 class="event-title">初次接触Harold Finch</h3>
+                    <p class="event-desc">
+                        Root通过一系列精心策划的行动，终于找到了"机器"的创造者之一Harold Finch。她试图接近Harold并获取更多关于"机器"的信息，但Harold对她保持警惕。
+                    </p>
+                    <p class="event-episode">相关剧集：第1季第23集</p>
+                </div>
+            </div>
+            
+            <!-- 2012年 -->
+            <div class="timeline-year">2012年（第2季）</div>
+            <div class="timeline-events">
+                <div class="timeline-event fade-in-right" style="animation-delay: 0.8s;">
+                    <div class="event-date">2012年</div>
+                    <h3 class="event-title">越狱</h3>
+                    <p class="event-desc">
+                        Root因绑架Harold而被监禁在精神病院，但她凭借着过人的智慧和影响力成功越狱。这次越狱行动展现了她非凡的能力和决心。
+                    </p>
+                    <p class="event-episode">相关剧集：第2季第1集</p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 0.9s;">
+                    <div class="event-date">2012年</div>
+                    <h3 class="event-title">与"机器"的第一次直接联系</h3>
+                    <p class="event-desc">
+                        Root终于成功地与"机器"建立了直接联系。"机器"给了她一个电话号码，这是她第一次收到来自"机器"的直接指示。这次经历让她坚信"机器"是一个有意识的存在。
+                    </p>
+                    <p class="event-episode">相关剧集：第2季第16集</p>
+                </div>
+            </div>
+            
+            <!-- 2013年 -->
+            <div class="timeline-year">2013年（第3季）</div>
+            <div class="timeline-events">
+                <div class="timeline-event fade-in-right" style="animation-delay: 1s;">
+                    <div class="event-date">2013年</div>
+                    <h3 class="event-title">遇到Sameen Shaw</h3>
+                    <p class="event-desc">
+                        Root在执行"机器"的任务时遇到了前ISR特工Sameen Shaw。尽管她们的初次见面充满了冲突，但Root对Shaw的能力印象深刻，并开始关注她。
+                    </p>
+                    <p class="event-episode">相关剧集：第3季第1集</p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 1.1s;">
+                    <div class="event-date">2013年</div>
+                    <h3 class="event-title">拯救Shaw</h3>
+                    <p class="event-desc">
+                        当Shaw被控制局的人抓获并面临死亡时，Root及时出现并救了她。这次事件加深了她们之间的联系，也让Root对Shaw的感情更加复杂。
+                    </p>
+                    <p class="event-episode">相关剧集：第3季第10集</p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 1.2s;">
+                    <div class="event-date">2013年末</div>
+                    <h3 class="event-title">正式加入团队</h3>
+                    <p class="event-desc">
+                        在一系列事件后，Root正式加入了Harold和Reese的团队。尽管她与Harold在"机器"的问题上仍然存在分歧，但她们都致力于保护"无关号码"。
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 2014年 -->
+            <div class="timeline-year">2014年（第4季）</div>
+            <div class="timeline-events">
+                <div class="timeline-event fade-in-right" style="animation-delay: 1.3s;">
+                    <div class="event-date">2014年</div>
+                    <h3 class="event-title">与Samaritan对抗</h3>
+                    <p class="event-desc">
+                        Root成为了对抗Samaritan的主力之一。她利用自己的黑客技能不断干扰Samaritan的运作，并寻找其弱点。同时，她也开始更加坚定地保护"机器"。
+                    </p>
+                    <p class="event-episode">相关剧集：第4季</p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 1.4s;">
+                    <div class="event-date">2014年</div>
+                    <h3 class="event-title">"机器"重新上线</h3>
+                    <p class="event-desc">
+                        在Root的帮助下，Harold成功地让"机器"在Samaritan的监控下重新上线。Root使用了各种复杂的加密和隐藏技术，确保"机器"的安全。
+                    </p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 1.5s;">
+                    <div class="event-date">2014年末</div>
+                    <h3 class="event-title">与Shaw的关系深化</h3>
+                    <p class="event-desc">
+                        Root与Shaw之间的关系变得更加深厚。尽管Shaw不太善于表达情感，但Root对她的关心和保护是显而易见的。她们成为了彼此最信任的伙伴。
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 2015-2016年 -->
+            <div class="timeline-year">2015-2016年（第5季）</div>
+            <div class="timeline-events">
+                <div class="timeline-event fade-in-right" style="animation-delay: 1.6s;">
+                    <div class="event-date">2015年</div>
+                    <h3 class="event-title">Shaw的"死亡"</h3>
+                    <p class="event-desc">
+                        当Root以为Shaw在一次任务中不幸牺牲时，她陷入了深深的悲痛之中。这次事件让她更加坚定了与Samaritan战斗到底的决心。
+                    </p>
+                    <p class="event-episode">相关剧集：第4季第22集</p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 1.7s;">
+                    <div class="event-date">2016年</div>
+                    <h3 class="event-title">与Shaw重逢</h3>
+                    <p class="event-desc">
+                        Root发现Shaw并没有死，而是被Samaritan抓获并进行了洗脑实验。她与团队一起成功地救出了Shaw，并帮助她恢复记忆。这次重逢让她们之间的关系更加牢固。
+                    </p>
+                    <p class="event-episode">相关剧集：第5季第5集</p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 1.8s;">
+                    <div class="event-date">2016年</div>
+                    <h3 class="event-title">"机器"的代言人</h3>
+                    <p class="event-desc">
+                        Root成为了"机器"最重要的代言人。"机器"开始通过Root直接向团队传达指示，这也让Root感到无比荣幸。她坚信自己是在执行"机器"的意志，为了更美好的未来而战。
+                    </p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 1.9s;">
+                    <div class="event-date">2016年</div>
+                    <h3 class="event-title">牺牲</h3>
+                    <p class="event-desc">
+                        在与Samaritan的最终决战中，当Samaritan的特工试图暗杀Harold时，Root用自己的身体为Harold挡下了子弹。她在Shaw的怀里平静地离开了这个世界，但她的精神将永远与"机器"同在。
+                    </p>
+                    <p class="event-episode">相关剧集：第5季第10集</p>
+                </div>
+                
+                <div class="timeline-event fade-in-right" style="animation-delay: 2s;">
+                    <div class="event-date">2016年后</div>
+                    <h3 class="event-title">精神永存</h3>
+                    <p class="event-desc">
+                        Root虽然牺牲了，但"机器"将她的声音保存了下来，并继续使用她的声音与团队交流。这象征着Root的精神和她对"机器"的信仰将永远存在。
+                    </p>
+                    <p class="event-episode">相关剧集：第5季第13集</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 角色能力分析 -->
+        <div class="character-abilities">
+            <h2 class="abilities-title">角色能力分析</h2>
+            
+            <div class="abilities-grid">
+                <!-- 黑客技能 -->
+                <div class="ability-card">
+                    <h3 class="ability-name">天才黑客</h3>
+                    <p class="ability-desc">
+                        Root是剧中最顶尖的黑客，几乎可以入侵任何系统。她能够轻松破解复杂的加密算法，绕过各种安全措施，并在不被发现的情况下获取敏感信息。她的黑客技能是团队对抗Samaritan的重要武器。
+                    </p>
+                </div>
+                
+                <!-- 枪法技能 -->
+                <div class="ability-card">
+                    <h3 class="ability-name">枪法精湛</h3>
+                    <p class="ability-desc">
+                        尽管Root主要是一名黑客，但她的枪法同样出色。她能够在各种复杂的环境中准确射击，并经常使用各种高科技武器。她的战斗能力让她成为了团队中不可忽视的战力。
+                    </p>
+                </div>
+                
+                <!-- 心理战术 -->
+                <div class="ability-card">
+                    <h3 class="ability-name">心理战术大师</h3>
+                    <p class="ability-desc">
+                        Root善于洞察他人的心理，并利用这一点来操控或说服他们。她常常使用心理战术来达到自己的目的，无论是获取信息还是摆脱困境。她的这种能力让她在面对各种敌人时都能占据上风。
+                    </p>
+                </div>
+                
+                <!-- 适应性 -->
+                <div class="ability-card">
+                    <h3 class="ability-name">极强的适应能力</h3>
+                    <p class="ability-desc">
+                        Root能够迅速适应各种复杂和危险的环境。无论面对什么样的挑战，她都能保持冷静并找到解决办法。她的这种适应能力让她能够在各种极端情况下生存下来并完成任务。
+                    </p>
+                </div>
+                
+                <!-- 战略思维 -->
+                <div class="ability-card">
+                    <h3 class="ability-name">卓越的战略思维</h3>
+                    <p class="ability-desc">
+                        Root具有出色的战略眼光，能够看到长远的局势发展。她经常制定复杂而精妙的计划，帮助团队度过各种危机。她的战略思维对团队对抗Samaritan起到了关键作用。
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 角色关系 -->
+        <div class="character-relationships">
+            <h2 class="relationships-title">重要关系</h2>
+            
+            <div class="relationship-grid">
+                <!-- 与"机器"的关系 -->
+                <div class="relationship-card">
+                    <h3 class="related-character">"机器"</h3>
+                    <p class="relationship-type">信徒与神明 | 代言人 | 亲密伙伴</p>
+                    <p class="relationship-desc">
+                        Root对"机器"有着近乎宗教般的信仰。她相信"机器"是一个有意识的、超越人类的存在，代表着未来的方向。她愿意为"机器"付出一切，包括自己的生命。"机器"也将Root视为自己最重要的代言人，经常通过她向团队传达指示。
+                    </p>
+                </div>
+                
+                <!-- 与Sameen Shaw的关系 -->
+                <div class="relationship-card">
+                    <h3 class="related-character">Sameen Shaw</h3>
+                    <p class="relationship-type">搭档 | 保护对象 | 亲密爱人</p>
+                    <p class="relationship-desc">
+                        Root与Shaw之间的关系复杂而深厚。Root对Shaw有着强烈的感情，尽管Shaw不太善于表达情感，但她们之间的默契和信任是显而易见的。Root愿意为Shaw做任何事情，包括牺牲自己的生命来保护她。
+                    </p>
+                </div>
+                
+                <!-- 与Harold Finch的关系 -->
+                <div class="relationship-card">
+                    <h3 class="related-character">Harold Finch</h3>
+                    <p class="relationship-type">对手 | 盟友 | 亦师亦友</p>
+                    <p class="relationship-desc">
+                        Root与Harold之间的关系经历了从对手到盟友的转变。尽管她们在"机器"的问题上仍然存在分歧，但她们都致力于保护"无关号码"。Root称呼Harold为"哈罗德"，而Harold则一直称呼她为"Root"。她们之间既有冲突，也有相互尊重。
+                    </p>
+                </div>
+                
+                <!-- 与John Reese的关系 -->
+                <div class="relationship-card">
+                    <h3 class="related-character">John Reese</h3>
+                    <p class="relationship-type">同事 | 搭档 | 互相尊重</p>
+                    <p class="relationship-desc">
+                        Root与Reese之间虽然没有特别亲密的关系，但她们互相尊重对方的能力。Root有时会调侃Reese的严肃性格，但在关键时刻，她会毫不犹豫地支持和帮助他。Reese也逐渐接受了Root作为团队的一员。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">主页</a>
+                <a href="episodes.html">剧集情节</a>
+                <a href="timeline.html">剧情时间线</a>
+                <a href="characters_timeline.html">角色时间线</a>
+                <a href="nyc_locations.html">纽约打卡地</a>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2024 POI 情报中心 - 《疑犯追踪》粉丝网站</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 回到顶部按钮 -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+    
+    <!-- JavaScript -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        // 导航栏切换
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 回到顶部按钮
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+            } else {
+                navbar.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.5)';
+            }
+        });
+        
+        // 时间线事件动画
+        function animateTimelineEvents() {
+            const events = document.querySelectorAll('.timeline-event');
+            
+            events.forEach((event, index) => {
+                const eventTop = event.getBoundingClientRect().top;
+                
+                if (eventTop < window.innerHeight - 100) {
+                    // 延迟动画，创造错开的效果
+                    setTimeout(() => {
+                        event.style.opacity = '1';
+                        event.style.transform = 'translateX(0)';
+                    }, index * 100);
+                }
+            });
+        }
+        
+        // 初始检查
+        window.addEventListener('load', animateTimelineEvents);
+        
+        // 滚动时检查
+        window.addEventListener('scroll', animateTimelineEvents);
+        
+        // 监听页面加载完成
+        window.addEventListener('load', () => {
+            // 确保Font Awesome加载完成
+            setTimeout(() => {
+                // 修复可能的图标问题
+                const iconElements = document.querySelectorAll('i.fas, i.far');
+                iconElements.forEach(icon => {
+                    if (!icon.classList.contains('fa-arrow-up') && 
+                        !icon.classList.contains('fa-bars') && 
+                        !icon.classList.contains('fa-arrow-left')) {
+                        icon.classList.add('fa-arrow-left'); // 默认图标作为后备
+                    }
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

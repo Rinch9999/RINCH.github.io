@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person of Interest - 剧情时间线</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 60px 0;
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            margin-bottom: 60px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/D00DD05A509DD4F59C1E93032F1ECEBF_1763918318721.webp.jpg') no-repeat center center;
+            background-size: cover;
+            opacity: 0.15;
+            z-index: -1;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 0 0 30px rgba(100, 100, 255, 0.6);
+            letter-spacing: 2px;
+        }
+        .timeline {
+            position: relative;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(to bottom, #4a9eff, #8a2be2, #4a9eff);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            box-shadow: 0 0 20px rgba(74, 158, 255, 0.5);
+        }
+        .year-section {
+            position: relative;
+            background: none;
+            padding: 40px 0;
+        }
+        .year-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 10px;
+            background: rgba(74, 158, 255, 0.8);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            z-index: 1;
+            box-shadow: 0 5px 20px rgba(74, 158, 255, 0.5);
+        }
+        .container-timeline {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .container-timeline::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, #4a9eff, #8a2be2);
+            border: 4px solid #fff;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 20px rgba(74, 158, 255, 0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .container-timeline:hover::after {
+            transform: scale(1.3);
+            box-shadow: 0 0 30px rgba(74, 158, 255, 1);
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            left: 50%;
+        }
+        .left::after {
+            right: -17px;
+        }
+        .right::after {
+            left: -17px;
+        }
+        .content {
+            padding: 25px 35px;
+            background: rgba(255, 255, 255, 0.05);
+            position: relative;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .content:hover {
+            background: rgba(74, 158, 255, 0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: #4a9eff;
+        }
+        .content h3 {
+            color: #4a9eff;
+            margin-top: 0;
+            font-size: 1.4rem;
+            border-bottom: 1px solid rgba(74, 158, 255, 0.3);
+            padding-bottom: 10px;
+        }
+        .content p {
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+        .date {
+            color: #8a2be2;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 1.1rem;
+        }
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #4a9eff, #8a2be2);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            margin-top: 60px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(74, 158, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+        }
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 158, 255, 0.5);
+        }
+        .intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 158, 255, 0.3);
+        }
+        .intro p {
+            font-size: 1.2rem;
+            color: #d0d0d0;
+            line-height: 1.8;
+            margin: 0;
+        }
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .timeline::after {
+                left: 31px;
+            }
+            .container-timeline {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 25px;
+            }
+            .container-timeline::after {
+                left: 18px;
+            }
+            .right {
+                left: 0%;
+            }
+            .year-title {
+                font-size: 1.5rem;
+                padding: 8px 20px;
+                left: 80px;
+                transform: none;
+                width: calc(100% - 120px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Person of Interest</h1>
+            <p style="font-size: 1.5rem; margin-top: 20px; color: #b0b0b0;">剧情时间线</p>
+        </header>
+
+        <div class="intro">
+            <p>本时间线记录了《Person of Interest》剧中的重要事件发展，从主角们的过去经历到「机器」与「Samaritan」的对决。按照时间顺序排列，呈现这部精彩剧集的完整脉络。</p>
+        </div>
+
+        <div class="timeline">
+            <!-- 2002年 -->
+            <div class="year-section">
+                <div class="year-title">2002年</div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2002年秋</span>
+                        <h3>芬奇与内森开始「机器」项目</h3>
+                        <p>Harold Finch与他的朋友兼商业伙伴Nathan Ingram开始为美国政府开发一个能够预测恐怖袭击的AI系统，被称为「机器」(The Machine)。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2002年</span>
+                        <h3>里瑟在阿富汗服役</h3>
+                        <p>John Reese作为美国特种部队成员在阿富汗服役，展现出色的战斗能力和战略思维。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2003年 -->
+            <div class="year-section">
+                <div class="year-title">2003年</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2003年</span>
+                        <h3>「机器」的首次预测</h3>
+                        <p>「机器」成功预测了一次恐怖袭击，证明了它的价值。然而，Finch开始担忧其潜在的隐私侵犯问题。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2005年 -->
+            <div class="year-section">
+                <div class="year-title">2005年</div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2005年</span>
+                        <h3>里瑟加入CIA</h3>
+                        <p>John Reese因其在阿富汗的出色表现被招募进入中央情报局(CIA)，开始了他作为特工的职业生涯。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2008年 -->
+            <div class="year-section">
+                <div class="year-title">2008年</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2008年</span>
+                        <h3>9/11事件后的扩展</h3>
+                        <p>「机器」的监控范围被大幅扩展，不仅能预测恐怖袭击，还能预测普通犯罪。但这些「无关号码」被系统忽略。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2008年</span>
+                        <h3>Root的起源</h3>
+                        <p>Samantha Groves (后来的Root)开始她的黑客生涯，展现出非凡的编程天赋和对AI的浓厚兴趣。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2010年 -->
+            <div class="year-section">
+                <div class="year-title">2010年</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2010年</span>
+                        <h3>内森之死</h3>
+                        <p>Nathan Ingram在政府策划的爆炸中身亡，这一事件促使Finch决定使用「机器」的「无关号码」来拯救普通人。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2010年</span>
+                        <h3>里瑟女友之死</h3>
+                        <p>John Reese的女友Jessica Arndt在一场看似意外的车祸中死亡，实际上这可能是针对里瑟的阴谋。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2011年 (第一季开始) -->
+            <div class="year-section">
+                <div class="year-title">2011年</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2011年</span>
+                        <h3>芬奇招募里瑟</h3>
+                        <p>Harold Finch找到隐姓埋名、意志消沉的John Reese，邀请他加入保护「无关号码」的使命。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2011年</span>
+                        <h3>团队初次接触</h3>
+                        <p>Reese与警探Carter和Fusco相遇，开始建立复杂的关系网络。团队开始处理第一个「无关号码」。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2012年 -->
+            <div class="year-section">
+                <div class="year-title">2012年</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2012年</span>
+                        <h3>Root首次登场</h3>
+                        <p>黑客Root初次出现在剧中，她已经发现了「机器」的存在，并对其产生了强烈的兴趣。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2012年</span>
+                        <h3>「HR」组织浮出水面</h3>
+                        <p>纽约警察局内部的腐败组织「HR」开始成为团队的主要对手，Carter开始深入调查这个组织。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2013年 -->
+            <div class="year-section">
+                <div class="year-title">2013年</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2013年</span>
+                        <h3>肖加入团队</h3>
+                        <p>前ISIA特工Sameen Shaw加入团队，她出色的战斗能力和冷静的性格使她成为重要成员。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2013年</span>
+                        <h3>Carter之死</h3>
+                        <p>Joss Carter警探在揭露「HR」组织的过程中被杀害，这一事件对团队造成了重大打击。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2013年底</span>
+                        <h3>「Samaritan」项目启动</h3>
+                        <p>由Control领导的政府机构开始开发另一个更加强大的AI系统「Samaritan」，这将成为「机器」的主要对手。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2014年 -->
+            <div class="year-section">
+                <div class="year-title">2014年</div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2014年</span>
+                        <h3>「Samaritan」上线</h3>
+                        <p>「Samaritan」正式上线，开始监控全球网络，对「机器」和团队构成严重威胁。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2014年</span>
+                        <h3>团队转入地下</h3>
+                        <p>面对「Samaritan」的全面监控，团队被迫转入地下，以隐蔽的方式继续运作。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2014年底</span>
+                        <h3>肖失踪</h3>
+                        <p>在一次任务中，Sameen Shaw被「Samaritan」的特工绑架，团队失去了联系，以为她已经死亡。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2015年 -->
+            <div class="year-section">
+                <div class="year-title">2015年</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2015年</span>
+                        <h3>Root与「机器」建立联系</h3>
+                        <p>Root成为「机器」的主要联系人，能够直接与AI系统沟通，获取关键信息。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2015年</span>
+                        <h3>肖获救</h3>
+                        <p>团队发现Shaw还活着，被「Samaritan」用于实验。经过一次危险的行动，Shaw最终被救出并重新加入团队。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2016年 (最终季) -->
+            <div class="year-section">
+                <div class="year-title">2016年</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2016年</span>
+                        <h3>最终对决</h3>
+                        <p>「机器」与「Samaritan」进行最终对决，人类的自由意志面临最严峻的考验。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2016年</span>
+                        <h3>Root牺牲</h3>
+                        <p>在与「Samaritan」特工的战斗中，Root为了保护团队和「机器」而牺牲，这是一个重大的转折点。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2016年</span>
+                        <h3>「机器」重启</h3>
+                        <p>经过一系列精心策划的行动，「机器」成功重启，击败了「Samaritan」，但代价是巨大的。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2016年末</span>
+                        <h3>新的开始</h3>
+                        <p>Finch选择隐退，而Reese和Shaw继续保护「无关号码」的使命，「机器」以新的形式继续存在，守护着纽约和世界。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <center><a href="index.html" class="back-button">返回首页</a></center>
+    </div>
+
+    <script>
+        // 滚动时的动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为时间线上的元素添加动画
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // 根据元素位置决定动画方向
+                        const timelineItem = entry.target;
+                        const isLeft = timelineItem.classList.contains('left');
+                        
+                        timelineItem.style.opacity = '0';
+                        timelineItem.style.transform = isLeft ? 'translateX(-50px)' : 'translateX(50px)';
+                        timelineItem.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                        
+                        setTimeout(() => {
+                            timelineItem.style.opacity = '1';
+                            timelineItem.style.transform = 'translateX(0)';
+                        }, 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // 观察所有时间线元素
+            document.querySelectorAll('.container-timeline').forEach(item => {
+                observer.observe(item);
+            });
+
+            // 年份标题的动画效果
+            const yearObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const yearTitle = entry.target.querySelector('.year-title');
+                        
+                        yearTitle.style.opacity = '0';
+                        yearTitle.style.transform = 'scale(0.8)';
+                        yearTitle.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                        
+                        setTimeout(() => {
+                            yearTitle.style.opacity = '1';
+                            yearTitle.style.transform = 'scale(1)';
+                        }, 100);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            // 观察所有年份区域
+            document.querySelectorAll('.year-section').forEach(section => {
+                yearObserver.observe(section);
+            });
+
+            // 页面加载时的动画效果
+            const header = document.querySelector('header');
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(-50px)';
+            header.style.transition = 'opacity 1s ease, transform 1s ease';
+            
+            setTimeout(() => {
+                header.style.opacity = '1';
+                header.style.transform = 'translateY(0)';
+            }, 300);
+
+            const intro = document.querySelector('.intro');
+            intro.style.opacity = '0';
+            intro.style.transition = 'opacity 1s ease';
+            
+            setTimeout(() => {
+                intro.style.opacity = '1';
+            }, 800);
+
+            // 滚动到指定年份的功能
+            function scrollToYear(year) {
+                const yearSection = document.querySelector(`.year-title:contains('${year}')`).closest('.year-section');
+                if (yearSection) {
+                    window.scrollTo({
+                        top: yearSection.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
