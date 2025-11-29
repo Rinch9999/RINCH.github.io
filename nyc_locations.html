@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="《疑犯追踪》(Person of Interest) 纽约实景拍摄地点打卡指南">
+    <meta name="keywords" content="疑犯追踪, 纽约拍摄地点, 实景, 打卡, 曼哈顿">
+    <title>《疑犯追踪》纽约实景拍摄地点 | POI 情报中心</title>
+    <link rel="stylesheet" href="styles/unified_footer.css">
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .back-to-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #000000;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: 1px solid #808080;
+            z-index: 100;
+            transition: none;
+        }
+        
+        .back-to-home:hover {
+            background: #333333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #000000;
+            margin-bottom: 40px;
+            border: 1px solid #666666;
+            position: relative;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 3rem;
+            margin: 0;
+        }
+        .intro-text {
+            font-size: 1.3rem;
+            margin-top: 15px;
+            color: #cccccc;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .location-card {
+            background-color: #111111;
+            border: 1px solid #666666;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .location-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .location-name {
+            color: #ffffff;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        .location-address, .location-season {
+            color: #999999;
+            font-size: 0.9rem;
+            margin: 5px 0;
+        }
+        .location-description {
+            color: #cccccc;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        .location-scene {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #333333;
+        }
+        .scene-title {
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .scene-description {
+            color: #cccccc;
+            line-height: 1.6;
+        }
+        .category-button {
+            background-color: #333333;
+            border: 1px solid #666666;
+            padding: 10px 20px;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .category-button.active {
+            background-color: #666666;
+            border-color: #666666;
+            color: #ffffff;
+        }
+        .back-button {
+            display: inline-block;
+            background-color: #333333;
+            color: #ffffff;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 1rem;
+            margin-top: 40px;
+            border: 1px solid #666666;
+            cursor: pointer;
+        }
+        .map-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 15px;
+            background-color: #333333;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid #666666;
+        }
+        .intro-section {
+            background-color: #111111;
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid #666666;
+        }
+        .intro-section h2 {
+            color: #ffffff;
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+        .intro-section p {
+            color: #cccccc;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            .intro-text {
+                font-size: 1.1rem;
+            }
+            .location-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .location-card {
+                margin-bottom: 20px;
+            }
+            .location-image {
+                height: 180px;
+            }
+            .category-filter {
+                gap: 10px;
+            }
+            .category-button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header style="position: relative; text-align: center;">
+            <a href="index.html" class="back-to-home">返回首页</a>
+            <h1>Person of Interest</h1>
+            <p class="intro-text">纽约实景拍摄地点</p>
+        </header>
+
+        <div class="intro-section">
+            <h2>纽约 - 角色们的战场</h2>
+            <p>《Person of Interest》以纽约市为主要拍摄地，这座城市不仅是故事的背景，更是一个重要的角色。从繁华的曼哈顿中城到历史悠久的布鲁克林，从标志性的地标到隐藏的街角，纽约的每一个角落都证明了Finch、Reese、Root和Shaw的冒险。这些实景拍摄地点不仅为剧集增添了真实感，也让观众有机会通过这些地点重新体验剧中的经典场景。</p>
+        </div>
+
+        <div class="category-filter">
+            <button class="category-button active" data-category="all">全部地点</button>
+            <button class="category-button" data-category="manhattan">曼哈顿</button>
+            <button class="category-button" data-category="brooklyn">布鲁克林</button>
+            <button class="category-button" data-category="queens">皇后区</button>
+            <button class="category-button" data-category="iconic">标志性地标</button>
+        </div>
+
+        <div class="location-grid">
+            <!-- 大中央车站 -->
+            <div class="location-card" data-category="manhattan iconic">
+                <img src="images/grand_central_terminal.jpg" alt="Grand Central Terminal" class="location-image">
+                <div class="location-content">
+                    <h3 class="location-name">大中央车站</h3>
+                    <div class="location-address">89 E 42nd St, New York, NY 10017</div>
+                    <div class="location-season">第一季 - 第三季</div>
+                    <div class="location-description">
+                        大中央车站是纽约市最著名的地标之一，也是《疑犯追踪》中多次出现的重要场景。这座宏伟的火车站以其独特的建筑风格和繁忙氛围，为剧集增添了纽约特有的都市感。
+                    </div>
+                    <div class="location-scene">
+                        <div class="scene-title">经典场景</div>
+                        <div class="scene-description">
+                            在第一季中，里瑟（Reese）经常在这里监视目标或与芬奇（Finch）会面。最令人印象深刻的是里瑟与芬奇的多次偶遇，以及在车站内进行的紧张追踪场景。
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/place/Grand+Central+Terminal" target="_blank" class="map-link">在地图上查看</a>
+                </div>
+            </div>
+
+            <!-- 纽约公共图书馆 -->
+            <div class="location-card" data-category="manhattan iconic">
+                <img src="images/new_york_public_library.jpg" alt="New York Public Library" class="location-image">
+                <div class="location-content">
+                    <h3 class="location-name">纽约公共图书馆</h3>
+                    <div class="location-address">476 5th Ave, New York, NY 10018</div>
+                    <div class="location-season">第二季 - 第四季</div>
+                    <div class="location-description">
+                        作为纽约的文化地标，纽约公共图书馆在剧中有着特殊的意义。哈罗德·芬奇（Harold Finch）作为一个热爱书籍和知识的人，这个地点与他的性格非常契合。
+                    </div>
+                    <div class="location-scene">
+                        <div class="scene-title">经典场景</div>
+                        <div class="scene-description">
+                            在剧中，芬奇经常在这里查阅资料或与他人会面。图书馆安静而庄严氛围，与芬奇低调内敛的性格形成了完美的呼应。
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/place/New+York+Public+Library" target="_blank" class="map-link">在地图上查看</a>
+                </div>
+            </div>
+
+            <!-- 布鲁克林大桥 -->
+            <div class="location-card" data-category="brooklyn manhattan iconic">
+                <img src="images/brooklyn_bridge.jpg" alt="Brooklyn Bridge" class="location-image">
+                <div class="location-content">
+                    <h3 class="location-name">布鲁克林大桥</h3>
+                    <div class="location-address">Brooklyn Bridge, New York, NY</div>
+                    <div class="location-season">第一季 - 第五季</div>
+                    <div class="location-description">
+                        布鲁克林大桥是连接曼哈顿和布鲁克林的标志性桥梁，在剧中多次出现，成为了纽约天际线的重要组成部分。
+                    </div>
+                    <div class="location-scene">
+                        <div class="scene-title">经典场景</div>
+                        <div class="scene-description">
+                            大桥出现在多个关键场景中，包括角色们的对话、追逐戏以及一些感人的时刻。特别是在大结局中，大桥作为纽约的象征，代表了团队的最后战斗。
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/place/Brooklyn+Bridge" target="_blank" class="map-link">在地图上查看</a>
+                </div>
+            </div>
+
+            <!-- 中央公园 -->
+            <div class="location-card" data-category="manhattan iconic">
+                <img src="images/central_park.jpg" alt="Central Park" class="location-image">
+                <div class="location-content">
+                    <h3 class="location-name">中央公园</h3>
+                    <div class="location-address">5th Ave & 59th St, New York, NY 10022</div>
+                    <div class="location-season">第一季 - 第五季</div>
+                    <div class="location-description">
+                        中央公园是纽约市的绿色心脏，在剧中多次出现，为紧张的剧情提供了一个宁静的背景。
+                    </div>
+                    <div class="location-scene">
+                        <div class="scene-title">经典场景</div>
+                        <div class="scene-description">
+                            Finch和Reese经常在公园中散步或会面，这里也是他们放松和交流的地方。此外，公园还出现在一些重要的剧情转折点。
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/place/Central+Park" target="_blank" class="map-link">在地图上查看</a>
+                </div>
+            </div>
+
+            <!-- 高线公园 -->
+            <div class="location-card" data-category="manhattan">
+                <img src="images/high_lin.jpg" alt="High Line" class="location-image">
+                <div class="location-content">
+                    <h3 class="location-name">高线公园</h3>
+                    <div class="location-address">New York, NY</div>
+                    <div class="location-season">第三季 - 第五季</div>
+                    <div class="location-description">
+                        高线公园是建在废弃高架铁路上的线性公园，以其独特的设计和城市景观而闻名。在剧中，这里是一些重要对话和场景的发生地。
+                    </div>
+                    <div class="location-scene">
+                        <div class="scene-title">经典场景</div>
+                        <div class="scene-description">
+                            Root和Shaw曾在这里有过重要的对话，高线公园的现代感和开阔视野为她们复杂的关系提供了一个独特的背景。
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/place/High+Line" target="_blank" class="map-link">在地图上查看</a>
+                </div>
+            </div>
+
+            <!-- 布鲁克林植物园 -->
+            <div class="location-card" data-category="brooklyn">
+                <img src="images/brooklyn_botanical_garden.jpg" alt="Brooklyn Botanical Garden" class="location-image">
+                <div class="location-content">
+                    <h3 class="location-name">布鲁克林植物园</h3>
+                    <div class="location-address">990 Washington Ave, Brooklyn, NY 11225</div>
+                    <div class="location-season">第四季</div>
+                    <div class="location-description">
+                        布鲁克林植物园是一个宁静的绿洲，在剧中为一些关键场景提供了一个远离城市喧嚣的背景。
+                    </div>
+                    <div class="location-scene">
+                        <div class="scene-title">经典场景</div>
+                        <div class="scene-description">
+                            在第四季中，这里是Finch与一位重要角色会面的地方，植物园的宁静与剧中紧张氛围形成了鲜明的对比。
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/place/Brooklyn+Botanical+Garden" target="_blank" class="map-link">在地图上查看</a>
+                </div>
+            </div>
+
+            <!-- 皇后区博物馆 -->
+            <div class="location-card" data-category="queens">
+                <img src="images/queens_museum.jpg" alt="Queens Museum" class="location-image">
+                <div class="location-content">
+                    <h3 class="location-name">皇后区博物馆</h3>
+                    <div class="location-address">New York City Building, Flushing Meadows Corona Park, Queens, NY 11368</div>
+                    <div class="location-season">第三季</div>
+                    <div class="location-description">
+                        皇后区博物馆位于法拉盛草原可乐娜公园内，以其收藏和建筑风格而闻名。在剧中，这里是一个重要的剧情发生地。
+                    </div>
+                    <div class="location-scene">
+                        <div class="scene-title">经典场景</div>
+                        <div class="scene-description">
+                            在第三季的一集中，博物馆内的联合国总部模型成为了一个关键的剧情元素，团队在这里执行了一次重要的任务。
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/place/Queens+Museum" target="_blank" class="map-link">在地图上查看</a>
+                </div>
+            </div>
+
+            <!-- 纽约市政厅 -->
+            <div class="location-card" data-category="manhattan iconic">
+                <img src="images/new_york_city_hal.jpg" alt="New York City Hall" class="location-image">
+                <div class="location-content">
+                    <h3 class="location-name">纽约市政厅</h3>
+                    <div class="location-address">City Hall Park, New York, NY 10007</div>
+                    <div class="location-season">第一季 - 第四季</div>
+                    <div class="location-description">
+                        纽约市政厅是纽约市的政府中心，也是一座历史悠久的建筑。在剧中，这里经常作为政府相关场景的背景。
+                    </div>
+                    <div class="location-scene">
+                        <div class="scene-title">经典场景</div>
+                        <div class="scene-description">
+                            与Carter相关的多个剧情场景在这里拍摄，特别是当她处理与政府和执法部门相关的事务时。
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/place/New+York+City+Hall" target="_blank" class="map-link">在地图上查看</a>
+                </div>
+            </div>
+
+            <!-- 威廉斯堡大桥 -->
+            <div class="location-card" data-category="brooklyn manhattan">
+                <img src="images/williamsburg_bridg.jpg" alt="Williamsburg Bridge" class="location-image">
+                <div class="location-content">
+                    <h3 class="location-name">威廉斯堡大桥</h3>
+                    <div class="location-address">Williamsburg Bridge, New York, NY</div>
+                    <div class="location-season">第二季 - 第五季</div>
+                    <div class="location-description">
+                        威廉斯堡大桥连接曼哈顿下东区和布鲁克林的威廉斯堡，在剧中多次作为纽约天际线的一部分出现。
+                    </div>
+                    <div class="location-scene">
+                        <div class="scene-title">经典场景</div>
+                        <div class="scene-description">
+                            大桥出现在多个追逐场景中，特别是在夜间场景中，大桥的灯光为剧集增添了独特的视觉效果。
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/place/Williamsburg+Bridge" target="_blank" class="map-link">在地图上查看</a>
+                </div>
+            </div>
+
+            <!-- 布鲁克林海军造船厂 -->
+            <div class="location-card" data-category="brooklyn">
+                <img src="images/brooklyn_nav_yard.jpg" alt="Brooklyn Navy Yard" class="location-image">
+                <div class="location-content">
+                    <h3 class="location-name">布鲁克林海军造船厂</h3>
+                    <div class="location-address">63 Flushing Ave, Brooklyn, NY 11205</div>
+                    <div class="location-season">第三季 - 第五季</div>
+                    <div class="location-description">
+                        布鲁克林海军造船厂是一个历史悠久的工业区，现在已转型为创意产业园区。在剧中，这里作为一些秘密行动和紧张场景的背景。
+                    </div>
+                    <div class="location-scene">
+                        <div class="scene-title">经典场景</div>
+                        <div class="scene-description">
+                            在与「Samaritan」对抗的剧情中，这里是团队执行一些高风险任务的地点，造船厂的工业氛围为这些场景增添了紧张感。
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/place/Brooklyn+Navy+Yard" target="_blank" class="map-link">在地图上查看</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="index.html" class="back-button">返回首页</a>
+        </div>
+    </div>
+
+    <script>
+        // 分类过滤功能 - 移除动态效果，保留基本功能
+        const categoryButtons = document.querySelectorAll('.category-button');
+        const locationCards = document.querySelectorAll('.location-card');
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 移除所有活动状态
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // 添加当前活动状态
+                this.classList.add('active');
+
+                const category = this.getAttribute('data-category');
+
+                // 过滤地点卡片
+                locationCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category').includes(category)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__links">
+                <a href="index.html" class="footer__link">主页</a>
+                <a href="season/episodes.html" class="footer__link">剧集情节</a>
+                <a href="characters_timeline/characters_timeline.html" class="footer__link">角色时间线</a>
+                <a href="nyc_locations.html" class="footer__link">纽约打卡地</a>
+            </div>
+        </div>
+    </footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a5fec64ea5bbd8b',t:'MTc2NDM5NjQzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

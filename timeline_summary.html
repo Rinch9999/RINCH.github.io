@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="《疑犯追踪》剧情时间线 - 详细记录POI剧集关键事件和时间节点">
+    <meta name="keywords" content="《疑犯追踪》, POI, 时间线, 剧情, 疑犯追踪, 事件">
+    <title>POI时间线 - 《疑犯追踪》粉丝维基</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000000;
+            color: #e0e0e0;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        header {
+            position: relative;
+            margin-bottom: 30px;
+            padding-top: 50px; /* 为返回按钮留出空间 */
+        }
+        
+        .back-to-home {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 10;
+            transition: background-color 0.3s;
+        }
+        
+        .back-to-home:hover {
+            background-color: #555;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        
+        .intro {
+            background-color: #111;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            border-left: 3px solid #444;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #333;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .year-section {
+            padding: 10px 40px;
+            position: relative;
+            width: 100%;
+        }
+        
+        .year-title {
+            background-color: #222;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 24px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .container-timeline {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+        
+        .container-timeline::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            background-color: #000;
+            border: 4px solid #444;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid #333;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent #333;
+        }
+        
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid #333;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent #333 transparent transparent;
+        }
+        
+        .right::after {
+            left: -13px;
+        }
+        
+        .content {
+            padding: 20px 30px;
+            background-color: #111;
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .date {
+            font-weight: bold;
+            color: #aaa;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .content h3 {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .content p {
+            color: #ccc;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #777;
+        }
+        
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 20px 0;
+            transition: background-color 0.3s;
+        }
+        
+        .back-button:hover {
+            background-color: #555;
+        }
+        
+        /* 响应式布局 */
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .container-timeline {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .container-timeline::before {
+                left: 60px;
+                border: medium solid #333;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent #333 transparent transparent;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+            }
+            
+            .container-timeline {
+                padding-left: 50px;
+                padding-right: 15px;
+            }
+            
+            .container-timeline::before {
+                left: 40px;
+            }
+            
+            .content {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header aria-labelledby="timeline-title">
+            <a href="index.html" class="back-to-home" aria-label="返回网站首页">返回首页</a>
+            <h1 id="timeline-title">Person of Interest</h1>
+            <p class="subtitle" id="timeline-subtitle">Plot Timeline</p>
+        </header>
+
+        <div class="intro">
+            <p>本时间线记录了《疑犯追踪》电视剧中重要事件的发展，从主要角色的过去经历到"The Machine"与"Samaritan"之间的对抗。按时间顺序排列，呈现这部精彩剧集的完整叙事。</p>
+        </div>
+
+        <div class="timeline" role="region" aria-labelledby="timeline-title timeline-subtitle">
+            <!-- 2002年 -->
+            <div class="year-section" role="section" aria-labelledby="year-2002">
+                <div class="year-title" id="year-2002">2002</div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">Fall 2002</span>
+                        <h3>Finch与Nathan开始"The Machine"项目</h3>
+<p>Harold Finch和他的朋友兼商业伙伴Nathan Ingram开始为美国政府开发一个可以预测恐怖袭击的AI系统，被称为"The Machine"。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2002</span>
+                        <h3>Reese在阿富汗服役</h3>
+<p>John Reese作为美国特种部队成员在阿富汗服役，展现出卓越的战斗技能和战略思维。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2003年 -->
+            <div class="year-section" role="section" aria-labelledby="year-2003">
+                <div class="year-title" id="year-2003">2003</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2003</span>
+                        <h3>The Machine的首次预测</h3>
+                        <p>The Machine成功预测了一次恐怖袭击，证明了其价值。然而，Finch开始担忧其潜在的隐私侵犯问题。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2005年 -->
+            <div class="year-section" role="section" aria-labelledby="year-2005">
+                <div class="year-title" id="year-2005">2005</div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2005</span>
+                        <h3>Reese加入CIA</h3>
+                        <p>John Reese因其在阿富汗的出色表现被招募进入中央情报局(CIA)，开始了他作为特工的职业生涯。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2008年 -->
+            <div class="year-section" role="section" aria-labelledby="year-2008">
+                <div class="year-title" id="year-2008">2008</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2008</span>
+                        <h3>9/11后的系统扩张</h3>
+                        <p>The Machine的监控范围大大扩大，使其不仅能预测恐怖袭击，还能预测普通犯罪。然而，这些"无关号码"被系统忽略。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2008年</span>
+                        <h3>Root的起源</h3>
+                        <p>Samantha Groves (后来的Root)开始她的黑客生涯，展现出非凡的编程天赋和对AI的浓厚兴趣。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2010年 -->
+            <div class="year-section">
+                <div class="year-title">2010</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2010</span>
+                        <h3>Nathan的死亡</h3>
+                        <p>Nathan Ingram在一次政府策划的爆炸中死亡，这一事件促使Finch决定使用The Machine的"无关号码"来拯救普通人。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2010</span>
+                        <h3>Reese女友的死亡</h3>
+                        <p>John Reese的女友Jessica Arndt在一场看似意外的车祸中死亡，但实际上可能是针对Reese的阴谋。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2011年 (第一季开始) -->
+            <div class="year-section">
+                <div class="year-title">2011</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2011</span>
+                        <h3>Finch招募Reese</h3>
+                        <p>Harold Finch找到了使用假身份并处于抑郁状态的John Reese，并邀请他加入保护"无关号码"的使命。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2011</span>
+                        <h3>团队首次接触</h3>
+                        <p>Reese结识了警探Carter和Fusco，开始建立复杂的关系网络。团队开始处理第一个"无关号码"。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2012年 -->
+            <div class="year-section">
+                <div class="year-title">2012</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2012</span>
+                        <h3>Root首次出现</h3>
+                        <p>黑客Root首次在系列中出现，她已经发现了The Machine的存在并对其产生了浓厚的兴趣。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2012</span>
+                        <h3>HR组织出现</h3>
+                        <p>纽约警察局内部腐败的HR组织开始成为团队的主要对手，Carter开始深入调查这个组织。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2013年 -->
+            <div class="year-section">
+                <div class="year-title">2013</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2013</span>
+                        <h3>Shaw加入团队</h3>
+                        <p>前ISA特工Sameen Shaw加入团队，她出色的战斗技能和平静的性格使她成为重要成员。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2013</span>
+                        <h3>Carter的死亡</h3>
+                        <p>警探Joss Carter在揭露HR组织时被杀害，这一事件对团队造成了重大打击。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">Late 2013</span>
+                        <h3>Samaritan项目启动</h3>
+                        <p>由Control领导的政府机构开始开发另一个更强大的AI系统，名为"Samaritan"，它将成为The Machine的主要对手。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2014年 -->
+            <div class="year-section">
+                <div class="year-title">2014</div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2014</span>
+                        <h3>Samaritan上线</h3>
+                        <p>Samaritan正式上线，开始监控全球网络，对The Machine和团队构成严重威胁。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2014</span>
+                        <h3>团队转入地下</h3>
+                        <p>面对Samaritan的全面监控，团队被迫转入地下，继续以秘密方式运作。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">Late 2014</span>
+                        <h3>Shaw失踪</h3>
+                        <p>在一次任务中，Sameen Shaw被Samaritan的特工绑架，团队失去联系，以为她已经死亡。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2015年 -->
+            <div class="year-section">
+                <div class="year-title">2015</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2015</span>
+                        <h3>Root与The Machine建立联系</h3>
+                        <p>Root成为The Machine的主要联系人，能够直接与AI系统沟通并获取关键信息。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2015</span>
+                        <h3>Shaw获救</h3>
+                        <p>团队发现Shaw仍然活着，正被Samaritan用于实验。经过一次危险的行动，Shaw最终被救出并重新加入团队。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2016年 (最终季) -->
+            <div class="year-section">
+                <div class="year-title">2016</div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2016</span>
+                        <h3>最终对决</h3>
+                        <p>The Machine与Samaritan进行最终对决，人类自由意志面临最严峻的考验。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">2016</span>
+                        <h3>Root的牺牲</h3>
+                        <p>在与Samaritan特工的战斗中，Root为保护团队和The Machine牺牲了自己，这是一个重大转折点。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline right">
+                    <div class="content">
+                        <span class="date">2016</span>
+                        <h3>The Machine重启</h3>
+                        <p>经过一系列精心策划的行动，The Machine成功重启并击败了Samaritan，但付出了巨大代价。</p>
+                    </div>
+                </div>
+                
+                <div class="container-timeline left">
+                    <div class="content">
+                        <span class="date">Late 2016</span>
+                        <h3>新的开始</h3>
+                        <p>Finch选择退休，而Reese和Shaw继续保护"无关号码"的使命。The Machine以新的形式继续存在，守护着纽约和整个世界。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <center><a href="index.html" class="back-button">返回首页</a></center>
+</div>
+    <script src="js/main.js"></script>
+</body>
+</html>

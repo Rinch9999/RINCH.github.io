@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="《疑犯追踪》(Person of Interest) 粉丝交流平台，提供角色时间线、剧集情节和纽约拍摄地点信息">
+    <meta name="keywords" content="疑犯追踪, POI, Person of Interest, 角色, 时间线, 纽约">
+    <title>《疑犯追踪》情报中心 - 首页</title>
+    <!-- 引入外部CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/unified_footer.css">
+</head>
+<body>
+    
+    
+    <!-- 主容器 - 实现左侧导航栏和居中内容区 -->
+    <div class="container container--flex">
+        <!-- 侧边栏 - 固定在左侧 -->
+        <aside class="sidebar sidebar--sticky" aria-label="侧边导航">
+            <div class="sidebar-section">
+                <h3 class="sidebar-heading">快速导航</h3>
+                <ul role="menu" class="sidebar-list">
+                    <li role="none"><a href="timeline_summary.html" role="menuitem" class="sidebar-link">剧情时间线</a></li>
+                    <li role="none"><a href="characters_timeline/characters_timeline.html" class="sidebar-link">角色时间线</a></li>
+                    <li role="none"><a href="season/episodes.html" class="sidebar-link">剧集情节</a></li>
+                    <li role="none"><a href="nyc_locations.html" class="sidebar-link">拍摄地点</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-heading">主要角色</h3>
+                <ul class="sidebar-list">
+                    <li><a href="characters/finch.html" class="sidebar-link">哈罗德·芬奇（Harold Finch）</a></li>
+                    <li><a href="characters/reese.html" class="sidebar-link">约翰·里瑟（John Reese）</a></li>
+                    <li><a href="characters/shaw.html" class="sidebar-link">萨米恩·肖（Sameen Shaw）</a></li>
+                    <li><a href="characters/root.html" class="sidebar-link">根（Root）</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-heading">关于本站</h3>
+                <p class="sidebar-text">本网站是《疑犯追踪》（Person of Interest）的非官方粉丝维基，旨在尽可能的为剧迷提供完整的剧集资料和剧情分析。</p>
+            </div>
+        </aside>
+        
+        <!-- 主内容区 - 居中显示 -->
+        <main class="main-content main-content--centered">
+            <!-- 媒体轮播 -->
+            <section id="media-container" class="media-container" aria-label="媒体轮播">
+                <div class="slider" role="region" aria-roledescription="图片轮播">
+                    <div class="slide active" data-index="0">
+                        <img src="images/brooklyn_bridge.jpg" alt="《疑犯追踪》图片1">
+                    </div>
+                    <div class="slide" data-index="1">
+                        <img src="images/y_b_w.jpg" alt="《疑犯追踪》图片2">
+                    </div>
+                    <div class="slide" data-index="2">
+                        <img src="images/grand_central_terminal.jpg" alt="《疑犯追踪》图片3">
+                    </div>
+                    <div class="slide" data-index="3">
+                        <img src="images/poi_background.jpg" alt="《疑犯追踪》图片4">
+                    </div>
+                </div>
+                <button class="prev-btn" aria-label="查看上一张图片" aria-controls="slider">上一张</button>
+                <button class="next-btn" aria-label="查看下一张图片" aria-controls="slider">下一张</button>
+                <div class="dots" role="tablist" aria-label="轮播图片导航">
+                    <span class="dot active" role="tab" aria-selected="true" aria-controls="slide-1" tabindex="0" data-index="0"></span>
+                    <span class="dot" role="tab" aria-selected="false" aria-controls="slide-2" tabindex="-1" data-index="1"></span>
+                    <span class="dot" role="tab" aria-selected="false" aria-controls="slide-3" tabindex="-1" data-index="2"></span>
+                    <span class="dot" role="tab" aria-selected="false" aria-controls="slide-4" tabindex="-1" data-index="3"></span>
+                </div>
+            </section>
+            
+            <!-- 主要介绍 -->
+            <div class="banner">
+                <div class="banner-content">
+                    <video src="images/sm_v.mp4" alt="《疑犯追踪》" class="banner-image" autoplay muted loop playsinline>视频无法播放</video>
+                    <div class="banner-text">
+                        <h2>关于《疑犯追踪》（Person of Interest）</h2>
+                        <p>《疑犯追踪》（Person of Interest）是一部美国科幻犯罪电视剧，由乔纳森·诺兰创作，J·J·艾布拉姆斯担任执行制作人。</p>
+                        <p>剧集讲述了一位神秘的亿万富翁Harold Finch和前中央情报局特工John Reese联手，利用芬奇开发的名为「The Machine」的超级人工智能系统，阻止犯罪发生的故事。</p>
+                        <p>在剧中，「机器」能够预测暴力犯罪，但只提供涉案人员的社保号码，芬奇和里瑟必须在犯罪发生前找出谁是受害者，谁是加害者。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 主要角色 -->
+            <div class="characters">
+                <h2>主要角色</h2>
+                <div class="character-grid">
+                    <div class="character-card">
+                        <img src="images/harold_finch.png" alt="Harold Finch">
+                        <h4>哈罗德·芬奇（Harold Finch）</h4>
+                        <p>软件工程师，「The Machine」的创造者</p>
+                    </div>
+                    <div class="character-card">
+                        <img src="images/john_reese.png" alt="John Reese">
+                        <h4>约翰·里瑟（John Reese）</h4>
+                        <p>前中央情报局特工，芬奇的搭档</p>
+                    </div>
+                    <div class="character-card">
+                        <img src="images/shaw.png" alt="Sameen Shaw">
+                        <h4>萨米恩·肖（Sameen Shaw）</h4>
+                        <p>前政府特工，团队成员</p>
+                    </div>
+                    <div class="character-card">
+                        <img src="images/root.png" alt="Root">
+                        <h4>萨曼莎·格罗夫斯（Root）</h4>
+                        <p>黑客，「机器」的信徒</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 内容网格 -->
+            <div class="content-grid">
+                <div class="content-card">
+                    <img src="images/machine.jpg" alt="剧情时间线">
+                    <h3>剧情时间线</h3>
+                    <p>按时间顺序探索剧中的重要事件，从「The Machine」的诞生到与「Samaritan」的最终对决。</p>
+                    <a href="timeline_summary.html">查看详情 →</a>
+                </div>
+                <div class="content-card">
+                    <img src="images/finch2.jpg" alt="角色时间线">
+                    <h3>角色时间线</h3>
+                    <p>深入了解四位核心角色的发展历程，探索每个角色的成长轨迹。</p>
+                    <a href="characters_timeline/characters_timeline.html">查看详情 →</a>
+                </div>
+                <div class="content-card">
+                    <img src="images/queens_museum.jpg" alt="纽约拍摄地点">
+                    <h3>纽约拍摄地点</h3>
+                    <p>探索剧中出现的纽约实景拍摄地点，跟随POI的脚步游览这座不夜城。</p>
+                    <a href="nyc_locations.html">查看详情 →</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__links">
+                <a href="season/episodes.html" class="footer__link">剧集情节</a>
+                <a href="characters_timeline/characters_timeline.html" class="footer__link">角色时间线</a>
+                <a href="nyc_locations.html" class="footer__link">纽约打卡地</a>
+            </div>
+            <div class="footer__copyright">
+                # © 2025 《疑犯追踪》（Person of Interest）粉丝维基 
+                1. 网站性质说明：本站为《疑犯追踪》（Person of Interest）剧集爱好者个人制作的非官方粉丝交流平台，所有内容仅用于粉丝间的学习、讨论与剧集相关内容分享，不涉及任何商业盈利行为（包括但不限于广告投放、付费订阅、商品售卖等）。 
+                2. 版权声明：本站与该剧集出品方CBS、发行方Warner Bros.无任何关联，未获得官方授权。站内所涉及的剧集名称、角色、剧情、海报、视频片段等相关知识产权，均归原版权方所有；转载内容已尽可能标注来源，若涉及侵权，请版权方或相关权利人及时联系，我方将在核实后第一时间删除相关内容。 
+                3. 联系与反馈：若您对本站内容有任何疑问、建议，或发现版权问题、违规信息，可通过以下邮箱与运营者联系：<a href="mailto:ajbfsdb8866@163.com">ajbfsdb8866@163.com</a>，我方会在合理时间内予以回复并处理。
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 首页不需要返回上一页按钮 -->
+    
+    <!-- 响应式设计脚本 -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // 简单的响应式导航处理
+        window.addEventListener('resize', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (window.innerWidth > 768 && menuToggle && navMenu) {
+                navMenu.style.display = 'flex';
+            } else if (menuToggle && navMenu) {
+                navMenu.style.display = 'none';
+            }
+        });
+        
+        // 初始化执行一次窗口大小检查
+        window.dispatchEvent(new Event('resize'));
+    </script>
+    
+    <!-- 主JavaScript文件 -->
+    <script src="js/main.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a5feb190b03bd8b',t:'MTc2NDM5NjM3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
