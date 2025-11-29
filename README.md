@@ -29,7 +29,7 @@
 
 ### 在线访问
 
-https://Rinch9999.github.io/canyouhearme.top
+https://canyouhearme.top
 
 
 ### 本地运行
