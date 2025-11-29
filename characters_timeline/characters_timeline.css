@@ -1,0 +1,400 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000000;
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 返回首页按钮 */
+.back-to-home {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border: 1px solid #808080;
+}
+
+.back-to-home:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+/* 角色页面内容样式 */
+.character-content {
+    padding: 50px 0;
+}
+
+.character-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 50px;
+    background: #111;
+    padding: 40px;
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.character-header-image {
+    width: 250px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.character-header-info {
+    flex: 1;
+}
+
+.character-full-name {
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.character-role {
+    font-size: 1.4rem;
+    color: #888;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.character-summary {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+    margin-bottom: 25px;
+}
+
+/* 角色基本信息标签 */
+.character-info-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.info-tag {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 返回角色列表按钮 */
+.back-to-characters {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #333333;
+    color: #ffffff;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 1px solid #666666;
+}
+
+/* 时间线部分 */
+.timeline-section {
+    margin-top: 60px;
+}
+
+.timeline-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #ffffff;
+    margin-bottom: 40px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-divider {
+    width: 150px;
+    height: 3px;
+    background: #666666;
+    margin: 20px auto;
+    border-radius: 3px;
+}
+
+.timeline-year {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin: 60px 0 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #666666;
+    position: relative;
+}
+
+.timeline-year::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 50px;
+    height: 2px;
+    background: #ffffff;
+}
+
+/* 时间线事件样式 */
+.timeline-events {
+    position: relative;
+    padding-left: 40px;
+}
+
+.timeline-events::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #666666;
+}
+
+.timeline-event {
+    background: #111111;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    border-left: 4px solid #ffffff;
+    position: relative;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-event::before {
+    content: '';
+    position: absolute;
+    left: -35px;
+    top: 25px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+}
+
+.event-date {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.event-title {
+    font-size: 1.3rem;
+    color: #e0e0e0;
+    margin-bottom: 10px;
+}
+
+.event-desc {
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.event-episode {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* 角色关系图 */
+.character-relationships {
+    margin-top: 80px;
+    padding: 40px;
+    background: rgba(42, 42, 42, 0.8);
+    border-radius: 0;
+}
+
+.relationships-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.relationship-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.relationship-card {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    border-radius: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.related-character {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.relationship-type {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.relationship-desc {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* 图片样式 */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+    .character-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+        padding: 30px;
+    }
+    
+    .character-header-image {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        margin: 0 auto;
+    }
+    
+    .character-full-name {
+        font-size: 2.5rem;
+    }
+    
+    .character-info-tags {
+        justify-content: center;
+    }
+    
+    .timeline-year {
+        font-size: 1.6rem;
+    }
+    
+    .character-top-image {
+        margin: 0 auto 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .character-full-name {
+        font-size: 2.2rem;
+    }
+    
+    .character-role {
+        font-size: 1.2rem;
+    }
+    
+    .character-header {
+        padding: 20px;
+        gap: 30px;
+    }
+    
+    .timeline-title {
+        font-size: 1.8rem;
+    }
+    
+    .timeline-events {
+        padding-left: 30px;
+    }
+    
+    .timeline-events::before {
+        left: 5px;
+    }
+    
+    .timeline-event::before {
+        left: -35px;
+        width: 16px;
+        height: 16px;
+    }
+    
+    .relationship-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .character-header {
+        padding: 25px;
+    }
+    
+    .character-header-image {
+        width: 180px;
+        height: 250px;
+    }
+    
+    .character-full-name {
+        font-size: 1.8rem;
+    }
+    
+    .character-role {
+        font-size: 1.2rem;
+    }
+    
+    .timeline-year {
+        font-size: 1.4rem;
+        margin: 40px 0 20px;
+    }
+    
+    .timeline-event {
+        padding: 20px;
+    }
+    
+    .event-title {
+        font-size: 1.2rem;
+    }
+    
+    .character-relationships {
+        padding: 25px;
+    }
+    
+    .relationships-title {
+        font-size: 1.6rem;
+    }
+}

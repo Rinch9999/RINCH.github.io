@@ -1,0 +1,289 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* 导航栏样式 */
+.navbar {
+    background-color: #000;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #999;
+}
+
+/* 主容器样式 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* 角色头部信息 */
+.character-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.character-header h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.character-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    filter: grayscale(100%);
+    border: 5px solid #333;
+}
+
+/* 角色信息卡片 */
+.character-info {
+    background-color: #111;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.character-info h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.character-description {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+/* 角色能力分析 */
+.character-abilities {
+    background-color: #111;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.character-abilities h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.abilities-list {
+    list-style: none;
+}
+
+.ability-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #333;
+}
+
+.ability-item:last-child {
+    border-bottom: none;
+}
+
+.ability-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.ability-description {
+    color: #ddd;
+}
+
+/* 重要关系 */
+.important-relationships {
+    background-color: #111;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.important-relationships h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.relationships-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.relationship-card {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.relationship-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.relationship-type {
+    font-style: italic;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.relationship-desc {
+    color: #ddd;
+}
+
+/* 导航链接 */
+.navigation-links {
+    background-color: #111;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.navigation-links h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.navigation-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 8px 15px;
+    background-color: #333;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.navigation-links a:hover {
+    background-color: #555;
+}
+
+/* 回到上一页按钮 */
+.back-to-top {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.back-to-top button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.back-to-top button:hover {
+    background-color: #555;
+}
+
+/* 页脚 */
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 60px;
+    border-top: 1px solid #333;
+}
+
+.footer-content p {
+    margin: 0;
+    color: #999;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+    }
+    
+    .nav-links {
+        margin-top: 15px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav-links li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+    
+    .character-header h1 {
+        font-size: 36px;
+    }
+    
+    .character-image {
+        width: 200px;
+        height: 200px;
+    }
+}
