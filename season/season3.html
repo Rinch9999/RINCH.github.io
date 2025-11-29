@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="《疑犯追踪》(Person of Interest) 第三季剧集情节介绍与分析">
+    <meta name="keywords" content="疑犯追踪, 剧集情节, 第三季, Person of Interest">
+    <title>《疑犯追踪》第三季 | POI 情报中心</title>
+    <link rel="stylesheet" href="../styles/unified_footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="episodes-shared.css">
+    
+    <script>
+        // 剧集筛选和交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为每个季度添加交互控制面板
+            function addSeasonControls(seasonContent) {
+                const seasonId = seasonContent.id;
+                const episodesGrid = seasonContent.querySelector('.episodes-grid');
+                
+                if (episodesGrid && !seasonContent.querySelector('.season-controls')) {
+                    // 创建控制面板
+                    const controlsContainer = document.createElement('div');
+                    controlsContainer.className = 'season-controls';
+                    controlsContainer.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <input type="text" class="episode-filter" placeholder="搜索剧集..." style="
+                                padding: 8px 12px;
+                                background: #222;
+                                color: #e0e0e0;
+                                border: 1px solid #444;
+                                border-radius: 4px;
+                                font-size: 14px;
+                                width: 200px;
+                                transition: all 0.3s ease;
+                            ">
+                            <span class="episode-count" style="
+                                font-size: 14px;
+                                color: #ddd;
+                                background: #222;
+                                padding: 8px 12px;
+                                border-radius: 4px;
+                            ">显示全部集数</span>
+                        </div>
+                    `;
+                    
+                    // 插入到episodes-grid之前
+                    episodesGrid.parentNode.insertBefore(controlsContainer, episodesGrid);
+                    
+                    // 添加筛选功能
+                    const filterInput = controlsContainer.querySelector('.episode-filter');
+                    const episodeCount = controlsContainer.querySelector('.episode-count');
+                    const episodeCards = seasonContent.querySelectorAll('.episode-card');
+                    
+                    filterInput.addEventListener('input', function() {
+                        const searchTerm = this.value.toLowerCase();
+                        let visibleCount = 0;
+                        
+                        episodeCards.forEach(card => {
+                            const title = card.querySelector('.episode-title').textContent.toLowerCase();
+                            const description = card.querySelector('.episode-description').textContent.toLowerCase();
+                            const number = card.querySelector('.episode-number').textContent.toLowerCase();
+                            
+                            if (title.includes(searchTerm) || description.includes(searchTerm) || number.includes(searchTerm)) {
+                                card.style.display = 'block';
+                                visibleCount++;
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                        
+                        // 更新计数显示
+                        episodeCount.textContent = searchTerm ? `显示 ${visibleCount}/${episodeCards.length} 集` : '显示全部集数';
+                    });
+                }
+            }
+            
+            // 初始化页面
+            const seasonContent = document.getElementById('season3');
+            if (seasonContent) {
+                addSeasonControls(seasonContent);
+            }
+            
+            // 为每个剧集卡片添加点击交互效果
+            document.querySelectorAll('.episode-card').forEach(card => {
+                // 添加悬停效果
+                card.style.transition = 'all 0.3s ease';
+                
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.3)';
+                    this.style.borderLeft = '4px solid #333';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                    this.style.borderLeft = '4px solid transparent';
+                });
+                
+                // 添加点击效果
+                card.addEventListener('click', function() {
+                    const description = this.querySelector('.episode-description');
+                    description.style.maxHeight = description.style.maxHeight ? null : '200px';
+                    description.style.transition = 'max-height 0.3s ease';
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i> 返回首页
+    </a>
+    
+    <!-- 返回剧集列表按钮 -->
+    <a href="episodes.html" class="back-to-episodes">
+        <i class="fas fa-list"></i> 返回剧集列表
+    </a>
+    
+    <div class="container">
+        <header>
+            <h1>疑犯追踪 - 第三季</h1>
+            <p class="subtitle">系统性整理《Person of Interest》第三季全剧内容</p>
+        </header>
+
+        <!-- 第三季 -->
+        <div id="season3" class="season-content">
+            <div class="season-header">
+                <h2><i class="fas fa-play-circle"></i> 第三季 (2013-2014)</h2>
+                <p class="season-info">共23集 | 首播：2013年9月24日 | 季终：2014年5月13日</p>
+                <div class="season-stats">
+                    <div class="stat"><i class="fas fa-play-circle"></i> 23 集</div>
+                    <div class="stat"><i class="fas fa-calendar-alt"></i> 2013-2014</div>
+                    <div class="stat"><i class="fas fa-robot"></i> Samaritan登场</div>
+                </div>
+            </div>
+            <div class="episodes-grid">
+                <!-- 第三季第一集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">1</div>
+                        <h3 class="episode-title">「自由」(Liberty)</h3>
+                    </div>
+                    <p class="episode-description">机器现已完全自主管理，下落不明，重新向芬奇提供"无关紧要"的危险数字，其中包括一名美国海军军官在城中参加舰队周。然而，随着纽约市街头涌入如此多的水手，及时找到这名军官对里斯和肖来说是更大的挑战。与此同时，卡特因被腐败警察犯罪组织HR陷害而降职为巡逻警官，并开始实施彻底铲除他们计划。此外，Root也在试探新环境的界限。团队从HR组织的崩溃中恢复，同时开始处理新的数字，肖正式加入团队。</p>
+                </div>
+                
+                <!-- 第三季第二集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">2</div>
+                        <h3 class="episode-title">「无所隐瞒」(Nothing to Hide)</h3>
+                    </div>
+                    <p class="episode-description">这个数字出现在一位致力于消除他人隐私的互联网创业者身上，但他发现自己的隐私迅速被剥夺。随着生活失控，里斯试图保护他，而芬奇则求助于肖、卡特和福斯科，寻找追捕他的人。与此同时，卡特意外地与新搭档迈克·拉斯基搭档。Root继续她的计划，目标直指"机器"，同时团队调查一个涉及隐私和监控的案件。</p>
+                </div>
+                
+                <!-- 第三季第三集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">3</div>
+                        <h3 class="episode-title">「女杀手」(Lady Killer)</h3>
+                    </div>
+                    <p class="episode-description">里斯和芬奇招募了卡特、肖和佐伊·摩根的帮助，他们利用女性魅力诱导一个变色龙花花公子，这个花花公子要么是掠食者，要么是别人的即将猎物。与此同时，机器帮助鲁特策划逃离精神病房，防止危险敌人追踪她。里瑟冒充一位被谋杀的花花公子，调查一系列与他有关的神秘死亡事件。</p>
+                </div>
+                
+                <!-- 第三季第四集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">4</div>
+                        <h3 class="episode-title">「合理怀疑」(Reasonable Doubt)</h3>
+                    </div>
+                    <p class="episode-description">团队获得了一位纽约知名律师的电话号码，必须确定她是策划了最近被谋杀的丈夫之死，还是被陷害。与此同时，卡特在发现她和穿西装的人在一起后，与她的新搭档拉斯基产生了矛盾。团队保护一位辩护律师，他似乎是他的前客户的目标。</p>
+                </div>
+                
+                <!-- 第三季第五集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">5</div>
+                        <h3 class="episode-title">「剃刀」(Razgovor)</h3>
+                    </div>
+                    <p class="episode-description">当肖被委派紧盯一名被机器识别的10岁女孩时，她勉强对这个小女孩的监视能力产生了敬意，并意识到这可能是她被提及的原因。与此同时，卡特将人力资源绳之以法的使命面临曝光风险。芬奇的过去被揭开，他与一个俄罗斯黑客的关系，同时团队调查一个涉及国际间谍活动的案件。</p>
+                </div>
+                
+                <!-- 第三季第六集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">6</div>
+                        <h3 class="episode-title">「前卫之晨」(Mors Praematura)</h3>
+                    </div>
+                    <p class="episode-description">从精神病房获释后，鲁特收到机器的指令，要求肖不择手段协助，并采取极端手段以获得她的配合。此外，里斯和芬奇也在寻找线索，想知道为什么会出现一位温和的遗产调查员的电话号码。团队调查一位被错误地认为已经死亡的科学家，他似乎发明了一种延长寿命的技术。</p>
+                </div>
+                
+                <!-- 第三季第七集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">7</div>
+                        <h3 class="episode-title">「完美目标」(The Perfect Mark)</h3>
+                    </div>
+                    <p class="episode-description">出现了一名催眠治疗师的号码，团队调查后发现他不仅仅是心灵大师。与此同时，卡特追踪一名与人力资源部门有关的古董商。里瑟和弗斯科调查一个涉及高级骗局的案件，同时芬奇和肖保护一位被盯上的亿万富翁。</p>
+                </div>
+                
+                <!-- 第三季第八集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">8</div>
+                        <h3 class="episode-title">「终局」(Endgame)</h3>
+                    </div>
+                    <p class="episode-description">POI团队与HR的战争接近临界点，当芬奇同时收到机器发来的38个号码时。他发现这些人与一名身份不明的势力有关，该势力正在煽动犯罪组织与俄罗斯黑帮之间的全面战争。与此同时，通过与她儿子的父亲的闪回，她得以窥见卡特的过去。Root开始执行她的计划，目标直指"机器"，同时团队必须阻止她。</p>
+                </div>
+                
+                <!-- 第三季第九集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">9</div>
+                        <h3 class="episode-title">「穿越」(The Crossing)</h3>
+                    </div>
+                    <p class="episode-description">当将犯罪组织人力资源绳之以法的斗争达到新高峰时，危险降临。此外，当机器突然泄露里斯的号码时，POI团队面临迄今为止最大的威胁。团队调查一个涉及火车事故的案件，同时"Samaritan"项目的威胁开始显现。</p>
+                </div>
+                
+                <!-- 第三季第十集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">10</div>
+                        <h3 class="episode-title">「魔鬼的份额」(The Devil's Share)</h3>
+                    </div>
+                    <p class="episode-description">随着POI团队为卡特的谋杀寻求正义，芬奇意识到他的队员中有人可能会走得太远，以结束与人力资源部的战争。此外，机器还提供了纽约警察局警官帕特里克·西蒙斯的电话号码，他是犯罪组织的关键人物之一。团队从一场悲剧中恢复，同时开始追踪导致这场悲剧的人。</p>
+                </div>
+                
+                <!-- 第三季第十一集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">11</div>
+                        <h3 class="episode-title">「莱特」(Lethe)</h3>
+                    </div>
+                    <p class="episode-description">回忆芬奇青少年时期，揭示了他制造机器的过程。此外，团队还收到了一名已垂死男子的电话号码，里斯在与犯罪组织HR的战争后离开了POI团队。Root发现了关于"Samaritan"的更多信息，同时团队遇到了一个神秘的程序员。</p>
+                </div>
+                
+                <!-- 第三季第十二集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">12</div>
+                        <h3 class="episode-title">「阿莱西亚」(Aletheia)</h3>
+                    </div>
+                    <p class="episode-description">多名敌人聚集在POI队伍前，保护一名垂死男子，他的号码刚刚被提及。他们努力抵挡敌人，但没有里斯——他在与HR的悲惨战争后离开了他们和他们的使命——少了一个人可能会对团队造成灾难性影响。芬奇回忆起与纳森·Ingram共同开发"机器"的时光，同时团队调查一个涉及政府阴谋的案件。</p>
+                </div>
+                
+                <!-- 第三季第十三集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">13</div>
+                        <h3 class="episode-title">「4C」</h3>
+                    </div>
+                    <p class="episode-description">里斯登上国际航班，试图将团队和过去抛诸脑后，但当他意识到自己的旅行计划控时，愤怒不已。里瑟在一架国际航班上保护一位目标，同时芬奇发现这可能与"Samaritan"有关。</p>
+                </div>
+                
+                <!-- 第三季第十四集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">14</div>
+                        <h3 class="episode-title">「来源」(Provenance)</h3>
+                    </div>
+                    <p class="episode-description">里斯回到纽约与芬奇会合，但当团队收到一名高技能古董窃贼的电话号码时，意外的转折是他们策划一场可能让所有人入狱的抢劫。团队调查一件被盗窃的艺术品，同时发现它可能隐藏着一个更大的秘密。</p>
+                </div>
+                
+                <!-- 第三季第十五集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">15</div>
+                        <h3 class="episode-title">「最后召集」(Last Call)</h3>
+                    </div>
+                    <p class="episode-description">Finch goes undercover in an emergency call center to protect a 911 operator, but it soon becomes clear that the threat reaches further than the team could have anticipated. 里瑟冒充一位酒保，调查一系列与一个酒吧有关的神秘死亡事件。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__links">
+                <a href="../index.html" class="footer__link">主页</a>
+                <a href="../timeline_summary.html" class="footer__link">剧情时间线</a>
+                <a href="../characters_timeline/characters_timeline.html" class="footer__link">角色时间线</a>
+                <a href="../nyc_locations.html" class="footer__link">纽约打卡地</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 响应式设计脚本 -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // 简单的响应式导航处理
+        window.addEventListener('resize', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (window.innerWidth > 768 && menuToggle && navMenu) {
+                navMenu.style.display = 'flex';
+            } else if (menuToggle && navMenu) {
+                navMenu.style.display = 'none';
+            }
+        });
+        
+        // 初始化执行一次窗口大小检查
+        window.dispatchEvent(new Event('resize'));
+    </script>
+</body>
+</html>

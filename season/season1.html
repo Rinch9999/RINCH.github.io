@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="《疑犯追踪》(Person of Interest) 第一季剧集情节介绍与分析">
+    <meta name="keywords" content="疑犯追踪, 剧集情节, 第一季, Person of Interest">
+    <title>《疑犯追踪》第一季 | POI 情报中心</title>
+    <link rel="stylesheet" href="../styles/unified_footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="episodes-shared.css">
+    
+    <script>
+        // 剧集筛选和交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为每个季度添加交互控制面板
+            function addSeasonControls(seasonContent) {
+                const seasonId = seasonContent.id;
+                const episodesGrid = seasonContent.querySelector('.episodes-grid');
+                
+                if (episodesGrid && !seasonContent.querySelector('.season-controls')) {
+                    // 创建控制面板
+                    const controlsContainer = document.createElement('div');
+                    controlsContainer.className = 'season-controls';
+                    controlsContainer.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <input type="text" class="episode-filter" placeholder="搜索剧集..." style="
+                                padding: 8px 12px;
+                                background: #222;
+                                color: #e0e0e0;
+                                border: 1px solid #444;
+                                border-radius: 4px;
+                                font-size: 14px;
+                                width: 200px;
+                                transition: all 0.3s ease;
+                            ">
+                            <span class="episode-count" style="
+                                font-size: 14px;
+                                color: #ddd;
+                                background: #222;
+                                padding: 8px 12px;
+                                border-radius: 4px;
+                            ">显示全部集数</span>
+                        </div>
+                    `;
+                    
+                    // 插入到episodes-grid之前
+                    episodesGrid.parentNode.insertBefore(controlsContainer, episodesGrid);
+                    
+                    // 添加筛选功能
+                    const filterInput = controlsContainer.querySelector('.episode-filter');
+                    const episodeCount = controlsContainer.querySelector('.episode-count');
+                    const episodeCards = seasonContent.querySelectorAll('.episode-card');
+                    
+                    filterInput.addEventListener('input', function() {
+                        const searchTerm = this.value.toLowerCase();
+                        let visibleCount = 0;
+                        
+                        episodeCards.forEach(card => {
+                            const title = card.querySelector('.episode-title').textContent.toLowerCase();
+                            const description = card.querySelector('.episode-description').textContent.toLowerCase();
+                            const number = card.querySelector('.episode-number').textContent.toLowerCase();
+                            
+                            if (title.includes(searchTerm) || description.includes(searchTerm) || number.includes(searchTerm)) {
+                                card.style.display = 'block';
+                                visibleCount++;
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                        
+                        // 更新计数显示
+                        episodeCount.textContent = searchTerm ? `显示 ${visibleCount}/${episodeCards.length} 集` : '显示全部集数';
+                    });
+                }
+            }
+            
+            // 初始化页面
+            const seasonContent = document.getElementById('season1');
+            if (seasonContent) {
+                addSeasonControls(seasonContent);
+            }
+            
+            // 为每个剧集卡片添加点击交互效果
+            document.querySelectorAll('.episode-card').forEach(card => {
+                // 添加悬停效果
+                card.style.transition = 'all 0.3s ease';
+                
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.3)';
+                    this.style.borderLeft = '4px solid #333';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                    this.style.borderLeft = '4px solid transparent';
+                });
+                
+                // 添加点击效果
+                card.addEventListener('click', function() {
+                    const description = this.querySelector('.episode-description');
+                    description.style.maxHeight = description.style.maxHeight ? null : '200px';
+                    description.style.transition = 'max-height 0.3s ease';
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i> 返回首页
+    </a>
+    
+    <!-- 返回剧集列表按钮 -->
+    <a href="episodes.html" class="back-to-episodes">
+        <i class="fas fa-list"></i> 返回剧集列表
+    </a>
+    
+    <div class="container">
+        <header>
+            <h1>疑犯追踪 - 第一季</h1>
+            <p class="subtitle">系统性整理《Person of Interest》第一季全剧内容</p>
+        </header>
+
+        <!-- 第一季 -->
+        <div id="season1" class="season-content">
+            <div class="season-header">
+                <h2><i class="fas fa-play-circle"></i> 第一季 (2011-2012)</h2>
+                <p class="season-info">共23集 | 首播：2011年9月22日 | 季终：2012年5月17日</p>
+                <div class="season-stats">
+                    <div class="stat"><i class="fas fa-play-circle"></i> 23 集</div>
+                    <div class="stat"><i class="fas fa-calendar-alt"></i> 2011-2012</div>
+                    <div class="stat"><i class="fas fa-user-friends"></i> 主要角色: Reese, Finch, Carter</div>
+                </div>
+            </div>
+            <div class="episodes-grid">
+                <!-- 第一集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">1</div>
+                        <h3 class="episode-title">「试播集」</h3>
+                    </div>
+                    <p class="episode-description">当一名年轻检察官的社会保障号码被提及时，里斯和芬奇合作，试图确定他们的嫌疑人是受害者还是加害者。前CIA特工John Reese被软件天才Harold Finch招募，开始处理"无关数字"，保护即将面临危险的普通人。</p>
+                </div>
+                
+                <!-- 第二集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">2</div>
+                        <h3 class="episode-title">「鬼魂」</h3>
+                    </div>
+                    <p class="episode-description">当他们收到一个两年前死亡的青少年的社会安全号码时，Reese和Finch开始质疑The Machine的绝对正确性。与此同时，Finch回忆起了The Machine的起源及其开发过程。里瑟调查一位被假身份困扰的年轻女性，发现她卷入了一个更大的阴谋。</p>
+                </div>
+                
+                <!-- 第三集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">3</div>
+                        <h3 class="episode-title">「任务蔓延」(Mission Creep)</h3>
+                    </div>
+                    <p class="episode-description">当机器指引里斯和芬奇找到一名与犯罪团伙有可疑联系的前海军陆战队员时，里斯必须潜入帮派，参与他们的抢劫。与此同时，卡特警探距离揭露里斯的真实身份比以往任何时候都近。团队帮助一位伊拉克战争退伍军人，他被卷入了一起抢劫案。</p>
+                </div>
+                
+                <!-- 第四集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">4</div>
+                        <h3 class="episode-title">「治愈你自己」(Cura Te Ipsum)</h3>
+                    </div>
+                    <p class="episode-description">里斯和芬奇监视他们最新的关注对象梅根·蒂尔曼博士，她正在值班和下班后，试图揭开这位有前途的年轻医生所面临的威胁。里瑟冒充医生调查一位精神科医生，后者的病人似乎都陷入了危险。</p>
+                </div>
+                
+                <!-- 第五集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">5</div>
+                        <h3 class="episode-title">「审判」(Judgment)</h3>
+                    </div>
+                    <p class="episode-description">当机器提供了一位以严厉判决著称的法官的社会保障号码时，里斯和芬奇面临额外的挑战——调查一名对他们私刑方式毫无瓜葛的兴趣人。团队调查一位前法官，他似乎在进行私人执法。</p>
+                </div>
+                
+                <!-- 第六集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">6</div>
+                        <h3 class="episode-title">「修复」(The Fix)</h3>
+                    </div>
+                    <p class="episode-description">里瑟被他们最新的关注对象所吸引——一位美丽、聪明且极具智慧的女性。里瑟和芬奇调查一位华尔街交易员，他可能卷入了内部交易。</p>
+                </div>
+                
+                <!-- 第七集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">7</div>
+                        <h3 class="episode-title">「目击者」(Witness)</h3>
+                    </div>
+                    <p class="episode-description">机器确认一名目击黑帮袭击的教师是下一个重点调查对象，里斯和芬奇赶紧救他。一位餐厅服务员目击了一起谋杀案，成为杀手的目标。</p>
+                </div>
+                
+                <!-- 第八集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">8</div>
+                        <h3 class="episode-title">「敌人」(Foe)</h3>
+                    </div>
+                    <p class="episode-description">当里斯和芬奇发现他们最新的兴趣人与冷战时期苏联间谍圈有联系时，他们很快了解到在"机器"出现之前的世界，秘密行动是如何进行的。芬奇的前商业伙伴出现，威胁要揭露他的身份。</p>
+                </div>
+                
+                <!-- 第九集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">9</div>
+                        <h3 class="episode-title">「去找卡特」(Get Carter)</h3>
+                    </div>
+                    <p class="episode-description">当机器宣布她是他们最新的关注对象时，里斯和芬奇与侦探卡特的猫捉老鼠游戏变得更加复杂。卡特警探开始调查里斯，同时团队必须保护一位有犯罪记录的人。</p>
+                </div>
+                
+                <!-- 第十集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">10</div>
+                        <h3 class="episode-title">「数字加算」(Number Crunch)</h3>
+                    </div>
+                    <p class="episode-description">当卡特侦探处理她最近与里斯和芬奇的遭遇后果时，机器加大了对两人的赌注，给了他们四个社会保障号码，而不是一个。团队调查一系列看似随机的暴力事件，发现它们可能有关联。</p>
+                </div>
+                
+                <!-- 第十一集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">11</div>
+                        <h3 class="episode-title">「超级」(Super)</h3>
+                    </div>
+                    <p class="episode-description">里斯作电脑，而芬奇则负责与最新的主管——一位对租户过于密切监视的建筑管理员——进行实地考察。与此同时，卡特侦探或许终于有机会窥见她期待已久的案件。一位天才程序员发现了一个危险的电脑游戏，游戏中的死亡会在现实生活中发生。</p>
+                </div>
+                
+                <!-- 第十二集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">12</div>
+                        <h3 class="episode-title">「遗产」(Legacy)</h3>
+                    </div>
+                    <p class="episode-description">当卡特最终与里斯面对面时，他敦促她联手帮助他们最新的兴趣人——一位来自社会边缘的坚韧年轻女子，她改过自新，成为一名律师。芬奇的过去被揭开，他与纳森·英格拉姆（Nathan Ingram）的关系变得更加清晰。</p>
+                </div>
+                
+                <!-- 第十三集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">13</div>
+                        <h3 class="episode-title">「根源」(Root Cause)</h3>
+                    </div>
+                    <p class="episode-description">里斯和芬奇最新的兴趣人是一个倒霉的男人，可能已经到了崩溃的边缘。随着案件的发展，两人求助于前兴趣线人佐伊，她是足智多谋且关系广泛的佐伊。一个神秘的黑客"Root"开始引起团队的注意，她似乎知道"机器"的存在。</p>
+                </div>
+                
+                <!-- 第十四集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">14</div>
+                        <h3 class="episode-title">「狼与幼崽」(Wolf and Cub)</h3>
+                    </div>
+                    <p class="episode-description">机器确认达伦·麦格雷迪是下一个POI，他的兄弟刚刚被谋杀。与此同时，芬奇越来越担心他前商业伙伴的儿子正危险地接近发现"机器"的存在。一位前黑帮成员试图保护一个年轻男孩免受他的前同伙伤害。</p>
+                </div>
+                
+                <!-- 第十五集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">15</div>
+                        <h3 class="episode-title">「蓝色代码」(Blue Code)</h3>
+                    </div>
+                    <p class="episode-description">里斯潜入一个走私团伙，接近他最新的兴趣人后，发现了故事的更多秘密。里瑟帮助一位患有失忆症的人，他可能是一个危险组织的目标。</p>
+                </div>
+                
+                <!-- 第十六集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">16</div>
+                        <h3 class="episode-title">「风险」(Risk)</h3>
+                    </div>
+                    <p class="episode-description">《机器》引领里斯和芬奇进入华尔街，当时一位精明的年轻交易员在一家大型投资银行卷入了一场数百万美元的金融骗局。Detective Carter's investigation nears the truth，同时团队必须保护一位风险分析师。</p>
+                </div>
+                
+                <!-- 第十七集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">17</div>
+                        <h3 class="episode-title">「宝贝蓝」(Baby Blue)</h3>
+                    </div>
+                    <p class="episode-description">当机器吐出一个6个月大婴儿的数字时，里斯和芬奇变成了过度保护的父母——他们手中拥有一大武器。与此同时，当伊莱亚斯重新出现时，侦探卡特开始质疑她与里斯和芬奇的新联盟。团队保护一位新生儿，他似乎是一个更大阴谋的关键。</p>
+                </div>
+                
+                <!-- 第十八集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">18</div>
+                        <h3 class="episode-title">「身份危机」(Identity Crisis)</h3>
+                    </div>
+                    <p class="episode-description">The Machine最新的数字对Reese和Finch来说是一个独特的挑战，因为这个人几乎没有数字足迹——而且似乎过着双重生活。一位身份被盗的女性成为目标，团队发现这与一个更大的身份盗窃团伙有关。</p>
+                </div>
+                
+                <!-- 第十九集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">19</div>
+                        <h3 class="episode-title">「血肉之躯」(Flesh and Blood)</h3>
+                    </div>
+                    <p class="episode-description">当机器吐出五个数字，点名纽约各犯罪家族的教父时，里斯和芬奇怀疑埃利亚斯计划消灭竞争对手。里瑟的前CIA同事出现，威胁要揭露他的身份。</p>
+                </div>
+                
+                <!-- 第二十集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">20</div>
+                        <h3 class="episode-title">「马佳·尼亚亚」(Matsya Nyaya)</h3>
+                    </div>
+                    <p class="episode-description">机器最新的标记让里斯潜伏在一支装甲车队伍中，这一案件唤起了他对上一次中情局任务和被迫做出痛苦决定的回忆。Root再次出现，开始执行她的计划，目标直指芬奇。</p>
+                </div>
+                
+                <!-- 第二十一集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">21</div>
+                        <h3 class="episode-title">「多重回归」(Many Happy Returns)</h3>
+                    </div>
+                    <p class="episode-description">今天是Reese的生日，Finch送给他一天假期——尤其是当他意识到The Machine最新的曲目肯定会唤起痛苦的回忆时。卡特警探发现了关于里瑟的更多真相，同时团队调查一个涉及假币的案件。</p>
+                </div>
+                
+                <!-- 第二十二集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">22</div>
+                        <h3 class="episode-title">「无善之举」(No Good Deed)</h3>
+                    </div>
+                    <p class="episode-description">最新的POI的好奇心可能导致他陷入一个黑暗的政府阴谋——而这个阴谋芬奇对此再熟悉不过。与此同时，Reese uncovers some revelations about Finch's past。The team's identities begin to be discovered by more people，while Root's plan nears completion。</p>
+                </div>
+                
+                <!-- 第二十三集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">23</div>
+                        <h3 class="episode-title">「防火墙」(Firewall)</h3>
+                    </div>
+                    <p class="episode-description">当心理学家的电话出现时，Reese must protect her from a patient，同时躲避迅速逼近的联邦调查局。与此同时，Finch receives an unwelcome visit from an old acquaintance。Root has kidnapped Finch, and Reese must rescue him with the help of Carter and Fusco，while uncovering more secrets about "The Machine"。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__links">
+                <a href="../index.html" class="footer__link">主页</a>
+                <a href="../timeline_summary.html" class="footer__link">剧情时间线</a>
+                <a href="../characters_timeline/characters_timeline.html" class="footer__link">角色时间线</a>
+                <a href="../nyc_locations.html" class="footer__link">纽约打卡地</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 响应式设计脚本 -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // 简单的响应式导航处理
+        window.addEventListener('resize', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (window.innerWidth > 768 && menuToggle && navMenu) {
+                navMenu.style.display = 'flex';
+            } else if (menuToggle && navMenu) {
+                navMenu.style.display = 'none';
+            }
+        });
+        
+        // 初始化执行一次窗口大小检查
+        window.dispatchEvent(new Event('resize'));
+    </script>
+</body>
+</html>

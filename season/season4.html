@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="《疑犯追踪》(Person of Interest) 第四季剧集情节介绍与分析">
+    <meta name="keywords" content="疑犯追踪, 剧集情节, 第四季, Person of Interest">
+    <title>《疑犯追踪》第四季 | POI 情报中心</title>
+    <link rel="stylesheet" href="../styles/unified_footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="episodes-shared.css">
+    
+    <script>
+        // 剧集筛选和交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为每个季度添加交互控制面板
+            function addSeasonControls(seasonContent) {
+                const seasonId = seasonContent.id;
+                const episodesGrid = seasonContent.querySelector('.episodes-grid');
+                
+                if (episodesGrid && !seasonContent.querySelector('.season-controls')) {
+                    // 创建控制面板
+                    const controlsContainer = document.createElement('div');
+                    controlsContainer.className = 'season-controls';
+                    controlsContainer.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <input type="text" class="episode-filter" placeholder="搜索剧集..." style="
+                                padding: 8px 12px;
+                                background: #222;
+                                color: #e0e0e0;
+                                border: 1px solid #444;
+                                border-radius: 4px;
+                                font-size: 14px;
+                                width: 200px;
+                                transition: all 0.3s ease;
+                            ">
+                            <span class="episode-count" style="
+                                font-size: 14px;
+                                color: #ddd;
+                                background: #222;
+                                padding: 8px 12px;
+                                border-radius: 4px;
+                            ">显示全部集数</span>
+                        </div>
+                    `;
+                    
+                    // 插入到episodes-grid之前
+                    episodesGrid.parentNode.insertBefore(controlsContainer, episodesGrid);
+                    
+                    // 添加筛选功能
+                    const filterInput = controlsContainer.querySelector('.episode-filter');
+                    const episodeCount = controlsContainer.querySelector('.episode-count');
+                    const episodeCards = seasonContent.querySelectorAll('.episode-card');
+                    
+                    filterInput.addEventListener('input', function() {
+                        const searchTerm = this.value.toLowerCase();
+                        let visibleCount = 0;
+                        
+                        episodeCards.forEach(card => {
+                            const title = card.querySelector('.episode-title').textContent.toLowerCase();
+                            const description = card.querySelector('.episode-description').textContent.toLowerCase();
+                            const number = card.querySelector('.episode-number').textContent.toLowerCase();
+                            
+                            if (title.includes(searchTerm) || description.includes(searchTerm) || number.includes(searchTerm)) {
+                                card.style.display = 'block';
+                                visibleCount++;
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                        
+                        // 更新计数显示
+                        episodeCount.textContent = searchTerm ? `显示 ${visibleCount}/${episodeCards.length} 集` : '显示全部集数';
+                    });
+                }
+            }
+            
+            // 初始化页面
+            const seasonContent = document.getElementById('season4');
+            if (seasonContent) {
+                addSeasonControls(seasonContent);
+            }
+            
+            // 为每个剧集卡片添加点击交互效果
+            document.querySelectorAll('.episode-card').forEach(card => {
+                // 添加悬停效果
+                card.style.transition = 'all 0.3s ease';
+                
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.3)';
+                    this.style.borderLeft = '4px solid #333';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                    this.style.borderLeft = '4px solid transparent';
+                });
+                
+                // 添加点击效果
+                card.addEventListener('click', function() {
+                    const description = this.querySelector('.episode-description');
+                    description.style.maxHeight = description.style.maxHeight ? null : '200px';
+                    description.style.transition = 'max-height 0.3s ease';
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i> 返回首页
+    </a>
+    
+    <!-- 返回剧集列表按钮 -->
+    <a href="episodes.html" class="back-to-episodes">
+        <i class="fas fa-list"></i> 返回剧集列表
+    </a>
+    
+    <div class="container">
+        <header>
+            <h1>疑犯追踪 - 第四季</h1>
+            <p class="subtitle">系统性整理《Person of Interest》第四季全剧内容</p>
+        </header>
+
+        <!-- 第四季 -->
+        <div id="season4" class="season-content">
+            <div class="season-header">
+                <h2><i class="fas fa-play-circle"></i> 第四季 (2014-2015)</h2>
+                <p class="season-info">共22集 | 首播：2014年9月23日 | 季终：2015年5月5日</p>
+                <div class="season-stats">
+                    <div class="stat"><i class="fas fa-play-circle"></i> 22 集</div>
+                    <div class="stat"><i class="fas fa-calendar-alt"></i> 2014-2015</div>
+                    <div class="stat"><i class="fas fa-robot"></i> Samaritan全面上线</div>
+                </div>
+            </div>
+            <div class="episodes-grid">
+                <!-- 第四季第一集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">1</div>
+                        <h3 class="episode-title">「系统重启」(Panopticon)</h3>
+                    </div>
+                    <p class="episode-description">随着Samaritan的全面上线，团队必须适应新的世界秩序，在阴影中继续他们的使命。Samaritan开始清除所有威胁，同时团队必须保护新的数字。</p>
+                </div>
+                
+                <!-- 第四季第二集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">2</div>
+                        <h3 class="episode-title">「Nautilus」</h3>
+                    </div>
+                    <p class="episode-description">团队收到一个与地下黑客组织有关的数字，他们必须深入网络世界，阻止一场可能导致大规模破坏的攻击。Root开始执行她的计划，目标直指Samaritan。</p>
+                </div>
+                
+                <!-- 第四季第三集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">3</div>
+                        <h3 class="episode-title">「真理」(Wingman)</h3>
+                    </div>
+                    <p class="episode-description">Reese和Finch调查一个与航空公司有关的数字，发现了一个涉及国家安全的阴谋。与此同时，Shaw开始质疑她在团队中的角色。</p>
+                </div>
+                
+                <!-- 第四季第四集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">4</div>
+                        <h3 class="episode-title">「兄弟」(Brotherhood)</h3>
+                    </div>
+                    <p class="episode-description">团队调查一个与黑帮有关的数字，发现了一个涉及兄弟情谊和背叛的故事。Finch回忆起他与Nathan Ingram的关系，同时团队必须保护一个年轻的黑帮成员。</p>
+                </div>
+                
+                <!-- 第四季第五集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">5</div>
+                        <h3 class="episode-title">「Prophets」</h3>
+                    </div>
+                    <p class="episode-description">Root和Shaw调查一个与宗教有关的数字，发现了一个涉及信仰和权力的阴谋。与此同时，Samaritan开始实施它的长期计划，目标直指团队。</p>
+                </div>
+                
+                <!-- 第四季第六集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">6</div>
+                        <h3 class="episode-title">「Pretenders」</h3>
+                    </div>
+                    <p class="episode-description">团队调查一个与假冒身份有关的数字，发现了一个涉及欺诈和谋杀的故事。Reese开始质疑他的过去，同时团队必须保护一个无辜的受害者。</p>
+                </div>
+                
+                <!-- 第四季第七集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">7</div>
+                        <h3 class="episode-title">「Honor Among Thieves」</h3>
+                    </div>
+                    <p class="episode-description">团队调查一个与盗窃有关的数字，发现了一个涉及荣誉和背叛的故事。Finch开始实施他的计划，目标直指Samaritan。</p>
+                </div>
+                
+                <!-- 第四季第八集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">8</div>
+                        <h3 class="episode-title">「Point of Origin」</h3>
+                    </div>
+                    <p class="episode-description">团队调查一个与起源有关的数字，发现了一个涉及过去和未来的故事。Root开始回忆她的过去，同时团队必须保护一个关键人物。</p>
+                </div>
+                
+                <!-- 第四季第九集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">9</div>
+                        <h3 class="episode-title">「The Cold War」</h3>
+                    </div>
+                    <p class="episode-description">随着Samaritan的势力不断扩大，团队必须与时间赛跑，阻止一场可能导致世界末日的危机。Root和Shaw开始执行一项危险的任务，目标直指Samaritan的核心。</p>
+                </div>
+                
+                <!-- 第四季第十集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">10</div>
+                        <h3 class="episode-title">「The Devil You Know」</h3>
+                    </div>
+                    <p class="episode-description">团队与一个熟悉的敌人合作，试图阻止Samaritan的计划。Reese开始质疑他的道德准则，同时团队必须做出一个艰难的决定。</p>
+                </div>
+                
+                <!-- 第四季第十一集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">11</div>
+                        <h3 class="episode-title">「If-Then-Else」</h3>
+                    </div>
+                    <p class="episode-description">机器开始模拟各种可能性，试图找到拯救团队的最佳方案。这是一集以机器视角讲述的故事，展示了它的决策过程和对团队的感情。</p>
+                </div>
+                
+                <!-- 第四季第十二集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">12</div>
+                        <h3 class="episode-title">「Control-Alt-Delete」</h3>
+                    </div>
+                    <p class="episode-description">团队调查一个与控制有关的数字，发现了一个涉及权力和腐败的故事。Root开始实施她的最终计划，目标直指Samaritan。</p>
+                </div>
+                
+                <!-- 第四季第十三集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">13</div>
+                        <h3 class="episode-title">「M.I.A.」</h3>
+                    </div>
+                    <p class="episode-description">Shaw失踪了，团队必须找到她，同时阻止Samaritan的计划。Reese和Finch开始质疑他们的使命，同时Root开始执行一项危险的任务。</p>
+                </div>
+                
+                <!-- 第四季第十四集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">14</div>
+                        <h3 class="episode-title">「Guilty」</h3>
+                    </div>
+                    <p class="episode-description">团队调查一个与内疚有关的数字，发现了一个涉及过去和现在的故事。Finch开始回忆他的过去，同时团队必须保护一个无辜的受害者。</p>
+                </div>
+                
+                <!-- 第四季第十五集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">15</div>
+                        <h3 class="episode-title">「QSO」</h3>
+                    </div>
+                    <p class="episode-description">团队调查一个与无线电有关的数字，发现了一个涉及通信和秘密的故事。Root开始执行她的计划，目标直指Samaritan的通信网络。</p>
+                </div>
+                
+                <!-- 第四季第十六集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">16</div>
+                        <h3 class="episode-title">「Blunt」</h3>
+                    </div>
+                    <p class="episode-description">团队调查一个与武器有关的数字，发现了一个涉及暴力和复仇的故事。Reese开始质疑他的过去，同时团队必须保护一个关键人物。</p>
+                </div>
+                
+                <!-- 第四季第十七集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">17</div>
+                        <h3 class="episode-title">「Karma」</h3>
+                    </div>
+                    <p class="episode-description">团队调查一个与因果报应有关的数字，发现了一个涉及正义和复仇的故事。Finch开始实施他的计划，目标直指Samaritan。</p>
+                </div>
+                
+                <!-- 第四季第十八集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">18</div>
+                        <h3 class="episode-title">「Skip」</h3>
+                    </div>
+                    <p class="episode-description">团队调查一个与跳跃有关的数字，发现了一个涉及时间和空间的故事。Root开始回忆她的过去，同时团队必须保护一个关键人物。</p>
+                </div>
+                
+                <!-- 第四季第十九集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">19</div>
+                        <h3 class="episode-title">「Search and Destroy」</h3>
+                    </div>
+                    <p class="episode-description">团队开始搜索Shaw，同时阻止Samaritan的计划。Reese和Finch开始质疑他们的使命，同时Root开始执行一项危险的任务。</p>
+                </div>
+                
+                <!-- 第四季第二十集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">20</div>
+                        <h3 class="episode-title">「Terra Incognita」</h3>
+                    </div>
+                    <p class="episode-description">Reese开始回忆他的过去，同时团队必须保护一个关键人物。Finch开始实施他的最终计划，目标直指Samaritan。</p>
+                </div>
+                
+                <!-- 第四季第二十一集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">21</div>
+                        <h3 class="episode-title">「Asylum」</h3>
+                    </div>
+                    <p class="episode-description">团队调查一个与精神病院有关的数字，发现了一个涉及真相和谎言的故事。Root开始执行她的最终计划，目标直指Samaritan。</p>
+                </div>
+                
+                <!-- 第四季第二十二集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">22</div>
+                        <h3 class="episode-title">「YHWH」</h3>
+                    </div>
+                    <p class="episode-description">团队与Samaritan的最终对决开始了。Finch开始实施他的最终计划，目标直指Samaritan的核心。Root和Shaw开始执行一项危险的任务，而Reese必须做出一个艰难的决定。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__links">
+                <a href="../index.html" class="footer__link">主页</a>
+                <a href="../timeline_summary.html" class="footer__link">剧情时间线</a>
+                <a href="../characters_timeline/characters_timeline.html" class="footer__link">角色时间线</a>
+                <a href="../nyc_locations.html" class="footer__link">纽约打卡地</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 响应式设计脚本 -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // 简单的响应式导航处理
+        window.addEventListener('resize', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (window.innerWidth > 768 && menuToggle && navMenu) {
+                navMenu.style.display = 'flex';
+            } else if (menuToggle && navMenu) {
+                navMenu.style.display = 'none';
+            }
+        });
+        
+        // 初始化执行一次窗口大小检查
+        window.dispatchEvent(new Event('resize'));
+    </script>
+</body>
+</html>

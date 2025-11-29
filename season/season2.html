@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="《疑犯追踪》(Person of Interest) 第二季剧集情节介绍与分析">
+    <meta name="keywords" content="疑犯追踪, 剧集情节, 第二季, Person of Interest">
+    <title>《疑犯追踪》第二季 | POI 情报中心</title>
+    <link rel="stylesheet" href="../styles/unified_footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="episodes-shared.css">
+    
+    <script>
+        // 剧集筛选和交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为每个季度添加交互控制面板
+            function addSeasonControls(seasonContent) {
+                const seasonId = seasonContent.id;
+                const episodesGrid = seasonContent.querySelector('.episodes-grid');
+                
+                if (episodesGrid && !seasonContent.querySelector('.season-controls')) {
+                    // 创建控制面板
+                    const controlsContainer = document.createElement('div');
+                    controlsContainer.className = 'season-controls';
+                    controlsContainer.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <input type="text" class="episode-filter" placeholder="搜索剧集..." style="
+                                padding: 8px 12px;
+                                background: #222;
+                                color: #e0e0e0;
+                                border: 1px solid #444;
+                                border-radius: 4px;
+                                font-size: 14px;
+                                width: 200px;
+                                transition: all 0.3s ease;
+                            ">
+                            <span class="episode-count" style="
+                                font-size: 14px;
+                                color: #ddd;
+                                background: #222;
+                                padding: 8px 12px;
+                                border-radius: 4px;
+                            ">显示全部集数</span>
+                        </div>
+                    `;
+                    
+                    // 插入到episodes-grid之前
+                    episodesGrid.parentNode.insertBefore(controlsContainer, episodesGrid);
+                    
+                    // 添加筛选功能
+                    const filterInput = controlsContainer.querySelector('.episode-filter');
+                    const episodeCount = controlsContainer.querySelector('.episode-count');
+                    const episodeCards = seasonContent.querySelectorAll('.episode-card');
+                    
+                    filterInput.addEventListener('input', function() {
+                        const searchTerm = this.value.toLowerCase();
+                        let visibleCount = 0;
+                        
+                        episodeCards.forEach(card => {
+                            const title = card.querySelector('.episode-title').textContent.toLowerCase();
+                            const description = card.querySelector('.episode-description').textContent.toLowerCase();
+                            const number = card.querySelector('.episode-number').textContent.toLowerCase();
+                            
+                            if (title.includes(searchTerm) || description.includes(searchTerm) || number.includes(searchTerm)) {
+                                card.style.display = 'block';
+                                visibleCount++;
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                        
+                        // 更新计数显示
+                        episodeCount.textContent = searchTerm ? `显示 ${visibleCount}/${episodeCards.length} 集` : '显示全部集数';
+                    });
+                }
+            }
+            
+            // 初始化页面
+            const seasonContent = document.getElementById('season2');
+            if (seasonContent) {
+                addSeasonControls(seasonContent);
+            }
+            
+            // 为每个剧集卡片添加点击交互效果
+            document.querySelectorAll('.episode-card').forEach(card => {
+                // 添加悬停效果
+                card.style.transition = 'all 0.3s ease';
+                
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.3)';
+                    this.style.borderLeft = '4px solid #333';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                    this.style.borderLeft = '4px solid transparent';
+                });
+                
+                // 添加点击效果
+                card.addEventListener('click', function() {
+                    const description = this.querySelector('.episode-description');
+                    description.style.maxHeight = description.style.maxHeight ? null : '200px';
+                    description.style.transition = 'max-height 0.3s ease';
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i> 返回首页
+    </a>
+    
+    <!-- 返回剧集列表按钮 -->
+    <a href="episodes.html" class="back-to-episodes">
+        <i class="fas fa-list"></i> 返回剧集列表
+    </a>
+    
+    <div class="container">
+        <header>
+            <h1>疑犯追踪 - 第二季</h1>
+            <p class="subtitle">系统性整理《Person of Interest》第二季全剧内容</p>
+        </header>
+
+        <!-- 第二季 -->
+        <div id="season2" class="season-content">
+            <div class="season-header">
+                <h2><i class="fas fa-play-circle"></i> 第二季 (2012-2013)</h2>
+                <p class="season-info">共22集 | 首播：2012年9月27日 | 季终：2013年5月9日</p>
+                <div class="season-stats">
+                    <div class="stat"><i class="fas fa-play-circle"></i> 22 集</div>
+                    <div class="stat"><i class="fas fa-calendar-alt"></i> 2012-2013</div>
+                    <div class="stat"><i class="fas fa-user-friends"></i> 新增角色: Shaw, Root</div>
+                </div>
+            </div>
+            <div class="episodes-grid">
+                <!-- 第二季第一集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">1</div>
+                        <h3 class="episode-title">「应急方案」(The Contingency)</h3>
+                    </div>
+                    <p class="episode-description">Finch is missing - kidnapped by his hacker nemesis Root - and Reese enlists Detectives Carter and Fusco to help rescue their friend。Reese and Finch continue their mission，while Finch recovers from Root's kidnapping。</p>
+                </div>
+                
+                <!-- 第二季第二集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">2</div>
+                        <h3 class="episode-title">「错误代码」(Bad Code)</h3>
+                    </div>
+                    <p class="episode-description">The Machine sends a number for a cold case, bringing Reese closer to catching up with Finch and his kidnapper Root。Root escapes from a mental institution，to execute a new plan，while the team encounters Samantha Shaw。</p>
+                </div>
+                
+                <!-- 第二季第三集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">3</div>
+                        <h3 class="episode-title">「化装舞会」(Masquerade)</h3>
+                    </div>
+                    <p class="episode-description">After Finch returns to the library，Reese returns to field work，facing his most difficult case yet - protect the privileged daughter of a Brazilian diplomat。Reese poses as a murdered journalist，investigate a case involving political corruption。</p>
+                </div>
+                
+                <!-- 第二季第四集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">4</div>
+                        <h3 class="episode-title">「触发者」(Triggerman)</h3>
+                    </div>
+                    <p class="episode-description">当机器告诉他们一名生命受到威胁的黑帮打手的电话号码时，里斯和芬奇必须决定是介入还是让因果报应平衡正义的天平。与此同时，芬奇寻求一个意想不到的援助。团队调查一系列看似随机的谋杀案，发现它们都与一个神秘的雇佣杀手有关。</p>
+                </div>
+                
+                <!-- 第二季第五集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">5</div>
+                        <h3 class="episode-title">「埋葬重点」(Bury the Lede)</h3>
+                    </div>
+                    <p class="episode-description">里斯必须通过秘密手段保护一名调查记者，以避免成为她故事的一部分。一位记者开始调查一个神秘的组织，同时成为团队的保护目标。</p>
+                </div>
+                
+                <!-- 第二季第六集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">6</div>
+                        <h3 class="episode-title">「高路」(The High Road)</h3>
+                    </div>
+                    <p class="episode-description">当"机器"最新一期将里斯送到郊区时，里斯潜入了一个田园诗般的社区。团队保护一位银行家，他似乎涉及一个国际洗钱阴谋。</p>
+                </div>
+                
+                <!-- 第二季第七集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">7</div>
+                        <h3 class="episode-title">「危急」(Critical)</h3>
+                    </div>
+                    <p class="episode-description">机器给了芬奇和里斯一位天才外科医生的电话号码，但他们很快发现一个足智多谋的第三方提高了这个兴趣点的赌注，迫使他们转向一个意想不到的求助对象。里瑟在一次任务中受伤，陷入昏迷，他的过去开始在他的脑海中浮现。</p>
+                </div>
+                
+                <!-- 第二季第八集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">8</div>
+                        <h3 class="episode-title">「直到死亡」(Til Death)</h3>
+                    </div>
+                    <p class="episode-description">当夫妻俩的号码都出现时，团队就人手不足。团队调查一对似乎陷入危险关系的夫妇，同时卡特继续他对HR组织的调查。</p>
+                </div>
+                
+                <!-- 第二季第九集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">9</div>
+                        <h3 class="episode-title">「货到付款」(C.O.D.)</h3>
+                    </div>
+                    <p class="episode-description">当纽约市出租车司机的号码出现，任何一名乘客都可能卷入即将发生的犯罪时，芬奇和里斯的监控能力被推到了极限。芬奇感染了一种致命病毒，里瑟必须找到解药，同时保护一位可能携带抗病毒抗体的女孩。</p>
+                </div>
+                
+                <!-- 第二季第十集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">10</div>
+                        <h3 class="episode-title">「影盒」(Shadow Box)</h3>
+                    </div>
+                    <p class="episode-description">当联邦调查局重新集中精力追捕"穿西装的人"时，里斯最新的调查对象在得知她是一名阵亡士兵的妹妹后，变成了个人任务。团队与肖合作，调查ISA的"相关数字"项目，发现了更多关于政府监控的真相。</p>
+                </div>
+                
+                <!-- 第二季第十一集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">11</div>
+                        <h3 class="episode-title">「2πR」</h3>
+                    </div>
+                    <p class="episode-description">芬奇伪装成一名高中代课老师，保护一位让他想起自己童年神童时期的少年天才，而卡特则执行一项危险任务，阻止联邦调查局查明被囚禁的里斯就是"穿西装的人"。团队保护一位物理学家，他的研究可能对国家安全构成威胁。</p>
+                </div>
+                
+                <!-- 第二季第十二集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">12</div>
+                        <h3 class="episode-title">「囚徒困境」(Prisoner's Dilemma)</h3>
+                    </div>
+                    <p class="episode-description">当卡特与联邦调查局展开心理战以帮助里斯躲避唐纳利探员日益集中的注意力时，里斯则遭遇了新旧敌人。与此同时，侦探福斯科被迫单独行动，帮助团队最新的兴趣对象：超级名模卡罗琳娜·库尔科娃。弗斯科警探被HR组织陷害入狱，卡特必须找到证据证明他的清白。</p>
+                </div>
+                
+                <!-- 第二季第十三集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">13</div>
+                        <h3 class="episode-title">「死算」(Dead Reckoning)</h3>
+                    </div>
+                    <p class="episode-description">里斯被一位老熟人绑架，后者策划一场大规模网络战争，可能导致里斯死亡。Root再次出现，她似乎知道关于"机器"的更多秘密，同时团队必须保护一位前军事承包商。</p>
+                </div>
+                
+                <!-- 第二季第十四集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">14</div>
+                        <h3 class="episode-title">「百分之一」(One Percent)</h3>
+                    </div>
+                    <p class="episode-description">里斯和芬奇遇到了他们的对手——一位科技亿万富翁的兴趣派对手，他的好奇心和无尽的资源威胁着暴露他们的身份，破坏他们拯救他生命的努力。团队保护一位亿万富翁，他似乎是一个环保恐怖组织的目标。</p>
+                </div>
+                
+                <!-- 第二季第十五集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">15</div>
+                        <h3 class="episode-title">「预订稳妥」(Booked Solid)</h3>
+                    </div>
+                    <p class="episode-description">里斯和芬奇争抢救一名酒店女佣的生命，但发现周围的嫌疑人比他们能排除的还多，因为他们意识到任何客人或员工都可能是潜在凶手。与此同时，卡特侦探正在权衡联邦调查局的一个重要提议。里瑟冒充一位酒店礼宾员，保护一位女演员免受她的跟踪者伤害。</p>
+                </div>
+                
+                <!-- 第二季第十六集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">16</div>
+                        <h3 class="episode-title">「相关性」(Relevance)</h3>
+                    </div>
+                    <p class="episode-description">一名致命的政府特工，负责追踪并阻止恐怖威胁，却发现自己在逃亡——同时成为里斯和芬奇关注的新焦点。然而，当他们发现她的非凡技能与他们不相上下时，他们的追寻成为最艰巨的。萨曼莎·肖的背景故事被揭示，她在ISA的工作以及她与"相关数字"项目的联系。</p>
+                </div>
+                
+                <!-- 第二季第十七集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">17</div>
+                        <h3 class="episode-title">「普罗透斯」(Proteus)</h3>
+                    </div>
+                    <p class="episode-description">机器一次给了里斯和芬奇六个号码，他们寻找线索的过程带他们来到一个海滨小镇，被迫与一群当地人一起在警察局度过风暴。然而，随着外面天气恶劣，内部发生了阴险局面，他们发现藏有身份不明的杀手藏身其中。团队调查一个能够完美伪装成任何人的连环杀手。</p>
+                </div>
+                
+                <!-- 第二季第十八集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">18</div>
+                        <h3 class="episode-title">「全押」(All In)</h3>
+                    </div>
+                    <p class="episode-description">当一位年长赌徒的电话号码出现时，里斯和芬奇前往大西洋城，试图深入挖掘他们兴趣对象看似平凡生活的表面，寻找答案。在纽约，卡特为洗清一名侦探的冤屈，险些发现部门内剩余的人力资源派系。里瑟和弗斯科调查一个地下扑克游戏，同时芬奇遇到了一个神秘的陌生人。</p>
+                </div>
+                
+                <!-- 第二季第十九集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">19</div>
+                        <h3 class="episode-title">「特洛伊木马」(Trojan Horse)</h3>
+                    </div>
+                    <p class="episode-description">当一位顶尖科技高管的电话号码出现时，芬奇潜入她的公司收集情报，但无法判断她是为公司利益工作，还是计划从内部摧毁公司。与此同时，卡特继续质疑比彻侦探的诚信，因为他提供了关于另一名侦探的不利信息。卡特的调查接近揭露HR组织的真相，同时团队必须保护一位可能知道太多的黑客。</p>
+                </div>
+                
+                <!-- 第二季第二十集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">20</div>
+                        <h3 class="episode-title">「极限」(In Extremis)</h3>
+                    </div>
+                    <p class="episode-description">当一位医学界的名人被下毒时，里斯和芬奇只有24小时时间确定他所服用的致命毒素并找到幕后黑手。与此同时，侦探福斯科的过去腐败问题显现，一名线人向内部事务局提供了关键情报，准备将他送进监狱。Shaw is betrayed by the ISA and in danger, while Root reappears with a proposition。</p>
+                </div>
+                
+                <!-- 第二季第二十一集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">21</div>
+                        <h3 class="episode-title">「零日」(Zero Day)</h3>
+                    </div>
+                    <p class="episode-description">里斯和芬奇意识到病毒使机器变得异常，导致数字不规则地发出。在与病毒倒计时赛跑的同时，团队寻找一位神秘到没人见过的科技百万富翁。此外，卡特侦探的任务是将卡尔·比彻的凶手绳之以法，这也让她成为了人力资源犯罪组织的目标。HR's plans reach a climax as a greater threat begins to emerge - a new project called "Samaritan"。</p>
+                </div>
+                
+                <!-- 第二季第二十二集 -->
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div class="episode-number">22</div>
+                        <h3 class="episode-title">「神模式」(God Mode)</h3>
+                    </div>
+                    <p class="episode-description">里斯和芬奇与意想不到的盟友联手，竞速拯救机器免受一个熟悉而邪恶的存在，芬奇与前搭档内森·英格拉姆的真实关系也被揭露。与此同时，卡特试图将比彻的凶手绳之以法，却与犯罪组织HR发生冲突。卡特与HR组织的最终对决，同时"机器"进入了特殊模式，帮助团队度过危机。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__links">
+                <a href="../index.html" class="footer__link">主页</a>
+                <a href="../timeline_summary.html" class="footer__link">剧情时间线</a>
+                <a href="../characters_timeline/characters_timeline.html" class="footer__link">角色时间线</a>
+                <a href="../nyc_locations.html" class="footer__link">纽约打卡地</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 响应式设计脚本 -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // 简单的响应式导航处理
+        window.addEventListener('resize', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (window.innerWidth > 768 && menuToggle && navMenu) {
+                navMenu.style.display = 'flex';
+            } else if (menuToggle && navMenu) {
+                navMenu.style.display = 'none';
+            }
+        });
+        
+        // 初始化执行一次窗口大小检查
+        window.dispatchEvent(new Event('resize'));
+    </script>
+</body>
+</html>

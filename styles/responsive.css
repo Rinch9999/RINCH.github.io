@@ -1,0 +1,266 @@
+/* 响应式设计 - 集中管理媒体查询 */
+/* 移动优先设计理念 - 基础样式适合移动设备，通过媒体查询扩展到更大屏幕 */
+
+/* 定义标准断点 */
+:root {
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+/* 移动设备 (480px及以下) */
+@media (max-width: 480px) {
+    /* 布局响应式调整 */
+    .container {
+        padding: var(--spacing-sm);
+    }
+    
+    /* 横幅响应式调整 */
+    .banner__content {
+        flex-direction: column;
+    }
+    
+    .banner__image {
+        margin-right: 0;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    /* 网格响应式调整 */
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .character-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    /* 卡片调整 */
+    .content-card, .character-card {
+        padding: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    /* 时间线响应式调整 */
+    .timeline::after {
+        left: 31px;
+    }
+    
+    .container-timeline {
+        width: 100%;
+        padding-left: var(--spacing-xxl);
+        padding-right: var(--spacing-md);
+    }
+    
+    .container-timeline::after {
+        left: 18px;
+    }
+    
+    .container-timeline--right {
+        left: 0%;
+    }
+    
+    /* 时间线内容响应式调整 */
+    .content--timeline {
+        padding: var(--spacing-md);
+    }
+    
+    .content--timeline__title {
+        font-size: var(--font-size-lg);
+    }
+    
+    .content--timeline__date {
+        font-size: var(--font-size-md);
+    }
+    
+    /* 标题响应式调整 */
+    h1 {
+        font-size: var(--font-size-xxxl);
+    }
+    
+    .year-title {
+        font-size: var(--font-size-xxl);
+        padding: var(--spacing-xs) var(--spacing-md);
+        left: var(--spacing-xxl);
+        transform: none;
+        width: calc(100% - var(--spacing-xxl) - var(--spacing-md));
+    }
+    
+    /* 导航栏调整 */
+    .navbar {
+        padding: var(--spacing-sm);
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .navbar__logo {
+        font-size: var(--font-size-lg);
+    }
+    
+    /* 侧边栏调整 */
+    .sidebar {
+        width: 100%;
+        position: relative;
+        transform: translateX(0);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    /* 主内容区调整 */
+    .main-content {
+        padding: var(--spacing-md);
+    }
+    
+    /* 轮播调整 */
+    .carousel {
+        height: 300px;
+    }
+    
+    .carousel-container {
+        height: 300px;
+    }
+    
+    .carousel-button {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-lg);
+    }
+    
+    /* 按钮调整 */
+    .btn {
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: var(--font-size-sm);
+    }
+    
+    /* 回到顶部按钮调整 */
+    .back-to-top {
+        padding: var(--spacing-xs) var(--spacing-md);
+        line-height: 24px;
+        font-size: var(--font-size-md);
+        bottom: var(--spacing-lg);
+        right: var(--spacing-lg);
+    }
+    
+    /* 页脚调整 */
+    .footer {
+        padding: var(--spacing-lg) var(--spacing-md);
+        text-align: center;
+    }
+    
+    .footer__columns {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+    
+    /* 媒体容器调整 */
+    .media-container {
+        max-width: 100%;
+    }
+}
+
+/* 平板设备 (481px-768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    /* 布局响应式调整 */
+    .container {
+        padding: var(--spacing-md);
+    }
+    
+    /* 人物网格调整 */
+    .character-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+    
+    /* 时间线调整 */
+    .container-timeline {
+        padding-left: var(--spacing-xxxl);
+    }
+    
+    .year-title {
+        font-size: var(--font-size-xxxl);
+        padding: var(--spacing-xs) var(--spacing-lg);
+        left: var(--spacing-xxxl);
+        width: calc(100% - var(--spacing-xxxl) - var(--spacing-lg));
+    }
+    
+    /* 标题调整 */
+    h1 {
+        font-size: var(--font-size-heading);
+    }
+    
+    /* 导航栏调整 */
+    .navbar {
+        padding: var(--spacing-md);
+    }
+    
+    .navbar__logo {
+        font-size: var(--font-size-xl);
+    }
+}
+
+/* 中等屏幕设备 (769px - 1199px) */
+@media (min-width: 769px) and (max-width: 1199px) {
+    /* 布局调整 */
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: var(--spacing-lg);
+    }
+    
+    /* 网格调整 */
+    .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+    
+    .character-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-md);
+    }
+    
+    /* 侧边栏调整 */
+    .sidebar {
+        width: 280px;
+    }
+    
+    /* 轮播高度调整 */
+    .carousel {
+        height: 400px;
+    }
+    
+    .carousel-container {
+        height: 400px;
+    }
+}
+
+/* 超大屏幕设备 (1200px以上) */
+@media (min-width: 1200px) {
+    /* 布局调整 */
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    /* 网格调整 */
+    .content-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-xl);
+    }
+    
+    .character-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-md);
+    }
+    
+    /* 卡片交互效果 */
+    .content-card, .character-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .content-card:hover, .character-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-xl);
+    }
+}

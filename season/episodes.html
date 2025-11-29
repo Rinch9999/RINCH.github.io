@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="《疑犯追踪》(Person of Interest) 全五季剧集情节介绍与分析">
+    <meta name="keywords" content="疑犯追踪, 剧集情节, 分集介绍, 第五季, Person of Interest">
+    <title>《疑犯追踪》剧集情节 | POI 情报中心</title>
+    <link rel="stylesheet" href="../styles/unified_footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="episodes-shared.css">
+    
+    <script>
+        // 剧集列表跳转功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取所有剧集按钮
+            const episodeBtns = document.querySelectorAll('.episode-btn');
+            
+            // 为每个按钮添加点击事件
+            episodeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 获取对应的数据属性
+                    const seasonId = this.getAttribute('data-season');
+                    
+                    // 跳转到对应季度页面
+                    window.location.href = `${seasonId}.html`;
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="../index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i> 返回首页
+    </a>
+    
+    <div class="container">
+        <header>
+            <h1>疑犯追踪 - 剧集情节</h1>
+            <p class="subtitle">系统性整理《Person of Interest》五季全剧内容</p>
+        </header>
+
+        <!-- 剧集列表按钮 -->
+        <div class="episodes-list">
+            <button class="episode-btn" data-season="season1">
+                <i class="fas fa-tv"></i>
+                <span>第一季</span>
+                <span>23集</span>
+            </button>
+            <button class="episode-btn" data-season="season2">
+                <i class="fas fa-tv"></i>
+                <span>第二季</span>
+                <span>22集</span>
+            </button>
+            <button class="episode-btn" data-season="season3">
+                <i class="fas fa-tv"></i>
+                <span>第三季</span>
+                <span>23集</span>
+            </button>
+            <button class="episode-btn" data-season="season4">
+                <i class="fas fa-tv"></i>
+                <span>第四季</span>
+                <span>22集</span>
+            </button>
+            <button class="episode-btn" data-season="season5">
+                <i class="fas fa-tv"></i>
+                <span>第五季</span>
+                <span>13集</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__links">
+                <a href="../index.html" class="footer__link">主页</a>
+                <a href="../timeline_summary.html" class="footer__link">剧情时间线</a>
+                <a href="../characters_timeline/characters_timeline.html" class="footer__link">角色时间线</a>
+                <a href="../nyc_locations.html" class="footer__link">纽约打卡地</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 响应式设计脚本 -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // 简单的响应式导航处理
+        window.addEventListener('resize', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (window.innerWidth > 768 && menuToggle && navMenu) {
+                navMenu.style.display = 'flex';
+            } else if (menuToggle && navMenu) {
+                navMenu.style.display = 'none';
+            }
+        });
+        
+        // 初始化执行一次窗口大小检查
+        window.dispatchEvent(new Event('resize'));
+    </script>
+</body>
+</html>
