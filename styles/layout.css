@@ -179,11 +179,7 @@
         margin-bottom: var(--spacing-sm);
     }
     
-    .sidebar {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: var(--spacing-xl);
-    }
+
     
     .back-to-top {
         padding: var(--spacing-xs) var(--spacing-md);

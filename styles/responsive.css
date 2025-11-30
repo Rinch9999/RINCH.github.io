@@ -108,6 +108,41 @@
         margin-bottom: var(--spacing-lg);
     }
     
+    /* 弹性容器调整 */
+    .container--flex {
+        flex-direction: row;
+        width: 100%;
+    }
+    
+    /* 固定侧边栏调整 */
+    .sidebar--sticky {
+        width: 25%;
+        min-width: 25%;
+        max-width: 25%;
+        padding: var(--spacing-md);
+        margin-right: var(--spacing-md);
+        margin-bottom: 0;
+    }
+    
+    /* 主内容区调整 */
+    .main-content--centered {
+        flex: 1;
+        padding: var(--spacing-md);
+        width: 75%;
+    }
+    
+    /* 页脚调整 */
+    .footer {
+        width: 100%;
+        padding: var(--spacing-md) 0;
+        margin-top: var(--spacing-lg);
+    }
+    
+    .footer__content {
+        width: 100%;
+        padding: 0 var(--spacing-md);
+    }
+    
     /* 主内容区调整 */
     .main-content {
         padding: var(--spacing-md);
@@ -197,6 +232,18 @@
     
     .navbar__logo {
         font-size: var(--font-size-xl);
+    }
+    
+    /* 固定侧边栏调整 */
+    .sidebar--sticky {
+        width: 25%;
+        min-width: 25%;
+        padding: var(--spacing-md);
+    }
+    
+    /* 弹性容器调整 */
+    .container--flex {
+        flex-direction: row;
     }
 }
 
