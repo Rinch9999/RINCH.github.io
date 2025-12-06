@@ -223,11 +223,15 @@ a.active {
     border-color: var(--color-text-lighter);
 }
 
-/* 响应式图片 */
+/* 通用图像样式 */
 img {
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+img:not([alt]) {
+    outline: 3px solid red; /* 开发时提醒缺失 alt */
 }
 
 /* 通用标题样式 */
@@ -244,19 +248,4 @@ p {
 /* 通用列表样式 */
 ul, ol {
     list-style: none;
-}
-
-/* 通用图像样式 */
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-img:not([alt]) {
-    outline: 3px solid red; /* 开发时提醒缺失 alt */
 }

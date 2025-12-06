@@ -190,8 +190,51 @@
     }
 }
 
+@media (max-width: 900px) {
+    /* 响应式布局：小屏幕时垂直堆叠 */
+    .container--flex {
+        flex-direction: column;
+    }
+    
+    /* 侧边栏响应式调整 */
+    .sidebar {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .sidebar--sticky {
+        width: 100%;
+        min-width: auto;
+        position: static;
+        height: auto;
+        overflow-y: visible;
+        padding: var(--spacing-md);
+    }
+    
+    /* 侧边栏内容响应式调整 */
+    .sidebar__section {
+        margin-bottom: var(--spacing-md);
+        padding: var(--spacing-sm);
+    }
+    
+    /* 主内容区响应式调整 */
+    .main-content--centered {
+        padding: var(--spacing-md);
+    }
+}
+
 @media (max-width: 480px) {
     .container {
         padding: var(--spacing-md);
+    }
+    
+    /* 进一步优化移动端样式 */
+    .sidebar--sticky {
+        padding: var(--spacing-sm);
+    }
+    
+    .sidebar__title {
+        font-size: var(--font-size-lg);
     }
 }
