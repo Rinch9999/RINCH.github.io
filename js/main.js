@@ -45,10 +45,6 @@ function initSlider() {
         slide.style.height = '100%';
         slide.style.opacity = index === 0 ? '1' : '0';
         slide.style.transition = 'opacity 0.5s ease';
-        slide.style.display = 'flex';
-        slide.style.flexDirection = 'column';
-        slide.style.justifyContent = 'center';
-        slide.style.alignItems = 'center';
         
         // 确保图片样式正确并立即显示
         const img = slide.querySelector('img');
@@ -56,6 +52,8 @@ function initSlider() {
             img.style.maxWidth = '100%';
             img.style.maxHeight = '100%';
             img.style.objectFit = 'cover';
+            img.style.width = '100%';
+            img.style.height = '100%';
             img.style.opacity = '1'; // 直接显示图片，不使用懒加载逻辑
             img.removeAttribute('loading'); // 移除懒加载属性
             img.removeAttribute('data-src'); // 移除data-src属性，因为直接使用src
@@ -141,6 +139,8 @@ function initSlider() {
  * 初始化回到顶部/上一页功能
  */
 function initBackToTop() {
+    // 此函数目前未被使用，因为backToTop按钮仅在特定页面出现
+    // 保留函数结构，以便未来扩展
     const backToTopButton = document.getElementById('backToTop');
     
     if (backToTopButton) {
@@ -157,78 +157,48 @@ function initLazyLoading() {
     // 直接加载轮播图片（优先处理轮播图）
     const carouselImages = document.querySelectorAll('#media-container .slide img');
     carouselImages.forEach(img => {
-        if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.onload = () => {
-                img.classList.add('lazy-loaded');
-                img.style.opacity = '1';
-                img.style.transition = 'opacity 0.5s ease';
-            };
-            img.onerror = () => {
-                console.error('Failed to load carousel image:', img.dataset.src);
-                // 使用默认图片作为备选
-                img.src = 'images/yellowback.jpg';
-                img.classList.add('lazy-load-error');
-            };
-        }
-    });
-    
-    // 确保轮播容器和图片有正确的样式
-    const sliderContainer = document.querySelector('#media-container .slider');
-    if (sliderContainer) {
-        // 设置固定的轮播高度
-        sliderContainer.style.height = '400px';
+        // 移除懒加载属性，确保轮播图图片立即加载
+        img.removeAttribute('loading');
+        img.removeAttribute('data-src');
         
-        // 确保每个slide中的图片能够正确显示
-        const slides = document.querySelectorAll('.slide');
-        slides.forEach(slide => {
-            const img = slide.querySelector('img');
-            if (img) {
-                img.style.maxWidth = '100%';
-                img.style.maxHeight = '100%';
-                img.style.objectFit = 'cover';
-                img.style.opacity = '1'; // 确保图片立即显示
-            }
-        });
-    }
+        // 确保图片样式正确
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '100%';
+        img.style.objectFit = 'cover';
+        img.style.opacity = '1';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.transition = 'opacity 0.5s ease';
+    });
     
     // 检查浏览器是否原生支持懒加载
     if ('loading' in HTMLImageElement.prototype) {
-        // 原生支持懒加载 - 处理其他页面图片
-        const lazyImages = document.querySelectorAll('img[loading="lazy"]:not(.lazy-loaded)');
-        lazyImages.forEach(img => {
-            if (img.dataset.src && !img.src) {
-                img.src = img.dataset.src;
-                img.onload = () => {
-                    img.classList.add('lazy-loaded');
-                    img.removeAttribute('data-src');
-                };
-                img.onerror = () => {
-                    console.error('Failed to load image:', img.dataset.src);
-                    img.classList.add('lazy-load-error');
-                };
-            }
-        });
+        // 浏览器原生支持懒加载，使用HTML属性即可，无需额外JS
+        console.log('使用浏览器原生懒加载');
     } else {
-        // 使用Intersection Observer进行懒加载
+        // 浏览器不支持原生懒加载，使用Intersection Observer进行懒加载
+        console.log('使用Intersection Observer懒加载');
+        
         const lazyImageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const lazyImage = entry.target;
+                    
+                    // 仅处理有data-src且没有src的图片
                     if (lazyImage.dataset.src && !lazyImage.src) {
-                        // 预加载图片
-                        const img = new Image();
-                        img.src = lazyImage.dataset.src;
+                        // 设置图片源
+                        lazyImage.src = lazyImage.dataset.src;
                         
-                        img.onload = () => {
-                            lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.onload = () => {
                             lazyImage.classList.add('lazy-loaded');
+                            lazyImage.style.opacity = '1';
                             lazyImageObserver.unobserve(lazyImage);
                         };
                         
-                        img.onerror = () => {
+                        lazyImage.onerror = () => {
                             console.error('Failed to load image:', lazyImage.dataset.src);
                             lazyImage.classList.add('lazy-load-error');
+                            lazyImage.style.opacity = '1';
                             lazyImageObserver.unobserve(lazyImage);
                         };
                     }
@@ -239,8 +209,9 @@ function initLazyLoading() {
             threshold: 0.01
         });
 
-        // 观察除轮播外的所有懒加载图片
-        document.querySelectorAll('img[data-src]:not(.lazy-loaded):not(#media-container img)').forEach(img => {
+        // 观察所有有data-src属性的非轮播图片
+        const lazyImages = document.querySelectorAll('img[data-src]:not(#media-container img)');
+        lazyImages.forEach(img => {
             lazyImageObserver.observe(img);
         });
     }

@@ -17,29 +17,29 @@
     <div class="container container--flex">
         <!-- 侧边栏 - 固定在左侧 -->
         <aside class="sidebar sidebar--sticky" aria-label="侧边导航">
-            <div class="sidebar-section">
-                <h3 class="sidebar-heading">快速导航</h3>
-                <ul role="menu" class="sidebar-list">
-                    <li role="none"><a href="timeline_summary.html" role="menuitem" class="sidebar-link">剧情时间线</a></li>
-                    <li role="none"><a href="characters_timeline/characters_timeline.html" class="sidebar-link">角色时间线</a></li>
-                    <li role="none"><a href="season/episodes.html" class="sidebar-link">剧集情节</a></li>
-                    <li role="none"><a href="nyc_locations.html" class="sidebar-link">拍摄地点</a></li>
+            <div class="sidebar__section">
+                <h3 class="sidebar__title">快速导航</h3>
+                <ul role="menu" class="sidebar__list">
+                    <li role="none" class="sidebar__item"><a href="timeline_summary.html" role="menuitem" class="sidebar__link">剧情时间线</a></li>
+                    <li role="none" class="sidebar__item"><a href="characters_timeline/characters_timeline.html" class="sidebar__link">角色时间线</a></li>
+                    <li role="none" class="sidebar__item"><a href="season/episodes.html" class="sidebar__link">剧集情节</a></li>
+                    <li role="none" class="sidebar__item"><a href="nyc_locations.html" class="sidebar__link">拍摄地点</a></li>
                 </ul>
             </div>
             
-            <div class="sidebar-section">
-                <h3 class="sidebar-heading">主要角色</h3>
-                <ul class="sidebar-list">
-                    <li><a href="characters/finch.html" class="sidebar-link">哈罗德·芬奇（Harold Finch）</a></li>
-                    <li><a href="characters/reese.html" class="sidebar-link">约翰·里瑟（John Reese）</a></li>
-                    <li><a href="characters/shaw.html" class="sidebar-link">萨米恩·肖（Sameen Shaw）</a></li>
-                    <li><a href="characters/root.html" class="sidebar-link">根（Root）</a></li>
+            <div class="sidebar__section">
+                <h3 class="sidebar__title">主要角色</h3>
+                <ul class="sidebar__list">
+                    <li class="sidebar__item"><a href="characters/finch.html" class="sidebar__link">哈罗德·芬奇（Harold Finch）</a></li>
+                    <li class="sidebar__item"><a href="characters/reese.html" class="sidebar__link">约翰·里瑟（John Reese）</a></li>
+                    <li class="sidebar__item"><a href="characters/shaw.html" class="sidebar__link">萨米恩·肖（Sameen Shaw）</a></li>
+                    <li class="sidebar__item"><a href="characters/root.html" class="sidebar__link">根（Root）</a></li>
                 </ul>
             </div>
             
-            <div class="sidebar-section">
-                <h3 class="sidebar-heading">关于本站</h3>
-                <p class="sidebar-text">本网站是《疑犯追踪》（Person of Interest）的非官方粉丝维基,
+            <div class="sidebar__section">
+                <h3 class="sidebar__title">关于本站</h3>
+                <p class="sidebar__text">本网站是《疑犯追踪》（Person of Interest）的非官方粉丝维基,
                     旨在尽可能的为剧迷提供完整的剧集资料和剧情分析。</p>
             </div>
         </aside>
@@ -155,24 +155,6 @@
     </footer>
     
     <!-- 首页不需要返回上一页按钮 -->
-    
-    <!-- 响应式设计脚本 -->
-    <script>
-        // 简单的响应式导航处理
-        window.addEventListener('resize', function() {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            
-            if (window.innerWidth > 768 && menuToggle && navMenu) {
-                navMenu.style.display = 'flex';
-            } else if (menuToggle && navMenu) {
-                navMenu.style.display = 'none';
-            }
-        });
-        
-        // 初始化执行一次窗口大小检查
-        window.dispatchEvent(new Event('resize'));
-    </script>
     
     <!-- 主JavaScript文件 -->
     <script src="js/main.js"></script>
