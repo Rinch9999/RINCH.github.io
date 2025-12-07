@@ -110,18 +110,21 @@
     
     /* 弹性容器调整 */
     .container--flex {
-        flex-direction: row;
+        flex-direction: column;
         width: 100%;
     }
     
     /* 固定侧边栏调整 */
     .sidebar--sticky {
-        width: 25%;
-        min-width: 25%;
-        max-width: 25%;
+        width: 100%;
+        min-width: auto;
+        max-width: 100%;
         padding: var(--spacing-md);
-        margin-right: var(--spacing-md);
-        margin-bottom: 0;
+        margin-right: 0;
+        margin-bottom: var(--spacing-lg);
+        position: static;
+        height: auto;
+        overflow-y: visible;
     }
     
     /* 主内容区调整 */
