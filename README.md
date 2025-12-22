@@ -705,4 +705,4 @@ fs.writeFileSync(path.join(__dirname, '../build/sitemap.xml'), xml);
 
 **文档版本**：v2.0.0  
 **最后更新**：2025-12-20  
-**文档维护**：项目开发团队
+**文档维护**：项目开发个人
