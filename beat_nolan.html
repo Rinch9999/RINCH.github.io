@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>暴打乔纳森·诺兰</title>
+    <style>
+        :root {
+            --primary: #333333;
+            --secondary: #666666;
+            --dark: #000000;
+            --light: #ffffff;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000000, #333333, #666666);
+            color: var(--light);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 90%;
+        }
+
+        header {
+            margin: 20px 0;
+            animation: fadeIn 1s ease;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(90deg, #ffffff, #cccccc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .game-description {
+            font-size: 1.2rem;
+            margin: 15px 0 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        #gameContainer {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            min-height: 400px;
+            max-height: 600px;
+            margin: 20px auto;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            background-color: rgba(0, 0, 0, 0.4);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            touch-action: manipulation; /* 优化触摸体验，防止双击缩放 */
+        }
+
+        #gameContainer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        #target {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            z-index: 2;
+            transform-origin: center;
+            will-change: transform, left, top; /* 优化动画性能 */
+            touch-action: manipulation; /* 优化触摸体验 */
+        }
+
+        /* 移动端优化目标大小 */
+        @media (max-width: 768px) {
+            #target {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #target {
+                width: 140px;
+                height: 140px;
+            }
+        }
+
+        #target:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        #target.hit {
+            animation: hitEffect 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes hitEffect {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.8) rotate(-10deg); opacity: 0.7; }
+            100% { transform: scale(1) rotate(0); }
+        }
+
+        @keyframes rippleEffect {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        #ui {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px auto;
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            width: 80%;
+            max-width: 700px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(5px);
+        }
+
+        .ui-item {
+            font-size: 1.4rem;
+            padding: 12px 20px;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            min-width: 120px;
+            margin: 5px;
+        }
+
+        /* 移动端UI优化 */
+        @media (max-width: 768px) {
+            .ui-item {
+                font-size: 1.2rem;
+                padding: 10px 16px;
+                min-width: 100px;
+            }
+        }
+
+        .ui-item span {
+            font-weight: bold;
+            color: #cccccc;
+        }
+
+        #startButton, #restartButton {
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            background-color: var(--primary);
+            color: var(--light);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 15px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(51, 51, 51, 0.6);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 200px;
+            touch-action: manipulation; /* 优化触摸体验 */
+        }
+
+        /* 移动端按钮优化 */
+        @media (max-width: 768px) {
+            #startButton, #restartButton {
+                padding: 16px 32px;
+                font-size: 1.2rem;
+                min-width: 180px;
+                margin: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #startButton, #restartButton {
+                padding: 14px 28px;
+                font-size: 1.1rem;
+                min-width: 160px;
+                margin: 8px;
+            }
+        }
+
+        #startButton:hover, #restartButton:hover {
+            background-color: #666666;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(51, 51, 51, 0.8);
+        }
+
+        #startButton:active, #restartButton:active {
+            transform: translateY(1px);
+        }
+
+        #message {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 25px auto;
+            min-height: 60px;
+            color: #cccccc;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            padding: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        #restartButton {
+            display: none;
+        }
+
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .game-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .difficulty-selection {
+            background-color: rgba(26, 42, 108, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .difficulty-selection h2 {
+            margin-top: 0;
+            color: var(--secondary);
+        }
+
+        .difficulty-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .difficulty-btn {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 120px;
+            font-weight: 600;
+        }
+
+        .difficulty-btn.easy {
+            background-color: #999999;
+            color: white;
+        }
+
+        .difficulty-btn.medium {
+            background-color: #666666;
+            color: white;
+        }
+
+        .difficulty-btn.hard {
+            background-color: #333333;
+            color: white;
+        }
+
+        .difficulty-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            margin: 20px 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 入场动画 */
+        @keyframes slideInFromLeft {
+            from { opacity: 0; transform: translateX(-100%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInFromRight {
+            from { opacity: 0; transform: translateX(100%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 0.9; transform: scale(1.05); }
+            80% { opacity: 1; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* 退场动画 */
+        @keyframes slideOutToLeft {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(-100%); }
+        }
+
+        @keyframes slideOutToRight {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(100%); }
+        }
+
+        /* 目标出现动画 */
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* 目标消失动画 */
+        @keyframes popOut {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+
+        /* 连击效果动画 */
+        @keyframes comboPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            #gameContainer {
+                height: 400px;
+            }
+
+            #ui {
+                flex-direction: column;
+                gap: 10px;
+                width: 90%;
+            }
+
+            .ui-item {
+                width: 80%;
+                font-size: 1.2rem;
+            }
+
+            #message {
+                font-size: 1.4rem;
+            }
+
+            #startButton, #restartButton {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+
+            .difficulty-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .difficulty-btn {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            #gameContainer {
+                height: 350px;
+            }
+
+            #target {
+                width: 80px;
+                height: 80px;
+            }
+
+            .game-description {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header style="animation: fadeIn 1s ease;">
+            <h1 style="animation: bounceIn 1.5s ease;">暴打乔纳森·诺兰</h1>
+            <p class="game-description" style="animation: fadeIn 1.2s ease 0.3s both;">在限定时间内，尽情点击那个让你烧脑的"罪魁祸首"！随着关卡提升，目标会变得更快更难击中！</p>
+        </header>
+
+        <div id="ui" style="animation: slideInFromLeft 1s ease 0.5s both;">
+            <div class="ui-item">时间: <span id="timer" aria-live="polite">60</span>秒</div>
+            <div class="ui-item">分数: <span id="score" aria-live="polite">0</span></div>
+            <div class="ui-item">关卡: <span id="levelDisplay" aria-live="polite">1</span></div>
+        </div>
+
+        <div id="buttonContainer" style="animation: slideInFromRight 1s ease 0.7s both;">
+            <button id="startButton" aria-label="开始游戏">开始游戏！</button>
+            <button id="restartButton" aria-label="再玩一次">再玩一次？</button>
+        </div>
+
+        <div id="gameContainer" aria-label="游戏区域" style="animation: fadeIn 1.5s ease 1s both;">
+            <div id="target" role="button" tabindex="0" aria-label="点击目标"></div>
+            <div class="game-overlay" id="difficultyOverlay" aria-modal="true" role="dialog" aria-labelledby="difficultyTitle">
+                <div class="difficulty-selection">
+                <h2 id="difficultyTitle">选择游戏模式</h2>
+                <div class="difficulty-buttons">
+                    <button class="difficulty-btn easy" data-mode="normal" data-speed="1000" data-time="60" data-level-up="10" aria-label="经典模式">经典模式</button>
+                    <button class="difficulty-btn medium" data-mode="timed" data-speed="800" data-time="30" data-level-up="15" aria-label="限时挑战">限时挑战</button>
+                    <button class="difficulty-btn hard" data-mode="endless" data-speed="1000" data-time="-1" data-level-up="10" aria-label="无限模式">无限模式</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div id="message" aria-live="assertive"></div>
+    </div>
+
+    <footer>
+        <p>游戏仅为娱乐目的，无真实人物攻击意图</p>
+    </footer>
+
+    <script>
+        // 获取DOM元素
+        const startButton = document.getElementById('startButton');
+        const restartButton = document.getElementById('restartButton');
+        const timerDisplay = document.getElementById('timer');
+        const scoreDisplay = document.getElementById('score');
+        const target = document.getElementById('target');
+        const messageDisplay = document.getElementById('message');
+        const gameContainer = document.getElementById('gameContainer');
+        const levelDisplay = document.getElementById('levelDisplay');
+        const difficultyOverlay = document.getElementById('difficultyOverlay');
+        const difficultyButtons = document.querySelectorAll('.difficulty-btn');
+
+        // 游戏变量初始化
+        let score = 0; // 当前分数
+        let timeLeft = 60; // 剩余时间（秒）
+        let gameActive = false; // 游戏是否激活
+        let timerId = null; // 计时器ID
+        let moveTimerId = null; // 移动计时器ID
+        let currentSpeed = 1000; // 默认移动速度（毫秒）
+        let levelUpScore = 10; // 默认升级所需分数
+        let currentLevel = 1; // 当前关卡
+        let hitCount = 0; // 击中次数
+        let missCount = 0; // 未击中次数
+        let bestScore = localStorage.getItem('bestScore') || 0; // 最佳成绩
+        let comboCount = 0; // 连击次数
+        let comboTimer = null; // 连击计时器
+        let gameMode = 'normal'; // 游戏模式：normal, timed, endless
+        let startTime = 0; // 游戏开始时间
+        const COMBO_TIMEOUT = 1000; // 连击超时时间（毫秒）
+        const MODE_NAMES = {
+            normal: '经典模式',
+            timed: '限时挑战',
+            endless: '无限模式'
+        };
+
+        // 乔纳森·诺兰的图片URL
+        const nolanImageUrl = 'https://cdn.jsdelivr.net/gh/Rinch9999/RINCH.github.io/images/nolan.jpg';
+
+        // 检查图像是否加载成功
+        const nolanImage = new Image();
+        nolanImage.onload = function() {
+            console.log('图像加载成功');
+        };
+        nolanImage.onerror = function() {
+            console.error('图像加载失败，使用默认样式');
+            // 添加备用样式
+            target.style.backgroundColor = '#e74c3c';
+            target.style.display = 'flex';
+            target.style.justifyContent = 'center';
+            target.style.alignItems = 'center';
+            target.textContent = '👊';
+        };
+        nolanImage.src = nolanImageUrl;
+
+        // 设置目标的图片
+        target.style.backgroundImage = `url('${nolanImageUrl}')`;
+
+        // 移动目标的函数
+        function moveTarget() {
+            if (!gameActive) return;
+
+            try {
+                const containerRect = gameContainer.getBoundingClientRect();
+                const targetRect = target.getBoundingClientRect();
+
+                // 计算最大移动范围
+                const maxX = containerRect.width - targetRect.width;
+                const maxY = containerRect.height - targetRect.height;
+
+                // 生成随机位置
+                const randomX = Math.floor(Math.random() * maxX);
+                const randomY = Math.floor(Math.random() * maxY);
+
+                // 更新目标位置
+                target.style.left = `${randomX}px`;
+                target.style.top = `${randomY}px`;
+            } catch (error) {
+                console.error('移动目标时出错:', error);
+            }
+        }
+
+        // 创建点击音效
+        function createClickSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } catch (error) {
+                console.error('创建音效时出错:', error);
+                // 忽略音效错误，不影响游戏运行
+            }
+        }
+
+        // 目标被点击时的函数
+        function hitTarget() {
+            if (!gameActive) return;
+
+            try {
+                // 增加连击计数
+                comboCount++;
+                
+                // 清除旧的连击计时器
+                if (comboTimer) {
+                    clearTimeout(comboTimer);
+                }
+                
+                // 设置新的连击计时器
+                comboTimer = setTimeout(() => {
+                    comboCount = 0;
+                }, COMBO_TIMEOUT);
+                
+                // 计算基础分数和连击奖励
+                const baseScore = 1;
+                const comboBonus = Math.floor(comboCount / 5); // 每5连击获得1点额外奖励
+                const totalPoints = baseScore + comboBonus;
+                
+                score += totalPoints;
+                hitCount++;
+                scoreDisplay.textContent = score;
+
+                // 播放点击音效
+                createClickSound();
+
+                // 添加被击中的动画效果
+                target.classList.add('hit');
+                setTimeout(() => {
+                    target.classList.remove('hit');
+                }, 300);
+
+                // 创建点击波纹效果
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '100px';
+                ripple.style.height = '100px';
+                ripple.style.borderRadius = '50%';
+                ripple.style.border = '3px solid rgba(255, 255, 255, 0.8)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'rippleEffect 0.5s ease-out forwards';
+                ripple.style.left = target.style.left;
+                ripple.style.top = target.style.top;
+                gameContainer.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 500);
+                
+                // 显示连击消息
+                if (comboCount > 1) {
+                    showTemporaryMessage(`连击！x${comboCount} (+${comboBonus})`, 500);
+                }
+
+                // 检查是否升级
+                checkLevelUp();
+
+                // 击中后立即移动
+                moveTarget();
+            } catch (error) {
+                console.error('处理击中事件时出错:', error);
+            }
+        }
+
+        // 检查是否升级
+        function checkLevelUp() {
+            try {
+                const requiredScore = currentLevel * levelUpScore;
+                
+                if (score >= requiredScore) {
+                    levelUp();
+                }
+            } catch (error) {
+                console.error('检查升级时出错:', error);
+            }
+        }
+
+        // 升级处理
+        function levelUp() {
+            try {
+                currentLevel++;
+                levelDisplay.textContent = currentLevel;
+                
+                // 随着关卡提升，移动速度加快（最低200ms）
+                const newSpeed = Math.max(200, currentSpeed - 50);
+                
+                // 清除旧的移动计时器，设置新的
+                if (moveTimerId) {
+                    clearInterval(moveTimerId);
+                }
+                currentSpeed = newSpeed;
+                moveTimerId = setInterval(moveTarget, currentSpeed);
+                
+                // 显示升级消息
+                showTemporaryMessage(`升级到关卡 ${currentLevel}！速度更快了！`, 1500);
+            } catch (error) {
+                console.error('升级处理时出错:', error);
+            }
+        }
+
+        // 显示临时消息
+        function showTemporaryMessage(text, duration) {
+            try {
+                const originalMessage = messageDisplay.textContent;
+                messageDisplay.textContent = text;
+                
+                setTimeout(() => {
+                    if (gameActive) {
+                        messageDisplay.textContent = originalMessage;
+                    }
+                }, duration);
+            } catch (error) {
+                console.error('显示临时消息时出错:', error);
+            }
+        }
+
+        // 更新计时器
+        function updateTimer() {
+            try {
+                // 根据游戏模式更新时间
+                if (gameMode === 'endless') {
+                    // 无限模式：计算已游戏时间
+                    const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                    timerDisplay.textContent = elapsedTime + '秒';
+                    // 无限模式永不结束，除非玩家手动退出
+                } else {
+                    // 经典模式和限时挑战：减少剩余时间
+                    timeLeft--;
+                    timerDisplay.textContent = timeLeft;
+
+                    // 最后10秒添加视觉警告
+                    if (timeLeft <= 10) {
+                        timerDisplay.style.color = '#e74c3c';
+                        timerDisplay.style.animation = 'pulse 1s infinite';
+                    } else {
+                        timerDisplay.style.color = '';
+                        timerDisplay.style.animation = '';
+                    }
+
+                    if (timeLeft <= 0) {
+                        endGame();
+                    }
+                }
+            } catch (error) {
+                console.error('更新计时器时出错:', error);
+                endGame(); // 出错时结束游戏
+            }
+        }
+
+        // 开始游戏
+        function startGame() {
+            try {
+                gameActive = true;
+                score = 0;
+                hitCount = 0;
+                missCount = 0;
+                comboCount = 0;
+                currentLevel = 1;
+                startTime = Date.now(); // 记录游戏开始时间
+                
+                // 清除连击计时器
+                if (comboTimer) {
+                    clearTimeout(comboTimer);
+                    comboTimer = null;
+                }
+                
+                scoreDisplay.textContent = score;
+                levelDisplay.textContent = currentLevel;
+                timerDisplay.textContent = gameMode === 'endless' ? '0秒' : timeLeft;
+                messageDisplay.textContent = `当前模式：${MODE_NAMES[gameMode]}`;
+                startButton.style.display = 'none';
+                restartButton.style.display = 'none';
+                difficultyOverlay.classList.remove('active');
+
+                // 重置计时器样式
+                timerDisplay.style.color = '';
+                timerDisplay.style.animation = '';
+
+                // 清除可能存在的旧计时器
+                if (timerId) {
+                    clearInterval(timerId);
+                }
+                if (moveTimerId) {
+                    clearInterval(moveTimerId);
+                }
+
+                // 启动计时器
+                timerId = setInterval(updateTimer, 1000);
+                // 启动移动
+                moveTimerId = setInterval(moveTarget, currentSpeed);
+
+                // 初始移动一次
+                moveTarget();
+                
+                // 显示游戏开始提示
+                showTemporaryMessage(`游戏开始！当前模式：${MODE_NAMES[gameMode]}`, 2000);
+            } catch (error) {
+                console.error('开始游戏时出错:', error);
+                endGame(); // 出错时结束游戏
+            }
+        }
+
+        // 结束游戏
+        function endGame() {
+            try {
+                gameActive = false;
+                
+                // 清除所有计时器
+                if (timerId) {
+                    clearInterval(timerId);
+                    timerId = null;
+                }
+                if (moveTimerId) {
+                    clearInterval(moveTimerId);
+                    moveTimerId = null;
+                }
+                if (comboTimer) {
+                    clearTimeout(comboTimer);
+                    comboTimer = null;
+                }
+
+                // 计算游戏时长
+                const gameDuration = Math.floor((Date.now() - startTime) / 1000);
+
+                // 更新最佳成绩
+                if (score > bestScore) {
+                    bestScore = score;
+                    localStorage.setItem('bestScore', bestScore);
+                    showTemporaryMessage('新纪录！', 2000);
+                }
+
+                // 计算命中率
+                const totalAttempts = hitCount + missCount;
+                const hitRate = totalAttempts > 0 ? Math.round((hitCount / totalAttempts) * 100) : 0;
+
+                // 根据游戏模式和得分生成不同的结束消息
+                let message = "";
+                if (gameMode === 'endless') {
+                    if (score > 100) {
+                        message = "惊人的耐力！你在无限模式中坚持了${gameDuration}秒，展现了无与伦比的反应速度！";
+                    } else if (score > 50) {
+                        message = "太棒了！你在无限模式中坚持了${gameDuration}秒，表现出色！";
+                    } else {
+                        message = "不错的尝试！你在无限模式中坚持了${gameDuration}秒，继续努力！";
+                    }
+                } else if (gameMode === 'timed') {
+                    if (score > 30) {
+                        message = "难以置信！你在30秒内完成了${score}次击打，简直是反应神速！";
+                    } else if (score > 20) {
+                        message = "太棒了！你在30秒内完成了${score}次击打，表现出色！";
+                    } else {
+                        message = "不错的表现！你在30秒内完成了${score}次击打，继续努力！";
+                    }
+                } else {
+                    if (score > currentLevel * levelUpScore * 2) {
+                        message = "太厉害了！你已经超越了诺兰的所有叙事诡计！";
+                    } else if (score > currentLevel * levelUpScore) {
+                        message = "很棒！诺兰对你刮目相看了！";
+                    } else if (score > currentLevel * levelUpScore / 2) {
+                        message = "不错！但还需要多练习才能完全破解诺兰的迷宫！";
+                    } else {
+                        message = "继续努力！诺兰还在等着你挑战呢！";
+                    }
+                }
+                
+                // 替换模板字符串中的变量
+                message = message.replace('${gameDuration}', gameDuration);
+                message = message.replace('${score}', score);
+
+                // 显示游戏结束统计
+                messageDisplay.innerHTML = `
+                    <div style="margin-bottom: 15px;">游戏结束！</div>
+                    <div style="margin-bottom: 10px;">当前模式：<strong>${MODE_NAMES[gameMode]}</strong></div>
+                    <div style="margin-bottom: 10px;">游戏时长：<strong>${gameDuration}</strong>秒</div>
+                    <div style="margin-bottom: 10px;">你的最终得分是：<strong>${score}</strong>，达到了第<strong>${currentLevel}</strong>关。</div>
+                    <div style="margin-bottom: 10px;">${message}</div>
+                    <div style="margin-bottom: 10px;">最佳成绩：<strong>${bestScore}</strong></div>
+                    <div style="margin-bottom: 10px;">统计信息：</div>
+                    <div style="margin-bottom: 5px;">击中次数：<strong>${hitCount}</strong></div>
+                    <div style="margin-bottom: 5px;">未击中次数：<strong>${missCount}</strong></div>
+                    <div style="margin-bottom: 5px;">命中率：<strong>${hitRate}%</strong></div>
+                `;
+
+                restartButton.style.display = 'inline-block';
+            } catch (error) {
+                console.error('结束游戏时出错:', error);
+                messageDisplay.textContent = "游戏出现错误，请重新开始！";
+                restartButton.style.display = 'inline-block';
+            }
+        }
+
+        // 事件监听优化：使用事件委托处理难度按钮点击
+        document.querySelector('.difficulty-buttons').addEventListener('click', (e) => {
+            if (e.target.classList.contains('difficulty-btn')) {
+                try {
+                    const button = e.target;
+                    gameMode = button.dataset.mode;
+                    currentSpeed = parseInt(button.dataset.speed);
+                    timeLeft = parseInt(button.dataset.time);
+                    levelUpScore = parseInt(button.dataset.levelUp);
+                    
+                    // 验证难度参数
+                    if (isNaN(currentSpeed) || isNaN(timeLeft) || isNaN(levelUpScore)) {
+                        throw new Error('无效的难度参数');
+                    }
+                    
+                    timerDisplay.textContent = gameMode === 'endless' ? '∞' : timeLeft;
+                    startGame();
+                } catch (error) {
+                    console.error('选择游戏模式时出错:', error);
+                    messageDisplay.textContent = "游戏模式选择出错，请重试！";
+                }
+            }
+        });
+        
+        // 为难度按钮添加键盘支持（事件委托）
+        document.querySelector('.difficulty-buttons').addEventListener('keydown', (e) => {
+            if (e.target.classList.contains('difficulty-btn') && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                e.target.click();
+            }
+        });
+
+        // 事件监听
+        startButton.addEventListener('click', () => {
+            try {
+                difficultyOverlay.classList.add('active');
+            } catch (error) {
+                console.error('显示难度选择时出错:', error);
+            }
+        });
+        
+        restartButton.addEventListener('click', () => {
+            try {
+                currentLevel = 1;
+                difficultyOverlay.classList.add('active');
+                messageDisplay.textContent = "";
+            } catch (error) {
+                console.error('重启游戏时出错:', error);
+            }
+        });
+        
+        target.addEventListener('click', hitTarget);
+        
+        // 键盘支持：允许使用Enter或Space键点击目标
+        target.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                hitTarget();
+            }
+        });
+        
+        // 游戏容器点击事件（处理未击中情况）
+        gameContainer.addEventListener('click', (e) => {
+            if (gameActive && e.target === gameContainer) {
+                missCount++;
+            }
+        });
+        
+        // 全局键盘支持
+        document.addEventListener('keydown', (e) => {
+            // 空格键开始游戏（当游戏未激活时）
+            if (e.key === ' ' && !gameActive) {
+                e.preventDefault();
+                if (startButton.style.display !== 'none') {
+                    difficultyOverlay.classList.add('active');
+                }
+            }
+            
+            // ESC键关闭难度选择
+            if (e.key === 'Escape' && difficultyOverlay.classList.contains('active')) {
+                difficultyOverlay.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

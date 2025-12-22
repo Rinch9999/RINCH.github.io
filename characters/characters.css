@@ -1,0 +1,331 @@
+/* 角色页面完整样式 - 包含全局样式和页面特定样式 */
+
+/* 颜色变量 */
+:root {
+    --color-primary: #1a1a1a;
+    --color-secondary: #252525;
+    --color-tertiary: #333333;
+    --color-border: #444444;
+    --color-border-light: #555555;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #cccccc;
+    --color-text-tertiary: #cccccc;
+    --color-text-muted: #777777;
+    --color-text-muted-light: #666666;
+    --color-text-light: #aaaaaa;
+    --color-text-lighter: #888888;
+    --color-background-dark: #0a0a0a;
+    --color-background-light: #151515;
+    --color-error: #ff4444;
+    --color-error-light: #552222;
+    --color-success: #44ff44;
+    --color-warning: #ffff44;
+    --color-info: #4444ff;
+    
+    /* 尺寸变量 */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --spacing-xl: 40px;
+    --spacing-xxl: 60px;
+    --spacing-xxxl: 80px;
+    
+    /* 字体变量 */
+    --font-family-primary: 'Microsoft YaHei', Arial, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2rem;
+    --font-size-xxxl: 2.5rem;
+    --font-size-heading: 3rem;
+    --font-size-title: 1.8rem;
+    --font-size-huge: 3.5rem;
+    
+    /* 圆角变量 */
+    --border-radius-small: 4px;
+    --border-radius-medium: 8px;
+    --border-radius-large: 12px;
+    
+    /* 阴影变量 */
+    --shadow-small: 0 2px 5px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 5px 15px rgba(0, 0, 0, 0.4);
+    --shadow-large: 0 10px 25px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 15px 30px rgba(0, 0, 0, 0.6);
+    
+    /* 过渡变量 */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* 全局重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 全局样式 */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* 导航栏样式 */
+.navbar {
+    background-color: #000;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #999;
+}
+
+/* 主容器样式 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* 返回上一页按钮 */
+.back-button, .back-to-characters, .back-to-top button {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--border-radius-small);
+    margin-top: var(--spacing-xl);
+    transition: all var(--transition-normal);
+    font-size: var(--font-size-md);
+    cursor: pointer;
+    font-family: var(--font-family-primary);
+}
+
+.back-button:hover, .back-to-characters:hover, .back-to-top button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: var(--color-text-primary);
+}
+
+/* 角色头部信息 */
+.character-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.character-header h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.character-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    filter: grayscale(0%);
+    border: 5px solid #333;
+}
+
+/* 角色信息卡片 */
+.character-info {
+    background-color: #111;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.character-info h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.character-description {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+/* 角色能力分析 */
+.character-abilities {
+    background-color: #111;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.character-abilities h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.abilities-list {
+    list-style: none;
+}
+
+.ability-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #333;
+}
+
+.ability-item:last-child {
+    border-bottom: none;
+}
+
+.ability-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.ability-description {
+    color: #ddd;
+}
+
+/* 重要关系 */
+.important-relationships {
+    background-color: #111;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.important-relationships h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.relationships-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.relationship-card {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.relationship-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.relationship-type {
+    font-style: italic;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.relationship-desc {
+    color: #ddd;
+}
+
+/* 导航链接 */
+.navigation-links {
+    background-color: #111;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.navigation-links h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.navigation-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 8px 15px;
+    background-color: #333;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.navigation-links a:hover {
+    background-color: #555;
+}
+
+/* 回到上一页按钮 - 使用全局.back-button样式 */
+.back-to-top {
+    text-align: center;
+    margin-top: 40px;
+}
+
+
+/* 响应式设计 - 仅保留角色页面特定的响应式样式 */
+@media (max-width: 768px) {
+    .character-header h1 {
+        font-size: 36px;
+    }
+    
+    .character-image {
+        width: 200px;
+        height: 200px;
+    }
+}
