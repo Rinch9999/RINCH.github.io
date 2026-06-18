@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《疑犯追踪》角色时间顺序线索板</title>
+    <link rel="stylesheet" href="characters_timeline.css">
+    <link rel="stylesheet" href="../styles/unified_footer.css">
+    <style>
+        /* 时间线索板特定样式 */
+        .timeline-board {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .board-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .board-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .board-subtitle {
+            font-size: 1.2rem;
+            color: #999;
+        }
+        
+        .character-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .timeline-container {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #333;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .timeline-item.even {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            padding: 20px;
+            background: #111;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+            border: 3px solid #333;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-date {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .timeline-event {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .timeline-desc {
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .character-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .tag-finch {
+            background: #2c3e50;
+            color: #fff;
+        }
+        
+        .tag-reese {
+            background: #8e44ad;
+            color: #fff;
+        }
+        
+        .tag-both {
+            background: #27ae60;
+            color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+            
+            .timeline-item,
+            .timeline-item.even {
+                flex-direction: column;
+                margin-left: 40px;
+            }
+            
+            .timeline-content {
+                width: 100%;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="logo">POI 情报中心</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../season/episodes.html">剧集情节</a></li>
+                <li><a href="../timeline_summary.html">剧情时间线</a></li>
+                <li><a href="characters_timeline.html">角色时间线</a></li>
+                <li><a href="../nyc_locations.html">纽约打卡地</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- 主容器 -->
+    <div class="main-container">
+        <div class="container">
+            <!-- 时间线索板 -->
+            <div class="timeline-board">
+                <div class="board-header">
+                    <h1 class="board-title">《疑犯追踪》角色时间顺序线索板</h1>
+                    <p class="board-subtitle">整合 Harold Finch 和 John Reese 的关键时间线事件</p>
+                </div>
+                
+                <!-- 角色筛选 -->
+                <div class="character-filter">
+                    <button class="filter-btn active" data-filter="all">全部事件</button>
+                    <button class="filter-btn" data-filter="finch">Harold Finch</button>
+                    <button class="filter-btn" data-filter="reese">John Reese</button>
+                    <button class="filter-btn" data-filter="both">共同事件</button>
+                </div>
+                
+                <!-- 时间线 -->
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    
+                    <!-- 事件列表 -->
+                    <div class="timeline-item even">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-finch">Harold Finch</div>
+                            <div class="timeline-date">1969-1-25</div>
+                            <h3 class="timeline-event">芬奇第一次出场</h3>
+                            <p class="timeline-desc">帮助父亲修理汽车发动机。父亲阿尔兹海默症症状初显。识鸟。第一次名句：如果他们不想让人进去，他们应该建一个更好的。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-finch">Harold Finch</div>
+                            <div class="timeline-date">1979-11-4</div>
+                            <h3 class="timeline-event">电话黑客事件</h3>
+                            <p class="timeline-desc">爱荷华州锡达拉皮兹，芬奇"电话黑客"发给巴黎</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item even">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-finch">Harold Finch</div>
+                            <div class="timeline-date">1979</div>
+                            <h3 class="timeline-event">准备父亲养老院</h3>
+                            <p class="timeline-desc">芬奇准备把父亲送进养老院。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-finch">Harold Finch</div>
+                            <div class="timeline-date">1980-10-27</div>
+                            <h3 class="timeline-event">阿帕网入侵事件</h3>
+                            <p class="timeline-desc">解放阿帕网→芬奇被通缉→养老院告别父亲→书籍：EASTERN BIRDS（《东部鸟类》）</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item even">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-reese">John Reese</div>
+                            <div class="timeline-date">约1970年代</div>
+                            <h3 class="timeline-event">出生</h3>
+                            <p class="timeline-desc">官方资料未给出确切出生年，但时间线与闪回显示1970s的成长背景。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-reese">John Reese</div>
+                            <div class="timeline-date">童年时期</div>
+                            <h3 class="timeline-event">八岁开车撞到邻居家</h3>
+                            <p class="timeline-desc">童年时期的冒险经历，八岁时开车撞到了邻居家。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item even">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-finch">Harold Finch</div>
+                            <div class="timeline-date">1981</div>
+                            <h3 class="timeline-event">麻省理工</h3>
+                            <p class="timeline-desc">进入麻省理工学院。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-reese">John Reese</div>
+                            <div class="timeline-date">1993年</div>
+                            <h3 class="timeline-event">入伍</h3>
+                            <p class="timeline-desc">加入美国陆军，从步兵→游骑兵→特种部队逐步晋升。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item even">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-both">共同事件</div>
+                            <div class="timeline-date">2001-9-11</div>
+                            <h3 class="timeline-event">911事件</h3>
+                            <p class="timeline-desc">911事件，纳森和芬奇决定建造The Machine。同时，Reese和杰斯卡度假时遇到911事件，决定重返军队。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-finch">Harold Finch</div>
+                            <div class="timeline-date">2001-10-13</div>
+                            <h3 class="timeline-event">道德测试</h3>
+                            <p class="timeline-desc">day1 - 道德测试→失败→TM自主添加代码→TM说谎→芬奇killTM→芬奇严重强调TM应有的道德准则"人类至上"和忠诚度"对应TM说谎or逃跑→芬奇killTM"</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item even">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-reese">John Reese</div>
+                            <div class="timeline-date">2001.6-9</div>
+                            <h3 class="timeline-event">驻扎路易斯堡</h3>
+                            <p class="timeline-desc">特种部队期间，驻扎在路易斯堡，first name:John；middle initial:H。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-finch">Harold Finch</div>
+                            <div class="timeline-date">2001-11-29</div>
+                            <h3 class="timeline-event">印随效应</h3>
+                            <p class="timeline-desc">day1(②) - TM→否认纳森管理员→对芬奇产生"印随效应"→like baby bird→逃跑→失败→再次讨论AI与人类的区别→严格明确界限</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item even">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-finch">Harold Finch</div>
+                            <div class="timeline-date">2001-12-31</div>
+                            <h3 class="timeline-event">TM逃跑事件</h3>
+                            <p class="timeline-desc">day1③ - TM逃跑→试图引起火灾→开启消防系统→抽走空气→憋死芬奇——→芬奇：I taught it how to think→care→再次尝试</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-finch">Harold Finch</div>
+                            <div class="timeline-date">2002-1-1</div>
+                            <h3 class="timeline-event">TM最终版</h3>
+                            <p class="timeline-desc">day1（finally）- TM最终版</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item even">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-reese">John Reese</div>
+                            <div class="timeline-date">2005年</div>
+                            <h3 class="timeline-event">加入CIA</h3>
+                            <p class="timeline-desc">正式加入CIA，开始情报工作生涯。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-reese">John Reese</div>
+                            <div class="timeline-date">2006.2.12</div>
+                            <h3 class="timeline-event">机场偶遇杰斯卡</h3>
+                            <p class="timeline-desc">在机场偶遇杰斯卡，这是两人久别后的重逢。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item even">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-reese">John Reese</div>
+                            <div class="timeline-date">2006年</div>
+                            <h3 class="timeline-event">卡拉"命名"里瑟</h3>
+                            <p class="timeline-desc">卡拉对里瑟说"你没有朋友"，并开始称呼他为里瑟。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-finch">Harold Finch</div>
+                            <div class="timeline-date">2007</div>
+                            <h3 class="timeline-event">纳森发现</h3>
+                            <p class="timeline-desc">纳森发现芬奇删除无关号码→吵架→芬奇：我们制造TM不是为了拯救"某个人"，而是为了拯救"所有人"</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item even">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-reese">John Reese</div>
+                            <div class="timeline-date">2008年</div>
+                            <h3 class="timeline-event">酒吧"偶遇"皮特</h3>
+                            <p class="timeline-desc">在酒吧"偶遇"皮特，开始新的任务。</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="character-tag tag-finch">Harold Finch</div>
+                            <div class="timeline-date">2010-9-26</div>
+                            <h3 class="timeline-event">码头爆炸</h3>
+                            <p class="timeline-desc">Day3191 - 码头爆炸恐怖袭击，纳森去世，芬奇重伤隐藏起来。回到图书馆后，芬奇询问机器是否知道内森即将死亡。几秒钟后，午夜时分，无关列表被清除</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__links">
+                <a href="../index.html" class="footer__link">主页</a>
+                <a href="../season/episodes.html" class="footer__link">剧集情节</a>
+                <a href="../timeline_summary.html" class="footer__link">剧情时间线</a>
+                <a href="characters_timeline.html" class="footer__link">角色时间线</a>
+                <a href="../nyc_locations.html" class="footer__link">纽约打卡地</a>
+            </div>
+            <div class="footer__copyright">
+                © 2023 POI 情报中心. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // 角色筛选功能
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 移除所有active类
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // 添加active类到当前按钮
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                
+                // 显示/隐藏时间线项目
+                timelineItems.forEach(item => {
+                    const tags = item.querySelectorAll('.character-tag');
+                    let show = false;
+                    
+                    if (filter === 'all') {
+                        show = true;
+                    } else if (filter === 'both') {
+                        // 查找同时包含两个角色的事件
+                        const hasFinch = Array.from(tags).some(tag => tag.classList.contains('tag-finch'));
+                        const hasReese = Array.from(tags).some(tag => tag.classList.contains('tag-reese'));
+                        show = hasFinch && hasReese;
+                    } else {
+                        // 查找包含指定角色的事件
+                        show = Array.from(tags).some(tag => tag.classList.contains(`tag-${filter}`));
+                    }
+                    
+                    item.style.display = show ? 'flex' : 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
